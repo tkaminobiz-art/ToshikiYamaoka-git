@@ -1,0 +1,580 @@
+:root {
+    --bg-color: #F8F8F8;
+    /* Slight off-white */
+    --text-color: #1A1A1A;
+    --accent-color: #0050AA;
+    --gold-color: #D4AF37;
+    /* --font-mincho: "Shippori Mincho", serif;  (Removed for unification) */
+    --font-sans: "Manrope", sans-serif;
+    --font-gothic: "Zen Kaku Gothic New", sans-serif;
+    --transition-speed: 0.6s;
+
+    /* Structure Mode Colors */
+    --structure-bg: #0F1115;
+    --structure-line: rgba(0, 80, 170, 0.5);
+    --structure-text: #E0E0E0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    color: var(--text-color);
+    font-family: var(--font-gothic);
+    /* Unified to Gothic globally */
+    line-height: 1.8;
+    overflow-x: hidden;
+    transition: background-color 0.5s, color 0.5s;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Structure Mode --- */
+body.show-structure {
+    background-color: var(--structure-bg);
+    color: var(--structure-text);
+}
+
+body.show-structure .structure-grid {
+    opacity: 1;
+}
+
+.structure-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+    background-image:
+        linear-gradient(var(--structure-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--structure-line) 1px, transparent 1px);
+    background-size: 100px 100px;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Header --- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 100;
+    mix-blend-mode: difference;
+    color: white;
+    /* Ensure visibility against mix-blend */
+}
+
+.logo {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+}
+
+.site-header nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: right;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+}
+
+.site-header nav a {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.site-header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width 0.3s;
+}
+
+.site-header nav a:hover::after {
+    width: 100%;
+}
+
+/* --- Generics --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+}
+
+section {
+    padding: 6rem 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-title {
+    font-family: var(--font-sans);
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    /* Was 3rem, but now it takes space */
+    color: #e0e0e0;
+    /* Explicit light color */
+    line-height: 1;
+    position: relative;
+    /* Changed from absolute */
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+
+.section-title .jp {
+    font-family: var(--font-gothic);
+    /* Gothic matches better with Manrope for modern feel */
+    font-weight: 400;
+    font-size: 1.1rem;
+    /* Slightly adjust for Gothic visual weight */
+    opacity: 1;
+    display: block;
+    margin-top: 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+body.show-structure .section-title {
+    color: #333;
+}
+
+body.show-structure .section-title .jp {
+    color: var(--structure-text);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: auto;
+    /* Dynamic height */
+    min-height: 50vh;
+    /* Minimum height for visual balance */
+    max-height: 85vh;
+    /* Prevent overflowing viewport too much */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers horizontally in vertical mode */
+    justify-content: center;
+    z-index: 20;
+    /* High z-index to stay on top */
+    background: rgba(255, 255, 255, 0.90);
+    /* Increased opacity for readability */
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+body.show-structure .vertical-text {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--structure-line);
+}
+
+.main-copy {
+    font-size: 2.2rem;
+    line-height: 2;
+    margin-left: 2rem;
+    /* Vertical margin becomes horizontal in vertical mode */
+}
+
+.main-copy .accent {
+    color: var(--accent-color);
+    background: linear-gradient(transparent 60%, rgba(0, 80, 170, 0.1) 60%);
+}
+
+body.show-structure .main-copy .accent {
+    color: #4da6ff;
+    background: none;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.sub-copy {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-top: 2rem;
+    color: #444;
+}
+
+body.show-structure .sub-copy {
+    color: #ccc;
+}
+
+/* --- Content Sections --- */
+.content-section .text-block {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.content-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.problem-list,
+.example-list,
+.ai-list {
+    margin: 2rem 0;
+    padding-left: 0;
+}
+
+.problem-list li,
+.example-list li,
+.ai-list li {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    padding: 0 1rem;
+}
+
+.problem-list li::before,
+.example-list li::before,
+.ai-list li::before {
+    content: '・';
+    margin-right: 0.5rem;
+}
+
+/* --- Point Sections --- */
+.point-section {
+    display: flex;
+    align-items: center;
+}
+
+.point-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+.point-content {
+    width: 50%;
+    position: relative;
+    z-index: 10;
+    /* Text above image */
+}
+
+.point-visual {
+    width: 40%;
+    position: relative;
+    z-index: 1;
+    /* Image below text */
+}
+
+.point-section.reverse .container {
+    flex-direction: row-reverse;
+}
+
+.point-number {
+    position: absolute;
+    top: -3rem;
+    left: 0;
+    font-family: var(--font-sans);
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.point-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid currentColor;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.point-content {
+    width: 50%;
+}
+
+.point-visual {
+    width: 40%;
+    position: relative;
+}
+
+.floating-img {
+    width: 100%;
+    height: auto;
+    box-shadow: 20px 20px 0 var(--bg-color);
+    /* Cutout effect */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.show-structure .floating-img {
+    box-shadow: 10px 10px 0 var(--structure-line);
+    border: 1px solid var(--structure-line);
+}
+
+/* --- Service Grid --- */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+
+body.show-structure .service-card {
+    background: transparent;
+    border: 1px dashed var(--structure-line);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.service-card h4 {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+/* --- Message --- */
+.message-section {
+    background: #111;
+    color: white;
+    padding-top: 4rem;
+}
+
+.vertical-text-message {
+    writing-mode: vertical-rl;
+    margin: 0 auto;
+    height: auto;
+    min-height: 60vh;
+    font-size: 1.1rem;
+    padding: 4rem 2rem;
+    /* More padding to avoid edge cutoff */
+    position: relative;
+    z-index: 10;
+}
+
+.message-section .section-title {
+    color: #333;
+    /* Darker background, darker text */
+    margin-bottom: 0;
+}
+
+.message-section .section-title .jp {
+    color: #fff;
+}
+
+.signature {
+    margin-top: 2rem;
+    /* To left in vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signature-img {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+/* --- CTA --- */
+.cta-section {
+    text-align: center;
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: white;
+    color: var(--accent-color);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    margin-top: 2rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background: var(--gold-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Toggle Switch --- */
+.structure-toggle {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.structure-toggle .label {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+body.show-structure .structure-toggle .label {
+    color: white;
+}
+
+.structure-toggle .switch {
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.structure-toggle .switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+body.show-structure .structure-toggle .switch {
+    background: var(--accent-color);
+}
+
+body.show-structure .structure-toggle .switch::after {
+    transform: translateX(20px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 1rem;
+    }
+
+    .site-header nav {
+        display: none;
+        /* Simple hide for MVP, or hamburger */
+    }
+
+    .vertical-text {
+        height: auto;
+        writing-mode: horizontal-tb;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .main-copy {
+        margin-left: 0;
+        font-size: 1.5rem;
+    }
+
+    .point-section .container {
+        flex-direction: column !important;
+        /* Force column on mobile */
+    }
+
+    .point-content,
+    .point-visual {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vertical-text-message {
+        writing-mode: horizontal-tb;
+        height: auto;
+    }
+}
