@@ -7,12 +7,18 @@
     <title>山岡としき | 政治を、アップデートする右腕。</title>
     <meta name="description" content="元市議会議員・マーケター山岡としき。政治家の「熱量」を「熱狂」に変える翻訳者。">
 
-    <!-- Google Fonts -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap"
         rel="stylesheet">
+
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,8 +26,10 @@
 <body class=""> <!-- Toggle 'show-structure' class -->
 
     <div class="structure-grid"></div> <!-- Grid overlay for structure mode -->
+    <!-- Loading Curtain -->
+    <div class="loader-curtain"></div>
 
-    <header class="site-header">
+    <header class="site-header reveal-header">
         <div class="logo">YAMAODKA TOSHIKI</div>
         <nav>
             <ul>
@@ -35,34 +43,39 @@
 
     <main>
         <!-- HERO -->
-        <section id="hero" class="hero-section">
+        <section class="hero-section">
             <div class="hero-bg">
-                <img src="assets/images/hero_new.jpg" alt="山岡としき" class="hero-img">
+                <img src="assets/images/hero_new.jpg" alt="Background" class="hero-img" data-speed="0.5">
             </div>
-            <div class="hero-content vertical-text">
+            <div class="vertical-text">
                 <h1 class="main-copy">
-                    その熱い想いは、<br>なぜ有権者に届かないのか。<br>
-                    <span class="accent">「伝わらない政治」</span>は、<br>存在しないのと同じだ。
+                    <span class="reveal-text">その熱い想いは、</span><br>
+                    <span class="reveal-text">実行力なくして</span><br>
+                    <span class="reveal-text">語れない。</span>
+                    <span class="accent reveal-text-delay">Political ARM</span>
                 </h1>
-                <div class="sub-copy">
-                    <p>
-                        28歳、最年少トップ当選。誰もが私の2期目を確信していたはずです。<br>
-                        しかし私は、あえて議員バッジを置きました。<br>
-                        それは、現場で痛感した<strong>「良い政治家ほど、損をしている」</strong>という現実を変えるため。<br>
-                        今、私は外側から、あなたの政治活動をアップデートする「右腕」になります。<br>
-                        WEB × SNS × AI この3つを武器に、<br>
-                        あなたが「選ばれ、必要とされ続ける政治家」であるために。
-                    </p>
-                </div>
+                <p class="sub-copy reveal-text-delay">
+                    政治を、アップデートする右腕。<br>
+                    山岡としき
+                </p>
             </div>
         </section>
 
         <!-- WHY -->
         <section id="why" class="content-section">
             <div class="container">
-                <h2 class="section-title">WHY <span class="jp">なぜ今、このサポートが必要なのか</span></h2>
+                <h2 class="section-title" data-reveal="up">
+                    WHY
+                    <span class="jp">なぜ、今なのか</span>
+                </h2>
                 <div class="text-block">
-                    <h3>なぜ今、あなたの言葉は<br>「政治離れ」の壁を越えられないのか？</h3>
+                    <h3 data-reveal="up">その政策に、<br>「翼」はありますか？</h3>
+                    <p data-reveal="up">
+                        素晴らしい理念があっても、<br>
+                        届かなければ世界は変わらない。<br>
+                        現代の政治には、<br>
+                        伝える力と、動かす仕組みが必要です。
+                    </p>
                     <p>有権者の関心が薄れているのは、政策が難しいからでも、政治がつまらないからでもありません。</p>
                     <p>理由はもっと残酷です。<strong>「あなたという人間が、正しく認知されていない」</strong>からです。</p>
                     <ul class="problem-list">
@@ -80,9 +93,9 @@
         <!-- POINT 01 -->
         <section id="point1" class="point-section">
             <div class="container">
-                <span class="point-number">01</span>
-                <h2 class="point-title">客観的目線の徹底</h2>
-                <div class="point-content">
+                <span class="point-number" data-speed="0.8">01</span>
+                <h2 class="point-title" data-reveal="right">客観的目線の徹底</h2>
+                <div class="point-content" data-reveal="up">
                     <h3>「言い方は悪いですが、ダサいです」<br>まずは、その見た目から変えましょう。</h3>
                     <p>あえて、厳しいことを言わせてください。</p>
                     <p>多くの議員さんが良かれと思って作っているチラシ、ポスター、WEBサイト、そして毎日の服装。<br>
@@ -91,7 +104,7 @@
                     <p>私には、<strong>「議員としての内側の論理」</strong>と「有権者としての外側の冷徹な目」この両方があります。</p>
                     <p>身内が褒めるデザインではなく、有権者が「おっ、この人は違う」と足を止めるデザインへ。あなたの見え方を、徹底的にアップデートします。</p>
                 </div>
-                <div class="point-visual">
+                <div class="point-visual" data-speed="1.1">
                     <img src="assets/images/img2.jpg" alt="Point 1 Visual" class="floating-img">
                 </div>
             </div>
@@ -100,9 +113,9 @@
         <!-- POINT 02 -->
         <section id="point2" class="point-section reverse">
             <div class="container">
-                <span class="point-number">02</span>
-                <h2 class="point-title">SNS発信の本質</h2>
-                <div class="point-content">
+                <span class="point-number" data-speed="0.8">02</span>
+                <h2 class="point-title" data-reveal="left">SNS発信の本質</h2>
+                <div class="point-content" data-reveal="up">
                     <h3>その投稿は「報告」ですか？<br>それとも「心を動かす言葉」ですか？</h3>
                     <p>タイムラインに流れる、多くの議員の投稿。残念ながら、そのほとんどが「自己満足」で終わっています。</p>
                     <ul class="example-list">
@@ -115,7 +128,7 @@
                     <p>だから私が、あなたの<strong>“発信の脳”</strong>になります。企画、言語化、構成、そして心を掴む設計まで。</p>
                     <p>Instagramフォロワー1.1万人の現役インフルエンサーでもある私が、数字に裏付けられた「届くロジック」で、あなたのアカウントをメディア化します。</p>
                 </div>
-                <div class="point-visual">
+                <div class="point-visual" data-speed="1.1">
                     <img src="assets/images/img3.jpg" alt="Point 2 Visual" class="floating-img">
                 </div>
             </div>
@@ -124,9 +137,9 @@
         <!-- POINT 03 -->
         <section id="point3" class="point-section">
             <div class="container">
-                <span class="point-number">03</span>
-                <h2 class="point-title">AIを武器にする議員へ</h2>
-                <div class="point-content">
+                <span class="point-number" data-speed="0.8">03</span>
+                <h2 class="point-title" data-reveal="right">AIを武器にする議員へ</h2>
+                <div class="point-content" data-reveal="up">
                     <h3>これは「脅し」ではありません。<br>AIを使えない議員の価値は、暴落します。</h3>
                     <p>社会構造は激変しています。ホワイトカラーの業務がAIに置き換わる中、政治家だけが例外でいられるはずがありません。</p>
                     <ul class="ai-list">
@@ -138,7 +151,7 @@
                     <p>答えは明確です。AIを右腕として使いこなし、浮いた時間で、人間にしかできない「対話」と「決断」に命を燃やす人です。</p>
                     <p>私は、概念論ではなく実践論を伝えます。AIをどう実務に落とし込み、どう自身の分身として機能させるか。最先端の武器を、あなたの手元に。</p>
                 </div>
-                <div class="point-visual">
+                <div class="point-visual" data-speed="1.1">
                     <img src="assets/images/img4.jpg" alt="Point 3 Visual" class="floating-img">
                 </div>
             </div>
@@ -149,7 +162,7 @@
             <div class="container">
                 <h2 class="section-title">WHAT I DO <span class="jp">提供できること</span></h2>
                 <h3>私が提供するのは「作業」ではありません。<br>「政治家としての未来」です。</h3>
-                <div class="service-grid">
+                <div class="service-grid" data-reveal="stagger">
                     <div class="service-card">
                         <h4>Web</h4>
                         <p>信頼と期待を集めるオフィシャルサイト制作・設計</p>
@@ -175,7 +188,7 @@
         <section id="message" class="message-section">
             <div class="container">
                 <h2 class="section-title">MESSAGE</h2>
-                <div class="message-body vertical-text-message">
+                <div class="message-body vertical-text-message" data-reveal="vertical">
                     <h3>私は、政治を諦めていない。</h3>
                     <p>私は議員を辞めました。ですが、それは政治から逃げたからではありません。</p>
                     <p>むしろ、<strong>「政治をもっと面白く、価値あるものにしたい」</strong>という執念の結果です。</p>
