@@ -632,3 +632,21 @@ body.show-structure .structure-toggle .switch::after {
         height: auto;
     }
 }
+
+/* --- Visual Bands --- */
+.visual-band {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.visual-band img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    min-height: 200px;
+    /* Ensure visibility on mobile */
+}
