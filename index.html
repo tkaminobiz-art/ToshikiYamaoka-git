@@ -882,24 +882,6 @@
             });
         });
 
-    <div id="update-overlay" class="fixed inset-0 z-[100] bg-black hidden flex flex-col items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDAs 255, 0, 0.1KSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none"></div>
-        
-        <div class="w-full max-w-2xl p-8 font-mono text-xs md:text-sm text-neon leading-relaxed relative z-10">
-            <div id="console-output" class="mb-4 text-left h-64 overflow-hidden border-l-2 border-neon pl-4 opacity-0"></div>
-            
-            <div id="progress-container" class="w-full bg-gray-900 h-2 mt-8 overflow-hidden opacity-0">
-                <div id="progress-bar" class="h-full bg-neon w-0"></div>
-            </div>
-            <div id="progress-text" class="text-right mt-2 text-neon font-bold opacity-0">0%</div>
-
-            <div class="absolute top-0 right-0 p-4 text-xs text-gray-500">
-                SYSTEM_KERNEL: v9.0.2<br>
-                TARGET: LEGACY_POLITICS
-            </div>
-        </div>
-    </div>
-
     <!-- Glitch Layer (Existing) -->
     <div id="glitch-layer" class="fixed inset-0 z-50 bg-black transform scale-y-0 origin-bottom pointer-events-none"></div>
 
@@ -995,95 +977,32 @@
 
         // --- SYSTEM UPDATE TRANSITION ---
         function activateUpdate() {
-            const overlay = document.getElementById('update-overlay');
-            const consoleOutput = document.getElementById('console-output');
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
-            const progressContainer = document.getElementById('progress-container');
-            
+            const glitchLayer = document.getElementById('glitch-layer');
             const legacySystem = document.getElementById('legacy-system');
             const newServices = document.getElementById('new-services');
 
-            // Show Overlay
-            overlay.classList.remove('hidden');
-
-            const tl = gsap.timeline();
-
-            // 1. Console Diagnosis Sequence
-            const logs = [
-                "INITIATING SYSTEM DIAGNOSIS...",
-                "DETECTED: CRITICAL ERROR IN [JAPANESE_POLITICS.EXE]",
-                "> ERROR: LOGIC_NOT_FOUND",
-                "> ERROR: PASSION_DISCONNECT",
-                "> WARNING: LEGACY SYSTEM UNSTABLE",
-                "--------------------------------",
-                "SCANNING REPLACEMENT KERNEL...",
-                "FOUND: AX-2026 PROTOCOL (YAMAOKA_KAMINO_BUILD)",
-                "PREPARING OVERWRITE...",
-                "DELETING OLD DEPENDENCIES..."
-            ];
-
-            tl.to(consoleOutput, { opacity: 1, duration: 0.1 })
-              .call(() => {
-                  let i = 0;
-                  const interval = setInterval(() => {
-                      if (i < logs.length) {
-                          consoleOutput.innerHTML += `<div>> ${logs[i]}</div>`;
-                          consoleOutput.scrollTop = consoleOutput.scrollHeight;
-                          i++;
-                      } else {
-                          clearInterval(interval);
-                      }
-                  }, 100); // Speed of logs
-              })
-              .to({}, { duration: 1.5 }) // Wait for logs to finish (approx)
-
-            // 2. Glitch / Instability
-            tl.to(legacySystem, { 
-                filter: "invert(1) hue-rotate(180deg) blur(2px)", 
-                duration: 0.1, 
-                yoyo: true, 
-                repeat: 5 
-            }, "-=1.0")
-            
-            // 3. Progress Bar Sequence
-            tl.to([progressContainer, progressText], { opacity: 1, duration: 0.2 })
-              .to(progressBar, { 
-                  width: "100%", 
-                  duration: 1.5, 
-                  ease: "power2.inOut",
-                  onUpdate: function() {
-                      const progress = Math.round(this.progress() * 100);
-                      progressText.innerText = `${progress}%`;
-                  }
-              })
-            
-            // 4. Blackout & Switch
-            tl.to(overlay, { 
-                backgroundColor: "#fff", 
-                duration: 0.05, 
-                yoyo: true, 
-                repeat: 1 
-            })
-            .to(overlay, { backgroundColor: "#000", duration: 0.1 })
-            .call(() => {
-                // Actual DOM Switch
-                window.scrollTo(0, 0);
-                legacySystem.style.display = 'none';
-                newServices.classList.remove('hidden');
-                
-                // Clear console for cleanliness
-                consoleOutput.innerHTML = "";
-            })
-            
-            // 5. Reveal New World (CRT Turn On Effect)
-            tl.to(overlay, { 
-                opacity: 0, 
-                duration: 0.8, 
-                delay: 0.5,
+            // 1. Wipe Up Transition
+            gsap.to(glitchLayer, {
+                scaleY: 1,
+                duration: 0.6,
+                ease: "expo.inOut",
                 onComplete: () => {
-                    overlay.classList.add('hidden');
-                    initNewWorldAnimations();
+                    // 2. Switch Content
+                    window.scrollTo(0, 0);
+                    legacySystem.style.display = 'none';
+                    newServices.classList.remove('hidden');
+
+                    // 3. Reveal New Content (Wipe Down)
+                    gsap.to(glitchLayer, {
+                        scaleY: 0,
+                        transformOrigin: "top",
+                        duration: 0.6,
+                        delay: 0.2, // Small pause in black
+                        ease: "expo.inOut",
+                        onComplete: () => {
+                            initNewWorldAnimations(); // Start scroll animations for new world
+                        }
+                    });
                 }
             });
         }
