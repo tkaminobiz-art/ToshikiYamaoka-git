@@ -4,321 +4,998 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>山岡としき | 政治を、アップデートする右腕。</title>
-    <meta name="description" content="元市議会議員・マーケター山岡としき。政治家の「熱量」を「熱狂」に変える翻訳者。">
+    <title>AX-2026 | POLITICAL ENGINEERING LAB</title>
 
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&family=Shippori+Mincho:wght@400;500;700&family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700;900&family=Oswald:wght@400;700&family=Shippori+Mincho:wght@400;600;800&display=swap"
         rel="stylesheet">
 
-    <!-- Animation Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <!-- Physics Engine -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bronze: '#CD7F32',
+                        ink: '#1A1A1A',
+                        neon: '#EAFF00',
+                        magenta: '#FF00FF'
+                    },
+                    fontFamily: {
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        sans: ['"Oswald"', 'sans-serif'],
+                        jp: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F0F0F0;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+
+        /* NOISE OVERLAY */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* TEXT STROKE UTILITY */
+        .stroke-text {
+            -webkit-text-stroke: 1px #1A1A1A;
+            color: transparent;
+        }
+
+        .stroke-white {
+            -webkit-text-stroke: 1px white;
+            color: transparent;
+        }
+
+        /* RUBI STYLES */
+        .rubi-tag {
+            position: absolute;
+            font-family: "Shippori Mincho", serif;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            padding: 2px 6px;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .rubi-tag {
+                font-size: 0.9rem;
+                padding: 4px 10px;
+            }
+        }
+
+        /* GLITCH TRANSITION LAYER */
+        #glitch-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            z-index: 9999;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* HIDE SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #EAFF00;
+        }
+    </style>
 </head>
 
-<!-- Grid Overlay (Noise & Crosshairs) -->
-<div class="noise-overlay"></div>
-<div class="grid-crosshairs"></div>
+<body class="font-jp antialiased selection:bg-neon selection:text-black">
 
-<!-- BOOT SEQUENCE (Terminal) -->
-<div class="boot-screen">
-    <div class="terminal-content">
-        <span class="blink">_</span>
+    <div class="noise"></div>
+
+    <div id="glitch-layer">
+        <div class="text-neon font-sans text-4xl font-bold tracking-widest animate-pulse">SYSTEM UPDATING...</div>
     </div>
-</div>
 
-<div class="lab-wrapper">
-    <!-- Sidebar -->
-    <aside class="system-sidebar">
-        <div class="sidebar-top">
-            <span class="sys-text">AX-2026 PROTOCOL // GOV_OS</span>
-            <span class="sys-text">STATUS: UNSTABLE</span>
-        </div>
-        <div class="marquee-track-vertical">
-            <div class="marquee-content">
-                /// CAUTION: LEGACY SYSTEM PURGE /// AX-2026 PROTOCOL ACTIVE /// HUMAN CAPITAL REQUIRED ///
-                /// CAUTION: LEGACY SYSTEM PURGE /// AX-2026 PROTOCOL ACTIVE /// HUMAN CAPITAL REQUIRED ///
+    <div id="legacy-system">
+
+        <header id="legacy-system"
+            class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E5E5E5]">
+
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <div
+                    class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIi8+PC9zdmc+')]">
+                </div>
+
+                <svg class="absolute top-0 left-0 w-[500px] h-[500px] opacity-20" viewBox="0 0 100 100">
+                    <path d="M-10 20 H 30 V 60 H 80" fill="none" stroke="black" stroke-width="0.5" />
+                    <circle cx="30" cy="20" r="1" fill="black" />
+                    <circle cx="80" cy="60" r="1" fill="black" />
+                    <path d="M-10 40 H 20 V 80 H 60" fill="none" stroke="black" stroke-width="0.5" />
+                </svg>
+
+                <svg class="absolute bottom-0 right-0 w-[600px] h-[600px] opacity-20 transform rotate-180"
+                    viewBox="0 0 100 100">
+                    <path d="M-10 10 H 40 V 50 H 90" fill="none" stroke="black" stroke-width="0.5" />
+                    <path d="M-10 30 H 20 V 70 H 50" fill="none" stroke="black" stroke-width="0.5" />
+                </svg>
             </div>
-        </div>
-        <nav class="lab-nav">
-            <ul>
-                <li><a href="#hero">00. ROOT</a></li>
-                <li><a href="#problem">01. ERROR</a></li>
-                <li><a href="#files">02. FILES</a></li>
-            </ul>
-        </nav>
-    </aside>
 
-    <main class="lab-main">
-        <!-- Header (Mobile) -->
-        <header class="lab-header mobile-only">
-            <div class="logo">AX-2026</div>
+            <div class="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+
+                <div
+                    class="absolute top-24 -left-10 bg-[#EAFF00] border-2 border-black px-12 py-2 transform -rotate-12 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+                    <span class="font-sans font-bold text-sm tracking-widest text-black">ARM THE LONE WOLF ///</span>
+                </div>
+
+                <div
+                    class="absolute top-10 right-10 md:right-32 bg-[#FF00FF] text-white border-2 border-black px-4 py-3 transform rotate-6 shadow-[5px_5px_0px_rgba(0,0,0,1)]">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-white rounded-full border border-black"></div>
+                        <div class="leading-tight text-center">
+                            <span class="block font-bold text-lg">機密情報</span>
+                            <span class="block text-[0.6rem] font-sans tracking-widest">(CONFIDENTIAL)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="absolute bottom-32 -left-5 bg-[#EAFF00] border-y-4 border-black py-2 pr-12 pl-4 transform rotate-3 shadow-lg">
+                    <div class="font-sans font-black text-2xl text-black tracking-tighter">
+                        非対称戦 <span class="text-sm font-normal tracking-normal">(ASYMMETRIC WARFARE)</span>
+                    </div>
+                </div>
+
+                <div
+                    class="absolute bottom-40 right-5 md:right-20 bg-[#1A1A1A] text-white border-2 border-white p-4 rounded-xl transform -rotate-3 shadow-xl">
+                    <div class="flex flex-col items-center">
+                        <svg class="w-12 h-12 mb-1 fill-white" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C7.58 2 4 5.58 4 10c0 2.62 1.27 4.94 3.23 6.38.45 1.54.91 3.06 1.36 4.54A1.99 1.99 0 0 0 10.51 22h2.98c.95 0 1.77-.66 1.92-1.58l1.36-4.54C18.73 14.94 20 12.62 20 10c0-4.42-3.58-8-8-8zm0 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                            <circle cx="9" cy="9" r="1.5" />
+                            <circle cx="15" cy="9" r="1.5" />
+                        </svg>
+                        <span class="font-sans font-bold text-[0.6rem] tracking-widest">DO NOT DISTURB</span>
+                    </div>
+                </div>
+
+                <div class="absolute top-1/2 right-5 md:right-16 transform -translate-y-1/2 rotate-12">
+                    <div
+                        class="bg-[#FF00FF] text-white w-20 h-20 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_black]">
+                        <span class="font-bold text-sm text-center leading-tight">24h<br>参謀</span>
+                    </div>
+                </div>
+
+                <div
+                    class="absolute top-40 right-[15%] bg-white border border-gray-300 p-4 w-40 shadow-md transform -rotate-2 hidden md:block">
+                    <div class="w-20 h-6 bg-gray-200/50 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1"></div>
+                    <p class="font-serif font-bold text-sm text-gray-800">思考実験中...</p>
+                    <p class="font-sans text-[0.5rem] text-gray-400 mt-1">THOUGHT EXPERIMENT<br>IN PROGRESS...</p>
+                </div>
+
+                <div class="absolute bottom-10 right-10 bg-white border border-black p-2 transform rotate-2">
+                    <div class="flex items-end gap-[1px] h-8">
+                        <div class="w-1 h-full bg-black"></div>
+                        <div class="w-2 h-full bg-black"></div>
+                        <div class="w-1 h-3/4 bg-black"></div>
+                        <div class="w-3 h-full bg-black"></div>
+                        <div class="w-1 h-full bg-black"></div>
+                        <div class="w-2 h-3/4 bg-black"></div>
+                    </div>
+                    <div class="text-[0.5rem] font-sans text-center mt-1">PROTOTYPE v1.2</div>
+                </div>
+
+                <svg class="absolute bottom-32 left-[30%] w-24 h-24 stroke-black fill-none transform rotate-12 hidden md:block"
+                    viewBox="0 0 100 100">
+                    <path d="M10 80 Q 50 10 90 20" stroke-width="2" marker-end="url(#arrowhead)" />
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+                        </marker>
+                    </defs>
+                </svg>
+
+            </div>
+
+            <div class="relative z-20 text-center py-12">
+
+                <div
+                    class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] border-2 border-black px-4 py-1 rotate-[-2deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-30">
+                    <span class="font-sans font-bold text-sm tracking-widest text-black">ONE MAN ARMY</span>
+                </div>
+
+                <div class="flex flex-col items-center justify-center leading-[0.8] select-none">
+
+                    <div class="relative group hover:scale-105 transition-transform duration-300">
+                        <div
+                            class="rubi-tag -top-4 left-0 md:-left-4 bg-black text-white transform -rotate-6 border border-white px-3 py-1 text-sm md:text-base">
+                            政治</div>
+                        <h1
+                            class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pl-2">
+                            POLITICAL
+                        </h1>
+                    </div>
+
+                    <div class="relative group mt-2 md:mt-4 hover:scale-105 transition-transform duration-300">
+                        <div
+                            class="rubi-tag -top-4 right-0 md:-right-4 bg-black text-white transform rotate-6 border border-white px-3 py-1 text-sm md:text-base">
+                            工学</div>
+                        <h1
+                            class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pr-2">
+                            ENGINEERING
+                        </h1>
+                    </div>
+
+                    <div class="relative group mt-2 md:mt-4 hover:scale-105 transition-transform duration-300">
+                        <div
+                            class="rubi-tag -top-5 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] text-black border border-black px-4 py-1 text-sm md:text-base">
+                            研究所</div>
+                        <h1 class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-transparent"
+                            style="-webkit-text-stroke: 2px #1A1A1A; filter: drop-shadow(4px 4px 0px white);">
+                            LABORATORY
+                        </h1>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-16 inline-block bg-white text-[#1A1A1A] px-10 py-8 transform rotate-1 border-4 border-black shadow-[10px_10px_0px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform max-w-2xl mx-4 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-200/50 rotate-1"></div>
+
+                    <p class="font-serif font-bold text-xl md:text-3xl tracking-wider leading-relaxed">
+                        「一人会派」を、<br class="md:hidden">「最強の組織」へ。
+                    </p>
+                    <div class="w-full h-[3px] bg-black my-4"></div>
+                    <p class="font-sans text-sm tracking-[0.4em] text-gray-600 text-center font-bold">ARM THE LONE WOLF.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20">
+                <span
+                    class="font-sans text-xs tracking-widest mb-2 bg-black text-white px-3 py-1 border border-white">SCROLL
+                    TO HISTORY</span>
+                <div class="w-[2px] h-12 bg-black"></div>
+            </div>
+
         </header>
 
-        <!-- HERO -->
-        <section id="hero" class="hero-section">
-            <div class="hero-bg"></div> <!-- Texture layer -->
 
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <h1 class="stencil-title glitch-text" data-physics="true">AX-2026</h1>
-                    <h2 class="stroke-title" data-physics="true">REVOLUTION</h2>
+        <section class="bg-[#111] text-white py-32 px-4 border-t-8 border-neon relative overflow-hidden">
 
-                    <div class="hero-meta">
-                        <div class="floating-data" data-physics="true">
-                            <p>INIT_SYSTEM: LOCAL_GOV_OS</p>
-                            <p>TARGET: THE_SHIFT</p>
-                            <p>STATUS: <span class="alert-text">CRITICAL_UPDATE</span></p>
-                        </div>
-                        <div class="vertical-copy" data-physics="true">
-                            <p>デジタルと熱量の融合による構造改革。</p>
-                            <p>「拡張された政治家」への進化。</p>
-                        </div>
-                        <div class="mission-statement" data-physics="true">
-                            <p class="sys-text">MISSION: TO REBUILD DEMOCRACY WITH CODE AND HEART.</p>
-                            <p class="sys-text">TARGET: LOCAL GOVERNMENT / PUBLIC SECTOR.</p>
-                            <p class="sys-text">REF: AX-2026-GOV-REFORM-INITIATIVE.</p>
-                        </div>
-                    </div>
-
-                    <!-- Trigger Button -->
-                    <button id="trigger-chaos" class="btn-chaos">
-                        <span class="btn-text">構造改革を実行 / ACTIVATE AX</span>
-                        <div class="btn-glitch"></div>
-                    </button>
-
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden select-none">
+                <div
+                    class="text-[20rem] font-black font-sans leading-none text-gray-800 whitespace-nowrap opacity-20 transform -rotate-12 origin-top-left">
+                    REWRITE HISTORY 2000-2050
                 </div>
             </div>
 
-            <!-- Horizontal Warning Tape -->
-            <div class="warning-tape" data-physics="true">
-                <div class="tape-content">
-                    /// WARNING: DEMOCRACY UNDER CONSTRUCTION /// DO NOT CROSS /// AX-2026 ///
-                    /// WARNING: DEMOCRACY UNDER CONSTRUCTION /// DO NOT CROSS /// AX-2026 ///
+            <div class="max-w-6xl mx-auto relative z-10">
+                <h2 class="font-sans text-5xl md:text-8xl font-black mb-32 text-center leading-none">
+                    THE <span class="text-neon stroke-white" style="-webkit-text-stroke: 0px;">GREAT</span><br>
+                    REWRITE
+                    <span class="block text-base md:text-xl font-jp font-bold tracking-[0.5em] text-gray-400 mt-4">2000
+                        - 2050 文明の断層ログ</span>
+                </h2>
+
+                <div class="space-y-40">
+
+                    <div class="relative group">
+                        <div
+                            class="absolute -left-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-[#333] z-0 group-hover:text-[#555] transition-colors leading-none">
+                            2000</div>
+
+                        <div class="relative z-10 border-l-4 border-gray-600 pl-8 md:pl-16 py-4 mt-8">
+                            <div class="flex items-baseline gap-4 mb-6">
+                                <span
+                                    class="bg-gray-600 text-black font-bold px-3 py-1 text-xs tracking-widest">PAST_LOG</span>
+                                <h3 class="text-3xl md:text-5xl font-black font-jp">「所有」と「熱狂」の時代</h3>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                <div class="font-jp text-gray-300 space-y-6 leading-relaxed">
+                                    <p class="text-lg font-bold text-white border-b border-gray-700 pb-2">■ 身体感覚</p>
+                                    <p>
+                                        情報は「足」で稼ぐものだった。駅の伝言板。公衆電話の行列。<br>
+                                        <span class="text-neon">「センター問い合わせ」</span>を連打し、アンテナを伸ばして電波を探す。<br>
+                                        「24時間戦えますか」というCMが、まだ冗談ではなかった時代。
+                                    </p>
+                                </div>
+                                <div class="bg-gray-900 p-6 border border-gray-700 transform rotate-1">
+                                    <h4 class="font-sans text-xl font-bold text-gray-500 mb-4">POLITICAL OS v1.0</h4>
+                                    <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-gray-300">
+                                        <li>選挙は「握手」と「ドブ板」が全て。</li>
+                                        <li>情報はテレビと新聞が独占。</li>
+                                        <li>「個人情報」という概念の希薄さ。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div
+                            class="absolute -right-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-neon opacity-20 z-0 animate-pulse-fast leading-none">
+                            2025</div>
+
+                        <div class="relative z-10 border-r-4 border-neon pr-8 md:pr-16 py-4 mt-8 text-right">
+                            <div class="flex flex-row-reverse items-baseline gap-4 mb-6">
+                                <span
+                                    class="bg-neon text-black font-bold px-3 py-1 text-xs tracking-widest animate-pulse">CURRENT_LOG</span>
+                                <h3 class="text-3xl md:text-5xl font-black font-jp text-white">「体験」と「焦燥」の時代</h3>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 direction-rtl">
+                                <div class="font-jp text-gray-200 space-y-6 leading-relaxed text-right md:order-2">
+                                    <p class="text-lg font-bold text-neon border-b border-neon pb-2 inline-block">■ 身体感覚
+                                    </p>
+                                    <p>
+                                        スマホを忘れることは、脳を忘れることと同義。<br>
+                                        <span class="text-neon">「タイパ」</span>に取り憑かれ、映画を倍速で観る。<br>
+                                        見たくない現実はアルゴリズムが遮断し、心地よい分断の中にいる。
+                                    </p>
+                                </div>
+                                <div
+                                    class="bg-white p-6 border-4 border-neon transform -rotate-1 shadow-[10px_10px_0px_#CD7F32] md:order-1 text-left">
+                                    <h4 class="font-sans text-xl font-bold text-black mb-4">POLITICAL OS v2.5</h4>
+                                    <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-ink">
+                                        <li>無党派層は「スマホ」の中にしかいない。</li>
+                                        <li>失言は切り抜かれ、永遠に拡散される。</li>
+                                        <li>「感情」をハックした者が勝つ認知戦。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group mt-32">
+                        <div
+                            class="absolute left-1/2 transform -translate-x-1/2 -top-24 md:-top-32 w-full text-center z-0">
+                            <span
+                                class="text-[8rem] md:text-[13rem] font-sans font-black text-transparent stroke-white opacity-40 blur-[1px]">2050</span>
+                        </div>
+
+                        <div
+                            class="relative z-10 bg-black/90 border border-gray-700 p-8 md:p-16 backdrop-blur-md overflow-hidden shadow-2xl">
+                            <div
+                                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDAsIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==')] opacity-30">
+                            </div>
+
+                            <div class="relative z-20 text-center">
+                                <span
+                                    class="bg-magenta text-white font-bold px-4 py-1 text-sm tracking-widest mb-6 inline-block shadow-[4px_4px_0px_white]">FUTURE_PREDICTION</span>
+                                <h3 class="text-4xl md:text-6xl font-black font-jp text-white mb-16 drop-shadow-lg">
+                                    「人間」の再定義</h3>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                                    <div class="border-t-4 border-magenta pt-6">
+                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO DEVICE</h4>
+                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                            スマホという「板」は消滅する。<br>
+                                            情報は網膜に直接投影され、思考するだけで送信される。<br>
+                                            オンラインとオフラインの境界線は完全に溶解する。
+                                        </p>
+                                    </div>
+                                    <div class="border-t-4 border-magenta pt-6">
+                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO AGING</h4>
+                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                            老化は「治療可能な疾患」となる。<br>
+                                            寿命の格差は、そのまま経済格差となる。<br>
+                                            死生観そのものが書き換わり、宗教と倫理が衝突する。
+                                        </p>
+                                    </div>
+                                    <div class="border-t-4 border-magenta pt-6">
+                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO WORK</h4>
+                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                            労働はAIとロボットが行う。<br>
+                                            政治家の仕事は「利益誘導」から、<br>
+                                            人類の「存在意義（何のために生きるか）」の提示へとシフトする。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-20 p-8 border-2 border-white inline-block relative bg-black">
+                                    <p class="font-jp font-bold text-xl md:text-2xl leading-relaxed text-white">
+                                        この垂直な進化の壁を、<br>
+                                        あなたは素手で登るつもりですか？
+                                    </p>
+                                    <div class="absolute -bottom-3 -right-3 w-6 h-6 bg-neon"></div>
+                                    <div class="absolute -top-3 -left-3 w-6 h-6 bg-magenta"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 1: DIRECTOR'S LOG (Profile) -->
-        <section id="problem" class="content-section problem-section">
-            <div class="corner-decoration top-right">LAT: 35.6895</div>
-            <div class="corner-decoration bottom-left">SYS_LOG_01</div>
-            <div class="container">
-                <div class="section-header">
-                    <div class="header-meta">
-                        <span class="phase-tag">PHASE: 01 // DIRECTOR'S LOG</span>
-                        <span class="ref-code">REF: YAMAOKA-PROFILE-26</span>
-                    </div>
-                    <h2 class="section-title">
-                        <span class="highlight-yellow">WARNING:</span><br>
-                        なぜ、あなたの政治活動は「届かない」のか？
-                    </h2>
+
+        <div class="relative w-full py-32 flex flex-col items-center justify-center bg-[#111] overflow-hidden">
+
+            <div
+                class="absolute w-full h-8 bg-neon border-y-2 border-black flex items-center overflow-hidden opacity-80 pointer-events-none mb-40 transform -rotate-1">
+                <div class="animate-marquee whitespace-nowrap font-sans font-bold text-black text-xs tracking-[0.5em]">
+                    WARNING: IRREVERSIBLE PROCESS /// OLD SYSTEM WILL BE DELETED /// 警告：古い常識は削除されます /// CAUTION ///
+                </div>
+            </div>
+
+            <div class="relative group cursor-pointer mt-12 z-20" onclick="activateUpdate()">
+                <div
+                    class="absolute inset-0 bg-red-600 transform translate-x-1 translate-y-1 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-100 opacity-0 group-hover:opacity-100">
+                </div>
+                <div
+                    class="absolute inset-0 bg-cyan-600 transform -translate-x-1 -translate-y-1 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-100 opacity-0 group-hover:opacity-100">
                 </div>
 
-                <div class="problem-grid">
-                    <div class="problem-visual">
-                        <!-- 'REALITY' visual -->
-                        <div class="rejected-stamp">REALITY</div>
-                        <img src="assets/images/yamaokagrid1.png" alt="Director Yamaoka" class="halftone-img">
+                <button
+                    class="relative bg-black text-white border-4 border-white px-8 md:px-16 py-8 shadow-[10px_10px_0px_#CD7F32] group-hover:shadow-[15px_15px_0px_#FF0000] group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] transition-all duration-200 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LDI1NSwgMC4xKSIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none">
                     </div>
-                    <div class="problem-text">
-                        <div class="error-log">
-                            <p class="sys-text">> ERROR: 0x404 [CONNECTION_LOST]</p>
-                            <p class="sys-text">> WARNING: INEFFICIENCY_DETECTED</p>
-                            <p class="sys-text">> ROOT_CAUSE: LACK_OF_DESIGN</p>
-                            <p class="sys-text">> STATUS: REBOOT_REQUIRED</p>
-                        </div>
-                        <p class="dense-copy">
-                            28歳でトップ当選させていただいた私が、議会の内側で直面した課題。<br>
-                            それは、<strong>「圧倒的な非効率」と「デザインの力の欠如」</strong>でした。<br><br>
-                            徹夜で練り上げた一般質問も、魂を込めた街頭演説も、「読みづらいチラシ」一枚で、手に取ってもらえない。「更新されないHP」一つで、若者との接点を失ってしまう。<br><br>
-                            汗をかけば報われる時代は、変わりつつあります。今必要なのは、地域を回る泥臭い活動と、最先端テクノロジーの<strong>「融合」</strong>です。<br>
-                            クリエイティブで「信頼」を作り、AIで「時間」を創る。これは単なるビジネスではありません。「本気で地域を良くしたい」と願うあなたへの、同志としての提案です。
+                    <div class="relative z-10 text-center">
+                        <p
+                            class="font-sans text-neon text-xs tracking-[0.4em] mb-1 group-hover:text-white transition-colors">
+                            &lt; UPDATE SYSTEM &gt;</p>
+                        <h2 class="font-jp font-black text-3xl md:text-5xl tracking-widest leading-none mt-2">
+                            政治家OSを<br>
+                            <span
+                                class="text-transparent stroke-white bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:text-neon transition-colors"
+                                style="-webkit-text-stroke: 1px transparent;">更新する</span>
+                        </h2>
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 h-1 bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out">
+                    </div>
+                </button>
+            </div>
+
+            <div class="mt-8 text-center max-w-lg mx-auto bg-black/50 backdrop-blur border-l-4 border-red-600 p-4">
+                <p class="text-red-500 font-bold text-sm md:text-base animate-pulse">※ 警告：実行すると、古い常識はすべて「削除」されます。</p>
+            </div>
+        </div>
+    </div>
+
+
+    <section id="new-services" class="hidden min-h-screen bg-white py-24 px-4 md:px-6 relative overflow-hidden">
+
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-gray-100 pointer-events-none select-none z-0 whitespace-nowrap">
+            AX-2026
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-20">
+                <p
+                    class="font-sans text-neon bg-black inline-block px-4 py-1 text-sm tracking-[0.3em] mb-6 animate-pulse">
+                    INSTALLATION COMPLETE</p>
+                <h2 class="font-sans text-5xl md:text-8xl font-black mb-6 text-ink leading-[0.9]">
+                    NEW WEAPONS<br>
+                    <span class="text-transparent stroke-text" style="-webkit-text-stroke: 1px #1A1A1A;">READY TO
+                        DEPLOY</span>
+                </h2>
+                <p class="font-jp text-lg md:text-xl font-bold text-gray-600">
+                    あなたの「一人会派」に実装された、3つの非対称兵器。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+
+                <div
+                    class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
+                    <div
+                        class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
+                        WEAPON_01</div>
+
+                    <h3 class="font-sans text-4xl font-black mb-2 italic">VISUAL<br><span
+                            class="text-bronze group-hover:text-neon">DOMINATION</span></h3>
+                    <p
+                        class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
+                        視覚支配プロトコル
+                    </p>
+
+                    <div class="space-y-4 font-jp text-sm leading-relaxed">
+                        <p class="font-bold text-lg">
+                            「あ、この人が勝つな」と、<br>
+                            <span
+                                class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">貼るだけで思わせる。</span>
                         </p>
-                        <div class="key-metrics">
-                            <div class="metric">
-                                <span class="label">ID</span>
-                                <span class="value">YAMAOKA</span>
-                            </div>
-                            <div class="metric">
-                                <span class="label">ROLE</span>
-                                <span class="value alert-text">DIRECTOR</span>
-                            </div>
-                        </div>
+                        <p class="opacity-80">
+                            有権者の9割は政策を読まない。彼らは0.5秒の「印象」だけで投票先を決める。
+                            商業デザインの色彩心理学を政治に転用し、新人であっても「現職以上の格」と「圧倒的な勝者のオーラ」を強制的に演出する。
+                        </p>
+                        <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
+                            <li>>> IDENTITY ARCHITECTURE (ブランド設計)</li>
+                            <li>>> PSYCHO-COLORING (色彩心理誘導)</li>
+                            <li>>> PROPAGANDA POSTER (高解像度ポスター)</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div
+                    class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
+                    <div
+                        class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
+                        WEAPON_02</div>
+
+                    <h3 class="font-sans text-4xl font-black mb-2 italic">SYNTHETIC<br><span
+                            class="text-bronze group-hover:text-neon">STAFF</span></h3>
+                    <p
+                        class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
+                        拡張参謀 (AI秘書)
+                    </p>
+
+                    <div class="space-y-4 font-jp text-sm leading-relaxed">
+                        <p class="font-bold text-lg">
+                            徹夜の質問作りを、<br>
+                            <span
+                                class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">3分で終わらせる。</span>
+                        </p>
+                        <p class="opacity-80">
+                            「人件費が出せない」はもう言い訳にならない。
+                            過去10年分の議事録と地域データを学習したAIが、あなたの右腕となる。
+                            答弁書の矛盾指摘から、炎上しないSNS投稿の作成まで。事務作業はAIに投げ、あなたは「握手」と「決断」に全リソースを注げ。
+                        </p>
+                        <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
+                            <li>>> MINUTES ANALYSIS (議事録解析)</li>
+                            <li>>> SPEECH GENERATION (演説生成)</li>
+                            <li>>> RISK MANAGEMENT (炎上予知)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
+                    <div
+                        class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
+                        WEAPON_03</div>
+
+                    <h3 class="font-sans text-4xl font-black mb-2 italic">VOTE<br><span
+                            class="text-bronze group-hover:text-neon">ENGINEERING</span></h3>
+                    <p
+                        class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
+                        集票工学
+                    </p>
+
+                    <div class="space-y-4 font-jp text-sm leading-relaxed">
+                        <p class="font-bold text-lg">
+                            「お願い」をやめて、<br>
+                            <span
+                                class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">「攻略」に切り替える。</span>
+                        </p>
+                        <p class="opacity-80">
+                            無駄なドブ板は罪だ。
+                            LINE公式アカウントとWeb解析を駆使し、「あなたに投票する可能性が高い層」だけをピンポイントで狙い撃つ。
+                            勘と経験に頼る昭和の選挙を捨て、データを元に票を積み上げる「再現性のある当選プログラム」を構築する。
+                        </p>
+                        <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
+                            <li>>> TARGETING MAP (重点攻略エリア選定)</li>
+                            <li>>> LINE 1-to-1 MARKETING (個別の囲い込み)</li>
+                            <li>>> VOTE CONVERSION (投票行動への転換)</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
-        </section>
 
-        <!-- SECTION 2: SOLUTIONS (Declassified Files) -->
-        <section id="files" class="content-section files-section">
-            <div class="corner-decoration top-right">LONG: 139.6917</div>
-            <div class="corner-decoration bottom-left">SEC: ARCHIVE</div>
-            <div class="container">
-                <div class="section-header">
-                    <div class="header-meta">
-                        <span class="phase-tag">PHASE: 02 // DECLASSIFIED</span>
-                        <span class="ref-code">REF: SOL-ARCHIVE-26</span>
-                    </div>
-                    <h2 class="section-title">SOLUTIONS ARCHIVE</h2>
+
+        </div>
+        <section class="py-24 px-4 md:px-6 bg-[#F0F0F0] border-t-2 border-black relative overflow-hidden">
+
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-5"
+                style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 40px 40px;">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+
+                <div class="mb-16 border-l-8 border-black pl-6">
+                    <h2 class="font-sans text-5xl md:text-7xl font-black text-ink mb-2">05. CORE TEAM</h2>
+                    <p class="font-sans text-sm tracking-[0.3em] font-bold text-gray-500 mb-4">// BLOOM ROAD INC.
+                        LEADERSHIP</p>
+                    <p class="font-jp font-bold text-lg md:text-xl max-w-2xl leading-relaxed">
+                        「政治の論理」と「芸術の感性」。<br>
+                        異なるOSを持つ二人の異端児が、AIを触媒に融合する。
+                    </p>
                 </div>
 
-                <div class="file-grid">
-                    <!-- FILE 01: VISUAL REBOOT -->
-                    <div class="file-folder" data-file="01">
-                        <div class="folder-tab">FILE_01 /// VISUAL REBOOT</div>
-                        <div class="folder-body">
-                            <div class="folder-meta">
-                                <span>TARGET: VOTERS</span>
-                                <span>TYPE: PSYCHOLOGICAL</span>
-                                <span class="badge-high">PRIORITY: MAX</span>
-                            </div>
-                            <h3>圧倒的権威の構築。</h3>
-                            <p>「有権者の記憶に残る、あなたの『座席』を確保する。」<br>
-                                心を込めて配ったチラシが捨てられる痛み。それは中身の問題ではありません。「読む」前に「感じる」デザインの敗北です。写真、フォント、配色。すべてを計算し尽くし、「頼れるリーダー」としての存在感を確立します。
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+                    <div
+                        class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#CD7F32] hover:shadow-[12px_12px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 relative group">
+
+                        <!-- Profile Images -->
+                        <div
+                            class="absolute -right-6 -top-12 w-32 md:w-36 z-20 transform rotate-6 hover:rotate-0 transition-transform duration-300 shadow-xl">
+                            <img src="./images/yamaoka_wow.jpg" alt="Yamaoka Action"
+                                class="w-full border-4 border-white">
+                        </div>
+
+                        <div
+                            class="absolute -top-5 left-6 bg-black text-white px-4 py-1 font-sans text-xs tracking-widest border-2 border-white transform -rotate-1 group-hover:bg-bronze transition-colors z-30">
+                            $$ FILE: 01 // THE STRATEGIST $$
+                        </div>
+
+                        <div class="mt-4 mb-8 border-b-2 border-gray-200 pb-6 relative z-10">
+                            <h3 class="font-sans text-4xl md:text-5xl font-black leading-none mb-1">
+                                TOSHIHIDE<br>YAMAOKA
+                            </h3>
+                            <p class="font-jp font-bold text-xl mb-2">山岡 稔季</p>
+                            <p class="font-sans text-xs font-bold bg-gray-100 inline-block px-2 py-1 text-gray-600">
+                                CEO / Political Tech Strategist
                             </p>
-                            <ul class="protocol-list">
-                                <li>> Identity Architecture</li>
-                                <li>> Election Winning LP</li>
-                                <li>> Propaganda Tools (Flyers)</li>
-                            </ul>
                         </div>
-                    </div>
 
-                    <!-- FILE 02: AI INTELLIGENCE -->
-                    <div class="file-folder" data-file="02">
-                        <div class="folder-tab">FILE_02 /// AI INTELLIGENCE</div>
-                        <div class="folder-body">
-                            <div class="folder-meta">
-                                <span>TARGET: EFFICIENCY</span>
-                                <span>TYPE: AUTOMATION</span>
-                            </div>
-                            <h3>参謀の量産。</h3>
-                            <p>「一人会派でも、AIがあれば『100人の政策秘書』を持つのと同じです。」<br>
-                                議事録分析や答弁書案作成に追われ、地域に出る時間がない。「勉強不足」への恐怖。それらはもう過去のものです。AIシンクタンクによる分析力と、あなたの分身となる「Legacy
-                                Archive」が、最強の右腕となります。</p>
-                            <ul class="protocol-list">
-                                <li>> Assembly AI Bootcamp</li>
-                                <li>> The "Shadow" System (Bot)</li>
-                                <li>> Time Hacking & Policy Making</li>
-                            </ul>
+                        <div
+                            class="bg-gray-50 border-l-4 border-bronze p-4 mb-8 italic font-jp font-bold text-sm md:text-base text-gray-700">
+                            「政治を内側から見てきた。<br>だからこそ、外側からの『ハッキング』が必要だと気づいた。」
                         </div>
-                    </div>
 
-                    <!-- FILE 03: SNS WARFARE -->
-                    <div class="file-folder" data-file="03">
-                        <div class="folder-tab">FILE_03 /// SNS WARFARE</div>
-                        <div class="folder-body">
-                            <div class="folder-meta">
-                                <span>TARGET: AIR_SPACE</span>
-                                <span>STATUS: ENGAGE</span>
-                            </div>
-                            <h3>空中戦の制圧。</h3>
-                            <p>「目指すべきは『いいね』の数ではなく、実際の『票』です。」<br>
-                                毎朝の義務的な投稿、反応のない報告。それを選挙からの逆算による「戦略的伏線」へと変えます。AIによる炎上予兆検知と危機管理体制で、攻めと守りの広報を盤石にします。</p>
-                            <ul class="protocol-list">
-                                <li>> Strategic Consulting</li>
-                                <li>> Ghostwriting with AI</li>
-                                <li>> Risk Management & Alert</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- FILE 04: FUTURE VISION -->
-                    <div class="file-folder" data-file="04">
-                        <div class="folder-tab">FILE_04 /// FUTURE VISION</div>
-                        <div class="folder-body">
-                            <div class="folder-meta">
-                                <span>TARGET: 2050</span>
-                                <span>SCOPE: SCENARIO</span>
-                            </div>
-                            <h3>縮小する未来を書き換える。</h3>
-                            <p>AIが予測する2050年の厳しいデータ。しかし、未来を選択し決断するのはAIではなく、政治家であるあなたです。客観的な予測データから逆算し、「地域を生き返らせるための楽観シナリオ」と政策を共に立案します。
+                        <div class="mb-8">
+                            <p class="font-sans text-xs font-bold tracking-widest text-gray-400 mb-2">[ PROFILE LOG ]
                             </p>
-                            <ul class="protocol-list">
-                                <li>> Data-Driven Policy</li>
-                                <li>> 2050 Scenario Planning</li>
-                                <li>> Regional Revival Strategy</li>
+                            <p class="font-jp text-sm leading-relaxed text-gray-800">
+                                かつて議場という「密室」に身を置き、昭和然とした政治システムの限界を誰よりも痛感した男。
+                                「良い政策だけでは、世界は1ミリも動かない」——その冷徹な現実を前に、彼は議員バッジを外し、より強力な武器（テクノロジー）を手に取る道を選んだ。<br><br>
+                                彼が提供するのは、コンサルティングではない。「OSの書き換え」である。
+                                SNS、AI、そして元議員としての泥臭い地上戦の知見。これらを統合し、情熱あるリーダーが評価される「勝利の方程式」を設計する。
+                            </p>
+                        </div>
+
+                        <div class="bg-black text-white p-4 font-mono text-xs leading-relaxed">
+                            <p class="text-bronze font-bold mb-2">[ SPEC / SPECIALTY ]</p>
+                            <ul class="space-y-2">
+                                <li><span class="text-bronze">> Political Hacking:</span> 選挙戦略のフルスタック・エンジニアリング。</li>
+                                <li><span class="text-bronze">> SNS Warfare:</span> 「認知」を「票」に変えるWebマーケティング。</li>
+                                <li><span class="text-bronze">> AI Implementation:</span> 「想い」を「政策・言語」へ変換するAI実装。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#FF00FF] hover:shadow-[12px_12px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 relative group">
+
+                        <!-- Profile Image (Left Side Placement) -->
+                        <div
+                            class="absolute -left-6 -top-12 w-32 md:w-40 z-20 transform -rotate-6 hover:rotate-0 transition-transform duration-300 shadow-xl">
+                            <img src="./images/kamino_face.png" alt="Takahiro Kamino Portrait"
+                                class="w-full border-4 border-white">
+                        </div>
+
+                        <div
+                            class="absolute -top-5 right-6 bg-black text-white px-4 py-1 font-sans text-xs tracking-widest border-2 border-white transform rotate-1 group-hover:bg-magenta transition-colors z-30">
+                            $$ FILE: 02 // THE ARCHITECT $$
+                        </div>
+
+                        <div class="mt-4 mb-8 border-b-2 border-gray-200 pb-6 text-right relative z-10">
+                            <h3 class="font-sans text-4xl md:text-5xl font-black leading-none mb-1">
+                                TAKAHIRO<br>KAMINO
+                            </h3>
+                            <p class="font-jp font-bold text-xl mb-2">神野 貴弘</p>
+                            <p class="font-sans text-xs font-bold bg-gray-100 inline-block px-2 py-1 text-gray-600">
+                                Chairman / Sensory & Logic Architect
+                            </p>
+                        </div>
+
+                        <div
+                            class="bg-gray-50 border-r-4 border-magenta p-4 mb-8 italic font-jp font-bold text-sm md:text-base text-gray-700 text-right">
+                            「論理（ロジック）で戦い、感性（センス）で魅了する。<br>二律背反を愛せ。」
+                        </div>
+
+                        <div class="mb-8 text-right">
+                            <p class="font-sans text-xs font-bold tracking-widest text-gray-400 mb-2">[ PROFILE LOG ]
+                            </p>
+                            <p class="font-jp text-sm leading-relaxed text-gray-800 text-left">
+                                一人の人間の中に、鋭利な「左脳」と爆発的な「右脳」が共存する、ビジネス界のキメラ（異種混合体）。
+                                ある時は法務・市場分析のスペシャリストとして緻密な戦略図を描き、次の瞬間にはアーティストとして空間を歪め、料理人として未知の味覚を創造する。<br><br>
+                                彼が提供するのは、ビジネス、アート、食、法律はすべて等価な「素材」に過ぎない。
+                                一見相反する要素を高度な次元で衝突・融合（アウフヘーベン）させ、誰も見たことのないビジネスモデルへと昇華させる。
+                            </p>
+                        </div>
+
+                        <div class="bg-black text-white p-4 font-mono text-xs leading-relaxed text-right">
+                            <p class="text-magenta font-bold mb-2">[ SPEC / SPECIALTY ]</p>
+                            <ul class="space-y-2 text-left">
+                                <li><span class="text-magenta">> Hybrid Design:</span> Web・空間・グラフィックのトータル設計。</li>
+                                <li><span class="text-magenta">> Sensory Engineering:</span> 五感に刺さる体験設計。</li>
+                                <li><span class="text-magenta">> Strategic Logic:</span> 法務・経営分析に基づく鉄壁のロジック。</li>
                             </ul>
                         </div>
                     </div>
 
                 </div>
+
+                <div class="bg-ink text-white p-8 md:p-12 border-4 border-black relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-neon opacity-20 blur-3xl rounded-full"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-magenta opacity-20 blur-3xl rounded-full"></div>
+
+                    <div class="relative z-10 text-center">
+                        <p class="font-sans text-neon text-xs tracking-[0.5em] mb-4">$$ SYSTEM SYNERGY $$</p>
+                        <h3 class="font-sans text-4xl md:text-6xl font-black mb-8 leading-none">
+                            POLITICS <span class="text-gray-500">×</span> ART <span class="text-gray-500">×</span> AI
+                        </h3>
+
+                        <div class="max-w-3xl mx-auto font-jp space-y-6 leading-loose">
+                            <p class="text-lg md:text-xl font-bold">
+                                元議員として社会構造の裏側を知り尽くした<br class="md:hidden">山岡の<span
+                                    class="text-bronze border-b-2 border-bronze">「突破力」</span>。<br>
+                                アーティストとして人の心の機微を知り尽くした<br class="md:hidden">神野の<span
+                                    class="text-magenta border-b-2 border-magenta">「創造力」</span>。
+                            </p>
+                            <p class="text-sm md:text-base text-gray-300">
+                                この二人がタッグを組み、そこに「AI」という最強の加速装置を組み込むことで、<br class="hidden md:inline">
+                                株式会社BLOOM ROADは単なる代行業者を超えた<br>
+                                <span class="font-bold text-white text-lg">「事業変革（Business
+                                    Transformation）」</span>のパートナーとなる。
+                            </p>
+                        </div>
+
+                        <div class="mt-12 pt-8 border-t border-gray-700">
+                            <p class="font-jp font-bold text-xl md:text-2xl mb-2">
+                                「古いルールで戦うのは、もう終わりにしよう。」
+                            </p>
+                            <p class="text-gray-400 text-sm mb-8">
+                                既存の枠に収まりきらない議員、経営者、そして挑戦者たちへ。
+                            </p>
+
+                            <a href="https://line.me/R/ti/p/@988ukvro" target="_blank"
+                                class="inline-block bg-white text-black font-bold py-4 px-12 text-lg hover:bg-neon transition-colors border-2 border-transparent hover:border-white">
+                                私たちと共にアップデートする ->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- CTA -->
-        <section id="contact" class="cta-section">
-            <div class="container">
-                <h2 class="stencil-title">ARE YOU READY?</h2>
-                <p class="dense-copy">AX-2026 PROTOCOL AWAITING INPUT.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-alert">無料戦略診断 (DIAGNOSIS)</a>
-                    <a href="#" class="btn-secondary">AX-2026 メンバーシップ (LINE)</a>
-                </div>
-            </div>
-        </section>
+    </section>
 
-        <!-- SYSTEM FOOTER -->
-        <footer class="system-footer">
-            <div class="container footer-grid">
-                <div class="footer-col">
-                    <h4>SYSTEM MAP</h4>
-                    <ul>
-                        <li><a href="#hero">ROOT</a></li>
-                        <li><a href="#problem">ERROR_LOGS</a></li>
-                        <li><a href="#files">ARCHIVES</a></li>
-                        <li><a href="#contact">INPUT</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>LEGAL PROTOCOLS</h4>
-                    <ul>
-                        <li><a href="#">PRIVACY_POLICY</a></li>
-                        <li><a href="#">TERMS_OF_SERVICE</a></li>
-                        <li><a href="#">DATA_GOVERNANCE</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>CONNECTION</h4>
-                    <ul>
-                        <li>
-                            <p>YAMAOKA TOSHIKI</p>
-                        </li>
-                        <li>
-                            <p>FORMER CITY COUNCIL</p>
-                        </li>
-                        <li>
-                            <p>TOKYO, JAPAN</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>STATUS</h4>
-                    <p class="sys-text">MEMORY: 64TB</p>
-                    <p class="sys-text">UPTIME: 99.99%</p>
-                    <p class="sys-text">VERSION: 2.0.4</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 AX-2026 PROTOCOL. ALL RIGHTS RESERVED.</p>
-                <p>LAT: 35.6895 / LONG: 139.6917</p>
-            </div>
-        </footer>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
-    </main>
-</div>
+        // --- PRE-UPDATE WORLD ANIMATIONS ---
+        window.addEventListener('load', () => {
 
-<script src="main.js"></script>
+            // 1. Header Animations (Version A / Chaos BG)
+            // Parallax for Background SVGs
+            gsap.to('#legacy-system > div:first-child > svg', {
+                y: 100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#legacy-system",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Floating Badges (Zero G Effect)
+            // Targets the badges inside the z-10 container
+            gsap.utils.toArray('#legacy-system .z-10 > div, #legacy-system .z-10 > svg').forEach((el) => {
+                gsap.to(el, {
+                    y: "random(-15, 15)",
+                    x: "random(-10, 10)",
+                    rotation: "random(-5, 5)", // Adds subtle rotation to existing rotation
+                    duration: "random(3, 6)",
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            });
+
+            // Floating Badges & Rubis (Main Content)
+            gsap.utils.toArray('#legacy-system .rubi-tag').forEach((el) => {
+                gsap.to(el, {
+                    y: "random(-5, 5)",
+                    duration: "random(2, 3)",
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            });
+
+            // Title Groups Hover Effect (Enhance existing CSS hover)
+            gsap.utils.toArray('#legacy-system .group').forEach((el) => {
+                gsap.from(el, {
+                    y: 20,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.5
+                });
+            });
+
+            // 2. Great Rewrite Section (History Logs)
+            gsap.utils.toArray('.space-y-40 > div').forEach((section) => {
+                // Main Content Fade Up
+                gsap.fromTo(section.querySelector('.relative.z-10'),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+
+                // Background Year Parallax
+                const bgYear = section.querySelector('.text-\\[8rem\\]') || section.querySelector('.text-\\[10rem\\]');
+                if (bgYear) {
+                    gsap.to(bgYear, {
+                        y: 150,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                }
+            });
+        });
+
+        // --- SYSTEM UPDATE TRANSITION ---
+        function activateUpdate() {
+            const glitchLayer = document.getElementById('glitch-layer');
+            const legacySystem = document.getElementById('legacy-system');
+            const newServices = document.getElementById('new-services');
+
+            // 1. Wipe Up Transition
+            gsap.to(glitchLayer, {
+                scaleY: 1,
+                duration: 0.6,
+                ease: "expo.inOut",
+                onComplete: () => {
+                    // 2. Switch Content
+                    window.scrollTo(0, 0);
+                    legacySystem.style.display = 'none';
+                    newServices.classList.remove('hidden');
+
+                    // 3. Reveal New Content (Wipe Down)
+                    gsap.to(glitchLayer, {
+                        scaleY: 0,
+                        transformOrigin: "top",
+                        duration: 0.6,
+                        delay: 0.2, // Small pause in black
+                        ease: "expo.inOut",
+                        onComplete: () => {
+                            initNewWorldAnimations(); // Start scroll animations for new world
+                        }
+                    });
+                }
+            });
+        }
+
+        // --- POST-UPDATE WORLD ANIMATIONS (Core Team etc) ---
+        function initNewWorldAnimations() {
+            // Force ScrollTrigger refresh to detect new layout
+            ScrollTrigger.refresh();
+
+            // 1. Master Title Sequence (New Weapons)
+            const serviceHeader = document.querySelector("#new-services .text-center");
+            if (serviceHeader) {
+                gsap.fromTo(serviceHeader.children,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.1,
+                        duration: 1,
+                        ease: "power3.out"
+                    }
+                );
+            }
+
+            // 2. Arsenal Cards Stagger
+            gsap.from("#new-services .grid:first-of-type > div", {
+                y: 60,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: "#new-services .grid:first-of-type",
+                    start: "top 80%"
+                }
+            });
+
+            // 3. Core Team Section Animations
+            // We use a slight delay or scroll trigger ensuring the user scrolls down to see it
+            const coreTeamSection = document.querySelector("#new-services section"); // The nested section
+
+            if (coreTeamSection) {
+                // Background Grid Parallax
+                gsap.to(coreTeamSection.querySelector('.absolute.inset-0'), {
+                    y: 50,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: coreTeamSection,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+
+                // File Cards "Stamp" Reveal
+                gsap.utils.toArray(coreTeamSection.querySelectorAll(".grid > div")).forEach((card, i) => {
+                    gsap.fromTo(card,
+                        { scale: 1.05, opacity: 0, filter: "blur(5px)" },
+                        {
+                            scale: 1,
+                            opacity: 1,
+                            filter: "blur(0px)",
+                            duration: 0.5,
+                            delay: i * 0.2,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 85%"
+                            }
+                        }
+                    );
+                });
+
+                // Synergy Section
+                gsap.from(coreTeamSection.querySelector(".bg-ink"), {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: coreTeamSection.querySelector(".bg-ink"),
+                        start: "top 80%"
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>
