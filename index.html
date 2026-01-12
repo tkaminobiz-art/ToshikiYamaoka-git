@@ -462,7 +462,8 @@
                 </div>
             </div>
 
-            <div class="relative group cursor-pointer mt-12 z-20" onclick="activateUpdate()">
+            <!-- Wrapper div (onclick removed to prevent double-firing) -->
+            <div class="relative group cursor-pointer mt-12 z-20">
                 <div
                     class="absolute inset-0 bg-red-600 transform translate-x-1 translate-y-1 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-100 opacity-0 group-hover:opacity-100">
                 </div>
@@ -995,6 +996,7 @@
 
         // --- SYSTEM UPDATE TRANSITION ---
         function activateUpdate() {
+            console.log("System Update Activated"); // Debug Log
             const overlay = document.getElementById('update-overlay');
             const consoleOutput = document.getElementById('console-output');
             const progressBar = document.getElementById('progress-bar');
