@@ -135,8 +135,41 @@
 
     <div class="noise"></div>
 
-    <div id="glitch-layer">
-        <div class="text-neon font-sans text-4xl font-bold tracking-widest animate-pulse">SYSTEM UPDATING...</div>
+    <!-- ENHANCED SYSTEM UPDATE OVERLAY -->
+    <div id="update-overlay"
+        class="fixed inset-0 z-[100] bg-black hidden flex flex-col items-center justify-center overflow-hidden">
+        <!-- Grid/Noise Background -->
+        <div
+            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDAs 255, 0, 0.1KSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none">
+        </div>
+
+        <!-- Top Left Status (Requested Restore) -->
+        <div class="absolute top-0 left-0 p-4 md:p-8 z-20">
+            <div class="flex items-center gap-2 mb-1">
+                <div class="w-2 h-2 bg-neon animate-pulse"></div>
+                <span class="text-neon font-mono text-xs tracking-widest font-bold">SYSTEM UPDATE</span>
+            </div>
+            <div class="text-[0.6rem] text-gray-500 font-mono tracking-widest pl-4">SEQUENCE_INIT_READY</div>
+        </div>
+
+        <!-- Top Right Info -->
+        <div class="absolute top-0 right-0 p-4 md:p-8 text-xs text-gray-500 font-mono text-right z-20">
+            SYSTEM_KERNEL: v9.0.2<br>
+            TARGET: LEGACY_POLITICS
+        </div>
+
+        <!-- Center Console -->
+        <div class="w-full max-w-2xl p-8 font-mono text-xs md:text-sm text-neon leading-relaxed relative z-10">
+            <div id="console-output"
+                class="mb-4 text-left h-64 overflow-hidden border-l-2 border-neon pl-4 opacity-0 font-bold shadow-[0_0_15px_rgba(234,255,0,0.2)]">
+            </div>
+
+            <div id="progress-container"
+                class="w-full bg-gray-900 h-2 mt-8 overflow-hidden opacity-0 border border-gray-800">
+                <div id="progress-bar" class="h-full bg-neon w-0 shadow-[0_0_10px_#EAFF00]"></div>
+            </div>
+            <div id="progress-text" class="text-right mt-2 text-neon font-bold opacity-0">0%</div>
+        </div>
     </div>
 
     <div id="legacy-system">
@@ -882,34 +915,101 @@
             });
         });
 
-        // --- SYSTEM UPDATE TRANSITION ---
+        // --- SYSTEM UPDATE TRANSITION (ENHANCED) ---
         function activateUpdate() {
-            const glitchLayer = document.getElementById('glitch-layer');
+            const overlay = document.getElementById('update-overlay');
+            const consoleOutput = document.getElementById('console-output');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const progressContainer = document.getElementById('progress-container');
+
             const legacySystem = document.getElementById('legacy-system');
             const newServices = document.getElementById('new-services');
 
-            // 1. Wipe Up Transition
-            gsap.to(glitchLayer, {
-                scaleY: 1,
-                duration: 0.6,
-                ease: "expo.inOut",
+            // Show Overlay
+            overlay.classList.remove('hidden');
+
+            const tl = gsap.timeline();
+
+            // 1. Console Diagnosis Sequence
+            const logs = [
+                "INITIATING SYSTEM DIAGNOSIS...",
+                "DETECTED: CRITICAL ERROR IN [JAPANESE_POLITICS.EXE]",
+                "> ERROR: LOGIC_NOT_FOUND",
+                "> ERROR: PASSION_DISCONNECT",
+                "> WARNING: LEGACY SYSTEM UNSTABLE",
+                "--------------------------------",
+                "SCANNING REPLACEMENT KERNEL...",
+                "FOUND: AX-2026 PROTOCOL (YAMAOKA_KAMINO_BUILD)",
+                "PREPARING OVERWRITE...",
+                "DELETING OLD DEPENDENCIES..."
+            ];
+
+            tl.to(consoleOutput, { opacity: 1, duration: 0.1 })
+                .call(() => {
+                    let i = 0;
+                    consoleOutput.innerHTML = ""; // Clear previous logs
+                    const interval = setInterval(() => {
+                        if (i < logs.length) {
+                            const div = document.createElement('div');
+                            div.textContent = `> ${logs[i]}`;
+                            div.className = "mb-1";
+                            consoleOutput.appendChild(div);
+                            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                            i++;
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 80); // Speed of logs
+                })
+                .to({}, { duration: 2.0 }) // Wait for logs to finish
+
+            // 2. Glitch / Instability
+            tl.to(legacySystem, {
+                filter: "invert(1) hue-rotate(180deg) blur(2px)",
+                duration: 0.1,
+                yoyo: true,
+                repeat: 5
+            }, "-=1.5")
+
+            // 3. Progress Bar Sequence
+            tl.to([progressContainer, progressText], { opacity: 1, duration: 0.2 })
+                .to(progressBar, {
+                    width: "100%",
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    onUpdate: function () {
+                        const progress = Math.round(this.progress() * 100);
+                        progressText.innerText = `${progress}%`;
+                    }
+                })
+
+            // 4. Blackout & Switch
+            tl.to(overlay, {
+                backgroundColor: "#fff",
+                duration: 0.05,
+                yoyo: true,
+                repeat: 1,
                 onComplete: () => {
-                    // 2. Switch Content
+                    // Flash effect sound could go here
+                }
+            })
+                .to(overlay, { backgroundColor: "#000", duration: 0.1 })
+                .call(() => {
+                    // Actual DOM Switch
                     window.scrollTo(0, 0);
                     legacySystem.style.display = 'none';
                     newServices.classList.remove('hidden');
+                })
 
-                    // 3. Reveal New Content (Wipe Down)
-                    gsap.to(glitchLayer, {
-                        scaleY: 0,
-                        transformOrigin: "top",
-                        duration: 0.6,
-                        delay: 0.2, // Small pause in black
-                        ease: "expo.inOut",
-                        onComplete: () => {
-                            initNewWorldAnimations(); // Start scroll animations for new world
-                        }
-                    });
+            // 5. Reveal New World (CRT Turn On Effect)
+            tl.to(overlay, {
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.5,
+                onComplete: () => {
+                    overlay.classList.add('hidden');
+                    initNewWorldAnimations();
                 }
             });
         }
