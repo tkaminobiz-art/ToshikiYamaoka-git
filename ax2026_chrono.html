@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX-2026 | CHRONO-SHIFT PROTOCOL</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@300;500;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bronze: '#C0A062',
+                        offwhite: '#EAEAEA',
+                        ink: '#050505',
+                        neon: '#00FF41',
+                        alert: '#FF3333'
+                    },
+                    fontFamily: {
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        sans: ['"Oswald"', 'sans-serif'],
+                        gothic: ['"Zen Kaku Gothic New"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch': 'glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '0%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-2px, 2px)' },
+                            '40%': { transform: 'translate(-2px, -2px)' },
+                            '60%': { transform: 'translate(2px, 2px)' },
+                            '80%': { transform: 'translate(2px, -2px)' },
+                            '100%': { transform: 'translate(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #EAEAEA;
+            --text-color: #050505;
+            --accent-color: #C0A062;
+            --border-color: #050505;
+            --secondary-bg: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- 2020: STAGNATION --- */
+        body[data-era="2020"] {
+            --bg-color: #D3D3D3;
+            --text-color: #2A2A2A;
+            --accent-color: #555555;
+            --border-color: #2A2A2A;
+            --secondary-bg: #F0F0F0;
+            background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        /* --- 2025: THE SHIFT (DEFAULT) --- */
+        body[data-era="2025"] {
+            /* Default vars applied */
+            background-image: none;
+            filter: none;
+        }
+
+        /* --- 2050: AX WORLD --- */
+        body[data-era="2050"] {
+            --bg-color: #020204;
+            --text-color: #E0E0E0;
+            --accent-color: #00FF41;
+            --border-color: #00FF41;
+            --secondary-bg: #0A0A0A;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            filter: none;
+        }
+
+        body[data-era="2050"] .physics-element {
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+            border-color: #00FF41 !important;
+        }
+
+        /* NOISE OVERLAY */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* PHYSICS CANVAS */
+        #physics-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* UTILS */
+        .physics-element {
+            will-change: transform;
+        }
+
+        .glitch-active {
+            animation: glitch-anim 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            filter: invert(1);
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 2px)
+            }
+
+            40% {
+                transform: translate(-2px, -2px)
+            }
+
+            60% {
+                transform: translate(2px, 2px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
+        }
+
+        /* TYPOGRAPHIC NOISE */
+        .scramble-text::after {
+            content: '';
+            animation: cursor-blink 1s step-end infinite;
+        }
+
+        /* HORIZONTAL SCROLL SECTION */
+        .files-container {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100vh;
+        }
+
+        .file-card {
+            flex: 0 0 80vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--border-color);
+            padding: 4rem;
+        }
+
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body data-era="2025" class="font-serif antialiased selection:bg-bronze selection:text-white">
+
+    <div class="noise-overlay"></div>
+    <canvas id="physics-canvas"></canvas>
+
+    <!-- FIXED NAV -->
+    <nav
+        class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-6 py-4 border-b border-[var(--border-color)] mix-blend-difference text-white bg-black/10 backdrop-blur-sm">
+        <div class="font-sans font-bold text-xl tracking-tighter">
+            YAMAOKA <span class="text-[var(--accent-color)]">AX-PROJECT</span>
+        </div>
+
+        <div class="flex gap-2 font-sans text-sm">
+            <button onclick="switchEra('2020')"
+                class="era-btn group relative px-4 py-1 border border-transparent hover:border-white transition-all overflow-hidden"
+                data-target="2020">
+                <span class="relative z-10 opacity-50 group-hover:opacity-100">2020 | PAST</span>
+                <div
+                    class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform">
+                </div>
+            </button>
+
+            <button onclick="switchEra('2025')" class="era-btn group relative px-4 py-1 border border-white font-bold"
+                data-target="2025">
+                <span class="relative z-10 text-[var(--accent-color)]">2025 | PRESENT</span>
+            </button>
+
+            <button onclick="switchEra('2050')"
+                class="era-btn group relative px-4 py-1 border border-transparent hover:border-white transition-all overflow-hidden"
+                data-target="2050">
+                <span class="relative z-10 opacity-50 group-hover:opacity-100">2050 | FUTURE</span>
+                <div
+                    class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform">
+                </div>
+            </button>
+        </div>
+
+        <div class="hidden md:block font-sans text-xs tracking-widest border border-white px-2 py-1">
+            STATUS: <span id="system-status">ONLINE</span>
+        </div>
+    </nav>
+
+    <!-- APP CONTAINER -->
+    <main id="app-container" class="min-h-screen relative pt-20">
+        <!-- Content will be injected here -->
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- CONTENT DEFINITIONS ---
+        // Using function to return fresh DOM strings
+        const getEraContent = (era) => {
+            const contents = {
+                "2020": `
+                    <div class="max-w-7xl mx-auto px-6 py-12">
+                         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center min-h-[70vh] border-b border-[var(--border-color)] pb-12">
+                            <div class="md:col-span-8">
+                                <p class="font-gothic font-bold text-sm tracking-[0.3em] mb-4 physics-element border-l-4 border-black pl-4 text-gray-600">STAGNATION // LEGACY</p>
+                                <h1 class="text-5xl md:text-8xl font-black leading-[0.9] mb-8 physics-element font-sans tracking-tighter">
+                                    届かない声。<br>
+                                    埋もれる<span class="line-through decoration-red-600 decoration-4">熱意</span>。<br>
+                                    積み上がる<span class="px-2 bg-black text-white">「前例」</span>。
+                                </h1>
+                                <div class="physics-element max-w-2xl bg-white p-8 border border-black shadow-[8px_8px_0px_#000]">
+                                    <p class="text-lg md:text-xl font-medium leading-relaxed font-gothic text-gray-800">
+                                        アナログの限界点。どれだけ足で稼いでも、<br>
+                                        どれだけ想いを叫んでも、既存のシステムにはじき返される。<br>
+                                        そこにあるのは、疲弊と徒労感だけだ。
+                                    </p>
+                                    <div class="mt-6 flex gap-4 text-xs font-mono text-red-600">
+                                        <span>⚠ ERROR: 404 PASSION NOT FOUND</span>
+                                        <span>⚠ WARN: SYSTEM OVERLOAD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:col-span-4 relative h-full flex flex-col justify-center items-center gap-8">
+                                <div class="physics-element text-center border-4 border-black p-4 rotate-2 bg-white w-64">
+                                    <div class="font-bold text-6xl font-gothic text-gray-300">FAX</div>
+                                    <div class="text-sm mt-2 font-mono">SENDING... FAILED</div>
+                                </div>
+                                <div class="physics-element text-center border-4 border-black p-4 -rotate-3 bg-white w-64">
+                                    <div class="font-bold text-4xl font-gothic text-gray-300">NO REPLY</div>
+                                </div>
+                            </div>
+                         </div>
+                         
+                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 opacity-60">
+                            <div class="physics-element h-64 border-2 border-dashed border-gray-400 p-6 flex items-center justify-center">
+                                <span class="font-gothic text-gray-400">更新されないHP</span>
+                            </div>
+                            <div class="physics-element h-64 border-2 border-dashed border-gray-400 p-6 flex items-center justify-center">
+                                <span class="font-gothic text-gray-400">読まれないチラシ</span>
+                            </div>
+                            <div class="physics-element h-64 border-2 border-dashed border-gray-400 p-6 flex items-center justify-center">
+                                <span class="font-gothic text-gray-400">空席の報告会</span>
+                            </div>
+                         </div>
+                    </div>
+                `,
+                "2025": `
+                    <div class="max-w-[1920px] mx-auto">
+                        <!-- HERO -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 min-h-[90vh] border-b border-[var(--border-color)]">
+                            <!-- Left: Vertical Title -->
+                            <div class="hidden md:flex md:col-span-1 border-r border-[var(--border-color)] justify-center items-center writing-vertical py-12">
+                                <span class="font-sans font-bold text-xs tracking-[0.3em]">CONSTRUCTION SITE OF DEMOCRACY // TOKYO</span>
+                            </div>
+                            
+                            <!-- Center: Main Content -->
+                            <div class="md:col-span-8 p-6 md:p-12 flex flex-col justify-center relative overflow-hidden">
+                                <div class="absolute top-0 right-0 p-4 font-mono text-xs opacity-50 text-right">
+                                    LAT: 35.6895 N<br>LNG: 139.6917 E
+                                </div>
+                                
+                                <p class="physics-element font-sans font-bold text-sm tracking-[0.3em] mb-6 text-[var(--accent-color)]">THE SHIFT // GENESIS</p>
+                                
+                                <h1 class="physics-element text-6xl md:text-9xl font-black leading-[0.85] mb-8 font-sans tracking-tight">
+                                    地方政治の<br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-color)] to-[var(--accent-color)]">「OS」</span>を<br>
+                                    書き換える
+                                </h1>
+                                
+                                <div class="physics-element max-w-2xl border-l-4 border-[var(--accent-color)] pl-6 py-2">
+                                    <p class="text-lg md:text-xl font-bold leading-relaxed">
+                                        「DX」のその先へ。私たちが目指すのは、AIによる非連続な進化「AX（AI Transformation）」です。<br>
+                                        あなたは「拡張された政治家」か。それとも「過去の政治家」か。
+                                    </p>
+                                </div>
+                                
+                                <div class="physics-element mt-12">
+                                     <button class="px-8 py-4 bg-[var(--text-color)] text-[var(--bg-color)] font-sans font-bold text-xl hover:bg-[var(--accent-color)] hover:text-white transition-colors">
+                                        [ ACTIVATE AX ]
+                                     </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Visual -->
+                            <div class="md:col-span-3 border-l border-[var(--border-color)] bg-[var(--secondary-bg)] p-6 flex flex-col justify-between">
+                                <div class="physics-element w-full aspect-square border-2 border-[var(--border-color)] rounded-full flex items-center justify-center relative overflow-hidden group mb-8">
+                                    <div class="absolute inset-0 bg-[var(--accent-color)] opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                    <span class="font-sans text-8xl font-bold text-[var(--accent-color)] group-hover:scale-110 transition-transform duration-500">AX</span>
+                                </div>
+                                
+                                <div class="physics-element font-mono text-xs space-y-2 opacity-60">
+                                    <p>SYSTEM: ONLINE</p>
+                                    <p>CPU: 98%</p>
+                                    <p>MEM: 64TB</p>
+                                    <div class="w-full h-1 bg-[var(--border-color)] mt-2 loading-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HORIZONTAL SCROLL SECTION (Placeholder for now, logic will be re-injected) -->
+                        <div id="service-scroll-container" class="overflow-hidden border-b border-[var(--border-color)] bg-[var(--secondary-bg)]">
+                            <div class="files-container" style="width: 300vw;">
+                                <div class="file-card">
+                                    <h3 class="physics-element font-sans text-8xl font-bold mb-4 text-[var(--accent-color)] opacity-20">01</h3>
+                                    <h2 class="physics-element font-sans text-5xl font-bold mb-8">VISUAL REBOOT</h2>
+                                    <p class="physics-element text-xl leading-loose max-w-md">「読む」前に「感じる」デザインへ。<br>有権者の脳裏に焼き付く圧倒的なブランド・アイデンティティを構築。</p>
+                                </div>
+                                <div class="file-card bg-[var(--bg-color)]">
+                                    <h3 class="physics-element font-sans text-8xl font-bold mb-4 text-[var(--accent-color)] opacity-20">02</h3>
+                                    <h2 class="physics-element font-sans text-5xl font-bold mb-8">AI INTELLIGENCE</h2>
+                                    <p class="physics-element text-xl leading-loose max-w-md">一人会派でも「100人の政策秘書」を。<br>答弁書作成から議事録分析まで、AIがあなたの右腕となる。</p>
+                                </div>
+                                <div class="file-card">
+                                    <h3 class="physics-element font-sans text-8xl font-bold mb-4 text-[var(--accent-color)] opacity-20">03</h3>
+                                    <h2 class="physics-element font-sans text-5xl font-bold mb-8">SNS WARFARE</h2>
+                                    <p class="physics-element text-xl leading-loose max-w-md">「いいね」ではなく「票」を。<br>選挙から逆算された戦略的発信と、AIによる炎上リスク管理。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 min-h-[50vh]">
+                            <a href="#" class="physics-element group border-r border-b border-[var(--border-color)] p-12 flex flex-col justify-center hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors duration-500">
+                                <span class="font-sans text-sm tracking-widest mb-4">DIAGNOSIS</span>
+                                <h2 class="font-sans text-4xl md:text-5xl font-bold group-hover:translate-x-4 transition-transform">無料戦略診断 &rarr;</h2>
+                            </a>
+                            <a href="#" class="physics-element group border-b border-[var(--border-color)] p-12 flex flex-col justify-center hover:bg-[var(--accent-color)] hover:text-white transition-colors duration-500">
+                                <span class="font-sans text-sm tracking-widest mb-4">MEMBERSHIP</span>
+                                <h2 class="font-sans text-4xl md:text-5xl font-bold group-hover:translate-x-4 transition-transform">AX メンバーシップ &rarr;</h2>
+                            </a>
+                        </div>
+                    </div>
+                `,
+                "2050": `
+                    <div class="max-w-7xl mx-auto px-6 py-24 min-h-screen flex flex-col justify-center relative">
+                        <!-- Bg Grid is handled by CSS -->
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
+                            <div class="md:col-span-8">
+                                <p class="font-mono text-sm tracking-[0.5em] mb-4 physics-element text-[var(--accent-color)] animate-pulse">SINGULARITY // INTEGRATED</p>
+                                
+                                <h1 class="text-6xl md:text-9xl font-black leading-[0.9] mb-8 physics-element font-sans text-transparent bg-clip-text bg-gradient-to-r from-white via-[var(--accent-color)] to-white tracking-tighter" style="filter: drop-shadow(0 0 10px rgba(0,255,65,0.5));">
+                                    拡張された<br>
+                                    政治知能<br>
+                                    <span class="text-4xl block mt-4 font-mono w-full border-t border-[var(--border-color)] pt-4">SYSTEM: AX-2050</span>
+                                </h1>
+                                
+                                <div class="physics-element max-w-2xl bg-black/80 border border-[var(--accent-color)] p-8 relative overflow-hidden backdrop-blur-sm">
+                                    <div class="absolute top-0 left-0 w-full h-[1px] bg-[var(--accent-color)] animate-pulse-slow"></div>
+                                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--accent-color)]"></div>
+                                    
+                                    <p class="text-lg md:text-xl font-bold leading-relaxed text-gray-300 font-mono">
+                                        >> 感情とデータの完全な融合。<br>
+                                        >> AIによるリアルタイム民意解析。<br>
+                                        >> 人間は、<span class="text-[var(--accent-color)]">「決断」</span>のみに集中する。
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="md:col-span-4 flex flex-col gap-6 items-center">
+                                <div class="physics-element w-full aspect-square border border-[var(--accent-color)] rounded-full flex items-center justify-center relative animate-[spin_10s_linear_infinite]">
+                                    <div class="absolute inset-2 border border-dashed border-[var(--accent-color)] rounded-full opacity-50"></div>
+                                    <div class="absolute w-2 h-2 bg-[var(--accent-color)] top-0 left-1/2 -translate-x-1/2 -translate-y-1"></div>
+                                    <span class="font-sans text-6xl font-bold text-[var(--accent-color)] animate-none" style="transform: rotate(0deg) !important;">AI</span>
+                                </div>
+                                <div class="w-full grid grid-cols-2 gap-2 font-mono text-xs text-[var(--accent-color)]">
+                                    <div class="border border-[var(--accent-color)] p-2 text-center bg-[var(--accent-color)]/10">PREDICTION: 99.9%</div>
+                                    <div class="border border-[var(--accent-color)] p-2 text-center bg-[var(--accent-color)]/10">SENTIMENT: POS</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-24 border-t border-[var(--accent-color)] pt-8 flex justify-between items-end physics-element opacity-80 font-mono text-xs text-gray-400">
+                            <div>
+                                <p>CONNECTED NODES: 12,405,921</p>
+                                <p>POLICY GENERATION: AUTO</p>
+                            </div>
+                            <div class="text-right">
+                                <p>AX-PROJECT // EVOLUTION COMPLETED</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+            return contents[era];
+        };
+
+        // --- STATE ---
+        let currentEra = "2025";
+        let isTransitioning = false;
+        let scrollTriggerInstance = null;
+
+        const appContainer = document.getElementById('app-container');
+        const body = document.body;
+        const systemStatus = document.getElementById('system-status');
+
+        // --- INITIALIZATION ---
+        const init = () => {
+            // Load Default Content
+            appContainer.innerHTML = getEraContent("2025");
+            initScrollTrigger("2025");
+
+            // GSAP Intro
+            gsap.from(".physics-element", {
+                y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out"
+            });
+        };
+
+        // --- SCROLLTRIGGER LOGIC ---
+        const initScrollTrigger = (era) => {
+            if (scrollTriggerInstance) {
+                scrollTriggerInstance.kill();
+                scrollTriggerInstance = null;
+            }
+
+            if (era === "2025") {
+                const container = document.querySelector('.files-container');
+                if (container) {
+                    scrollTriggerInstance = gsap.to(container, {
+                        x: () => -(container.scrollWidth - window.innerWidth),
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: "#service-scroll-container",
+                            pin: true,
+                            scrub: 1,
+                            end: () => "+=" + container.scrollWidth
+                        }
+                    });
+                }
+            } else {
+                ScrollTrigger.refresh(); // Clear any pins
+            }
+        };
+
+        // --- CHRONO-SHIFT LOGIC ---
+        window.switchEra = (targetEra) => {
+            if (currentEra === targetEra || isTransitioning) return;
+            isTransitioning = true;
+            systemStatus.innerText = `SHIFTING TO ${targetEra}...`;
+            systemStatus.classList.add('text-[var(--alert)]', 'animate-pulse');
+
+            // 1. Update UI Buttons
+            document.querySelectorAll('.era-btn').forEach(btn => {
+                const isTarget = btn.dataset.target === targetEra;
+                const span = btn.querySelector('span');
+
+                if (isTarget) {
+                    btn.classList.add('border-white', 'font-bold');
+                    btn.classList.remove('border-transparent');
+                    span.classList.add('text-[var(--accent-color)]');
+                    span.classList.remove('opacity-50');
+                } else {
+                    btn.classList.remove('border-white', 'font-bold');
+                    btn.classList.add('border-transparent');
+                    span.classList.remove('text-[var(--accent-color)]');
+                    span.classList.add('opacity-50');
+                }
+            });
+
+            // 2. PHYSICS DESTRUCTION
+            initGravityDestruction(() => {
+                // 3. RECONSTRUCTION
+                currentEra = targetEra;
+                body.setAttribute('data-era', targetEra);
+
+                // Inject New Content
+                appContainer.innerHTML = getEraContent(targetEra);
+
+                // Glitch Effect
+                body.classList.add('glitch-active');
+                setTimeout(() => body.classList.remove('glitch-active'), 300);
+
+                // Content Animations
+                gsap.fromTo(".physics-element",
+                    { y: 50, opacity: 0, filter: "blur(10px)" },
+                    { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.05, ease: "power3.out" }
+                );
+
+                // Re-init Logic
+                initScrollTrigger(targetEra);
+
+                // Unlock
+                isTransitioning = false;
+                systemStatus.innerText = "ONLINE";
+                systemStatus.classList.remove('text-[var(--alert)]', 'animate-pulse');
+            });
+        };
+
+        // --- MATTER.JS DESTRUCTION ---
+        function initGravityDestruction(callback) {
+            const Engine = Matter.Engine,
+                Render = Matter.Render,
+                World = Matter.World,
+                Bodies = Matter.Bodies,
+                Composite = Matter.Composite;
+
+            const engine = Engine.create();
+            const render = Render.create({
+                element: document.body,
+                canvas: document.getElementById('physics-canvas'),
+                engine: engine,
+                options: {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    wireframes: false, // Set to true for debugging if needed, but false looks better if we use solid colors
+                    background: 'transparent'
+                }
+            });
+
+            const elements = document.querySelectorAll('.physics-element');
+            const bodies = [];
+
+            // Get color based on era for the falling blocks
+            let blockColor = '#1A1A1A';
+            if (currentEra === '2020') blockColor = '#555555';
+            if (currentEra === '2050') blockColor = '#00FF41';
+
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0 || rect.top > window.innerHeight) return;
+
+                // Create physics body clone
+                const body = Bodies.rectangle(
+                    rect.left + rect.width / 2,
+                    rect.top + rect.height / 2,
+                    rect.width,
+                    rect.height,
+                    {
+                        restitution: 0.4,
+                        friction: 0.1,
+                        angle: (Math.random() - 0.5) * 0.2, // Slight random rotation
+                        render: {
+                            fillStyle: blockColor,
+                            opacity: 0.9
+                        }
+                    }
+                );
+                bodies.push(body);
+
+                // Hide original
+                el.style.opacity = '0';
+            });
+
+            // Add boundaries (Floor only, let them fall off eventually)
+            const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 500, window.innerWidth * 2, 100, { isStatic: true });
+
+            // Allow walls so they bounce a bit before falling? No, let's just let them fall down.
+
+            World.add(engine.world, [...bodies]); // No ground for total abyss feel? Or ground then remove? 
+            // Let's add ground but make it disappearing or just off screen heavily.
+            // Actually, let's add no ground so they fall into the void.
+            // Wait, user wants them to "collapse to the bottom". 
+            // Let's add a ground at the bottom of the viewport.
+
+            const floor = Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 50, { isStatic: true, render: { visible: false } });
+            World.add(engine.world, floor);
+
+            Engine.run(engine);
+            Render.run(render);
+
+            // Time Sequence
+            // 1. Let fall
+            // 2. After 1s, remove floor so they fall through? Or just fade out?
+
+            setTimeout(() => {
+                // Remove floor to let them fall into void if they haven't settled
+                World.remove(engine.world, floor);
+            }, 1000);
+
+            // Completion
+            setTimeout(() => {
+                Render.stop(render);
+                World.clear(engine.world);
+                Engine.clear(engine);
+                render.canvas.getContext('2d').clearRect(0, 0, render.canvas.width, render.canvas.height);
+                callback();
+            }, 1500); // 1.5s total destruction time
+        }
+
+        // Run Init
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+
+</html>

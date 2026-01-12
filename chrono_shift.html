@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX-2026 | CHRONO-SHIFT PROTOCOL</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@300;500;900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bronze: '#CD7F32',
+                        offwhite: '#F0F0F0',
+                        ink: '#1A1A1A',
+                        neon: '#00FF41'
+                    },
+                    fontFamily: {
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        sans: ['"Oswald"', 'sans-serif'],
+                        gothic: ['"Zen Kaku Gothic New"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* NOISE OVERLAY */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* CUSTOM CURSOR */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #CD7F32;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            z-index: 10000;
+            pointer-events: none;
+            transition: transform 0.1s;
+        }
+
+        .cursor-circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #CD7F32;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transition: transform 0.3s, width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        /* PHYSICS CANVAS */
+        #physics-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* GLITCH EFFECT CLASS */
+        .glitch-active {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            filter: invert(1);
+        }
+
+        @keyframes glitch-skew {
+            0% {
+                transform: skew(0deg);
+            }
+
+            20% {
+                transform: skew(-10deg);
+            }
+
+            40% {
+                transform: skew(10deg);
+            }
+
+            60% {
+                transform: skew(-5deg);
+            }
+
+            80% {
+                transform: skew(5deg);
+            }
+
+            100% {
+                transform: skew(0deg);
+            }
+        }
+
+        /* ERA STYLES */
+        body[data-era="2020"] {
+            background-color: #E6E6E6;
+            color: #4A4A4A;
+        }
+
+        body[data-era="2020"] .accent-text {
+            color: #888;
+        }
+
+        body[data-era="2020"] .border-theme {
+            border-color: #4A4A4A;
+        }
+
+        body[data-era="2025"] {
+            background-color: #F0F0F0;
+            color: #1A1A1A;
+        }
+
+        body[data-era="2025"] .accent-text {
+            color: #CD7F32;
+        }
+
+        body[data-era="2025"] .border-theme {
+            border-color: #1A1A1A;
+        }
+
+        body[data-era="2050"] {
+            background-color: #050505;
+            color: #E0E0E0;
+        }
+
+        body[data-era="2050"] .accent-text {
+            color: #00FF41;
+            text-shadow: 0 0 10px #00FF41;
+        }
+
+        body[data-era="2050"] .border-theme {
+            border-color: #00FF41;
+            box-shadow: 0 0 5px #00FF41;
+        }
+
+        .physics-element {
+            will-change: transform;
+        }
+    </style>
+</head>
+
+<body data-era="2025" class="font-serif">
+
+    <div class="noise-overlay"></div>
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-circle hidden md:block"></div>
+    <canvas id="physics-canvas"></canvas>
+
+    <nav
+        class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-6 py-4 border-b border-theme mix-blend-difference text-white bg-black/10 backdrop-blur-sm">
+        <div class="font-sans font-bold text-xl tracking-tighter">
+            YAMAOKA <span class="accent-text">AX-PROJECT</span>
+        </div>
+
+        <div class="flex gap-2 font-sans text-sm">
+            <button onclick="switchEra('2020')"
+                class="era-btn px-4 py-1 border border-transparent hover:border-white transition-all opacity-50 hover:opacity-100"
+                data-target="2020">2020</button>
+            <button onclick="switchEra('2025')" class="era-btn px-4 py-1 border border-white font-bold accent-text"
+                data-target="2025">2025</button>
+            <button onclick="switchEra('2050')"
+                class="era-btn px-4 py-1 border border-transparent hover:border-white transition-all opacity-50 hover:opacity-100"
+                data-target="2050">2050</button>
+        </div>
+
+        <div class="hidden md:block font-sans text-xs tracking-widest border border-white px-2 py-1">
+            STATUS: <span id="system-status">ONLINE</span>
+        </div>
+    </nav>
+
+    <main id="main-content" class="pt-24 px-6 min-h-screen relative">
+
+        <div id="era-content" class="max-w-7xl mx-auto">
+
+            <div class="era-block grid grid-cols-1 md:grid-cols-12 gap-12 items-center min-h-[80vh]">
+                <div class="md:col-span-8">
+                    <p
+                        class="font-sans font-bold text-sm tracking-[0.3em] mb-4 physics-element border-theme border-l-4 pl-4">
+                        THE SHIFT // GENESIS</p>
+                    <h1 class="text-6xl md:text-9xl font-black leading-[0.9] mb-8 physics-element font-sans">
+                        地方政治の<br>
+                        <span class="accent-text">「OS」</span>を<br>
+                        書き換える
+                    </h1>
+                    <div class="physics-element max-w-2xl bg-white/10 backdrop-blur-md p-6 border-theme border">
+                        <p class="text-lg md:text-xl font-bold leading-relaxed">
+                            「DX」のその先へ。私たちが目指すのは、AIによる非連続な進化「AX（AI Transformation）」です。<br>
+                            あなたは「拡張された政治家」か。それとも「過去の政治家」か。
+                        </p>
+                    </div>
+                </div>
+                <div class="md:col-span-4 flex flex-col gap-6">
+                    <div
+                        class="physics-element w-full aspect-square border-theme border-2 rounded-full flex items-center justify-center relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-bronze opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="font-sans text-6xl font-bold accent-text group-hover:scale-110 transition-transform duration-500">AX</span>
+                    </div>
+                    <div class="physics-element border-theme border-t pt-4">
+                        <p class="font-sans text-xs opacity-60">SYSTEM ARCHITECT:</p>
+                        <p class="font-bold text-lg">TOSHIKI YAMAOKA</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="physics-element mt-24 border-theme border-t-2 pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 pb-24">
+                <div class="border-theme border p-8 hover:bg-black hover:text-white transition-colors duration-300">
+                    <h3 class="font-sans text-3xl font-bold mb-4 accent-text">VISUAL REBOOT</h3>
+                    <p class="text-sm leading-loose">「読む」前に「感じる」デザインへ。有権者の脳裏に焼き付く圧倒的なブランド・アイデンティティを構築。</p>
+                </div>
+                <div class="border-theme border p-8 hover:bg-black hover:text-white transition-colors duration-300">
+                    <h3 class="font-sans text-3xl font-bold mb-4 accent-text">AI INTELLIGENCE</h3>
+                    <p class="text-sm leading-loose">一人会派でも「100人の政策秘書」を。答弁書作成から議事録分析まで、AIがあなたの右腕となる。</p>
+                </div>
+                <div class="border-theme border p-8 hover:bg-black hover:text-white transition-colors duration-300">
+                    <h3 class="font-sans text-3xl font-bold mb-4 accent-text">SNS WARFARE</h3>
+                    <p class="text-sm leading-loose">「いいね」ではなく「票」を。選挙から逆算された戦略的発信と、AIによる炎上リスク管理。</p>
+                </div>
+            </div>
+
+            <div class="physics-element text-center py-24 border-theme border-y-2 mb-24">
+                <h2 class="font-sans text-4xl md:text-6xl font-bold mb-8">ARE YOU READY?</h2>
+                <a href="#"
+                    class="inline-block px-12 py-6 bg-ink text-white font-sans text-xl font-bold hover:bg-bronze transition-colors duration-300 border-2 border-transparent hover:border-white">
+                    $$ 無料戦略診断を開始 $$
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // --- CONTENT DATA FOR ERAS ---
+        const eraData = {
+            "2020": {
+                html: `
+                <div class="era-block grid grid-cols-1 md:grid-cols-12 gap-12 items-center min-h-[80vh] opacity-80">
+                    <div class="md:col-span-8">
+                        <p class="font-gothic font-bold text-sm tracking-[0.3em] mb-4 physics-element border-theme border-l-4 pl-4 text-gray-500">LEGACY SYSTEM // STAGNATION</p>
+                        <h1 class="text-5xl md:text-8xl font-black leading-[0.9] mb-8 physics-element font-gothic text-gray-700">
+                            届かない声。<br>
+                            <span class="accent-text text-gray-500" style="text-decoration: line-through;">熱意</span>の限界。<br>
+                            埋もれる政策。
+                        </h1>
+                        <div class="physics-element max-w-2xl bg-white p-6 border-theme border shadow-lg">
+                            <p class="text-lg md:text-xl font-medium leading-relaxed font-gothic">
+                                徹夜で書いた一般質問。読まれないチラシ。更新されないHP。<br>
+                                「想い」だけでは、もう戦えない。<br>
+                                <span class="text-xs block mt-4 text-red-600">⚠ SYSTEM WARNING: RESOURCES DEPLETED</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 flex flex-col gap-6 items-center">
+                         <div class="physics-element w-64 h-80 bg-white border border-gray-400 p-4 shadow-xl rotate-3 flex flex-col items-center justify-center">
+                            <div class="w-full h-2 bg-gray-200 mb-2"></div>
+                            <div class="w-full h-2 bg-gray-200 mb-2"></div>
+                            <div class="text-4xl text-gray-300 font-bold">FAX</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="physics-element mt-12 text-center text-gray-500 font-gothic">
+                    <p>このまま、沈みゆく船に乗り続けますか？</p>
+                    <p class="mt-4 text-xs">CLICK [2025] TO UPDATE</p>
+                </div>
+                `,
+                color: "#E6E6E6"
+            },
+            "2025": {
+                html: document.getElementById('era-content').innerHTML, // Use initial HTML
+                color: "#F0F0F0"
+            },
+            "2050": {
+                html: `
+                <div class="era-block grid grid-cols-1 md:grid-cols-12 gap-12 items-center min-h-[80vh]">
+                    <div class="md:col-span-8">
+                        <p class="font-sans font-bold text-sm tracking-[0.3em] mb-4 physics-element border-theme border-l-4 pl-4 text-neon shadow-[0_0_10px_#00FF41]">SINGULARITY // INTEGRATION</p>
+                        <h1 class="text-6xl md:text-9xl font-black leading-[0.9] mb-8 physics-element font-sans text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+                            拡張された<br>
+                            <span class="accent-text">政治知能</span><br>
+                            System: AX
+                        </h1>
+                        <div class="physics-element max-w-2xl bg-black/50 border border-neon p-6 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-[1px] bg-neon animate-pulse-slow"></div>
+                            <p class="text-lg md:text-xl font-bold leading-relaxed text-gray-300">
+                                感情とデータの完全な融合。AIによるリアルタイム民意解析。<br>
+                                予測される未来を、最適解で書き換える。<br>
+                                人間は、決断のみに集中する。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 flex flex-col gap-6">
+                        <div class="physics-element w-full aspect-square border border-neon rounded-full flex items-center justify-center relative animate-pulse-slow bg-black">
+                            <span class="font-sans text-6xl font-bold text-neon">AI</span>
+                            <div class="absolute w-full h-full border border-neon rounded-full animate-ping opacity-20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="physics-element grid grid-cols-2 gap-4 mt-12 font-sans text-xs text-neon">
+                    <div class="border border-neon p-2">PREDICTION: OPTIMIZED</div>
+                    <div class="border border-neon p-2">SENTIMENT: POSITIVE</div>
+                    <div class="border border-neon p-2">BUDGET: AUTOMATED</div>
+                    <div class="border border-neon p-2">VOTE: SECURED</div>
+                </div>
+                `,
+                color: "#050505"
+            }
+        };
+
+        let currentEra = "2025";
+        const contentContainer = document.getElementById('era-content');
+
+        // --- CURSOR LOGIC ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorCircle = document.querySelector('.cursor-circle');
+
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(cursorCircle, { x: e.clientX, y: e.clientY, duration: 0.3 });
+        });
+
+        // Hover effect for buttons
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(cursorCircle, { width: 60, height: 60, opacity: 0.5 });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(cursorCircle, { width: 40, height: 40, opacity: 1 });
+            });
+        });
+
+
+        // --- PHYSICS & ERA SWITCH LOGIC ---
+        function switchEra(targetEra) {
+            if (currentEra === targetEra) return;
+
+            // 1. Update UI Buttons
+            document.querySelectorAll('.era-btn').forEach(btn => {
+                if (btn.dataset.target === targetEra) {
+                    btn.classList.add('border-white', 'font-bold', 'accent-text', 'opacity-100');
+                    btn.classList.remove('border-transparent', 'opacity-50');
+                } else {
+                    btn.classList.remove('border-white', 'font-bold', 'accent-text', 'opacity-100');
+                    btn.classList.add('border-transparent', 'opacity-50');
+                }
+            });
+
+            // 2. Trigger Destruction of Current Content
+            initGravityDestruction(() => {
+                // 3. Callback: Rebuild Content
+                document.body.setAttribute('data-era', targetEra);
+                contentContainer.innerHTML = eraData[targetEra].html;
+                currentEra = targetEra;
+
+                // 4. Glitch Effect
+                document.body.classList.add('glitch-active');
+                setTimeout(() => {
+                    document.body.classList.remove('glitch-active');
+                    // Animate In New Content
+                    gsap.fromTo(".physics-element",
+                        { y: 50, opacity: 0, filter: "blur(10px)" },
+                        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.1, ease: "power3.out" }
+                    );
+                }, 300);
+            });
+        }
+
+        function initGravityDestruction(callback) {
+            // Setup Matter.js
+            const Engine = Matter.Engine,
+                Render = Matter.Render,
+                World = Matter.World,
+                Bodies = Matter.Bodies;
+
+            const engine = Engine.create();
+            const render = Render.create({
+                element: document.body,
+                canvas: document.getElementById('physics-canvas'),
+                engine: engine,
+                options: {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    wireframes: false,
+                    background: 'transparent'
+                }
+            });
+
+            const elements = document.querySelectorAll('.physics-element');
+            const bodies = [];
+
+            // Snapshot positions and hide real elements
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
+
+                // Create physics body clone
+                const body = Bodies.rectangle(
+                    rect.left + rect.width / 2,
+                    rect.top + rect.height / 2,
+                    rect.width,
+                    rect.height,
+                    {
+                        restitution: 0.5,
+                        friction: 0.1,
+                        render: {
+                            // In a real prod version, we would use html2canvas to create textures.
+                            // For this prototype, we use solid blocks representing the elements.
+                            fillStyle: currentEra === "2050" ? '#00FF41' : (currentEra === "2020" ? '#888' : '#1A1A1A'),
+                            opacity: 0.8
+                        }
+                    }
+                );
+                bodies.push(body);
+
+                // Hide original
+                el.style.opacity = '0';
+            });
+
+            // Add boundaries
+            const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 200, window.innerWidth, 100, { isStatic: true });
+
+            World.add(engine.world, [...bodies, ground]);
+            Engine.run(engine);
+            Render.run(render);
+
+            // Wait for fall, then clear
+            setTimeout(() => {
+                Render.stop(render);
+                World.clear(engine.world);
+                Engine.clear(engine);
+                render.canvas.getContext('2d').clearRect(0, 0, render.canvas.width, render.canvas.height);
+                callback();
+            }, 1000); // Destruction duration
+        }
+
+        // Initial Animation
+        gsap.fromTo(".physics-element",
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" }
+        );
+
+    </script>
+</body>
+
+</html>
