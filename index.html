@@ -34,12 +34,17 @@
                     animation: {
                         'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'marquee': 'marquee 25s linear infinite',
+                        'marquee-vertical': 'marquee-vertical 15s linear infinite',
                         'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0%)' },
                             '100%': { transform: 'translateX(-100%)' },
+                        },
+                        'marquee-vertical': {
+                            '0%': { transform: 'translateY(0%)' },
+                            '100%': { transform: 'translateY(-100%)' },
                         },
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
@@ -135,47 +140,46 @@
 
     <div class="noise"></div>
 
-    <!-- ENHANCED SYSTEM UPDATE OVERLAY -->
-    <div id="update-overlay"
-        class="fixed inset-0 z-[100] bg-black hidden flex flex-col items-center justify-center overflow-hidden">
-        <!-- Grid/Noise Background -->
-        <div
-            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDAs 255, 0, 0.1KSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none">
+    <!-- BOOT SEQUENCE OVERLAY -->
+    <div id="boot-sequence"
+        class="fixed inset-0 z-[99999] bg-black flex flex-col items-center justify-center font-mono text-neon overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg width="100%" height="100%">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EAFF00" stroke-width="0.5" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
         </div>
 
-        <!-- Top Left Status (Requested Restore) -->
-        <div class="absolute top-0 left-0 p-4 md:p-8 z-20">
-            <div class="flex items-center gap-2 mb-1">
-                <div class="w-2 h-2 bg-neon animate-pulse"></div>
-                <span class="text-neon font-mono text-xs tracking-widest font-bold">SYSTEM UPDATE</span>
-            </div>
-            <div class="text-[0.6rem] text-gray-500 font-mono tracking-widest pl-4">SEQUENCE_INIT_READY</div>
+        <div id="boot-log"
+            class="text-xs md:text-sm leading-tight text-left w-full max-w-lg p-4 h-64 overflow-hidden mb-8 opacity-80">
         </div>
 
-        <!-- Top Right Info -->
-        <div class="absolute top-0 right-0 p-4 md:p-8 text-xs text-gray-500 font-mono text-right z-20">
-            SYSTEM_KERNEL: v9.0.2<br>
-            TARGET: LEGACY_POLITICS
+        <div id="boot-loader" class="w-64 h-1 bg-gray-900 overflow-hidden relative">
+            <div class="absolute inset-0 bg-neon animate-pulse"></div>
         </div>
 
-        <!-- Center Console -->
-        <div class="w-full max-w-2xl p-8 font-mono text-xs md:text-sm text-neon leading-relaxed relative z-10">
-            <div id="console-output"
-                class="mb-4 text-left h-64 overflow-hidden border-l-2 border-neon pl-4 opacity-0 font-bold shadow-[0_0_15px_rgba(234,255,0,0.2)]">
-            </div>
-
-            <div id="progress-container"
-                class="w-full bg-gray-900 h-2 mt-8 overflow-hidden opacity-0 border border-gray-800">
-                <div id="progress-bar" class="h-full bg-neon w-0 shadow-[0_0_10px_#EAFF00]"></div>
-            </div>
-            <div id="progress-text" class="text-right mt-2 text-neon font-bold opacity-0">0%</div>
+        <div class="absolute bottom-10 left-10 text-[0.6rem] text-gray-500">
+            SYSTEM_INTEGRITY_CHECK: PENDING...<br>
+            SECURE_CONNECTION: ESTABLISHED
         </div>
     </div>
+
+
+    <!-- MAGNETIC INTERACTION CONTAINER -->
+    <div id="magnetic-field" class="fixed inset-0 z-0 pointer-events-none"></div>
 
     <div id="legacy-system">
 
         <header id="legacy-system"
             class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E5E5E5]">
+
+            <div id="header-canvas-container" class="absolute inset-0 z-0 pointer-events-none">
+                <!-- Canvas or specific DOM elements for magnetic effect could go here -->
+            </div>
 
             <div class="absolute inset-0 z-0 pointer-events-none">
                 <div
@@ -196,83 +200,116 @@
                 </svg>
             </div>
 
-            <div class="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+            <style>
+                /* ... existing styles ... */
+                .vertical-rl {
+                    writing-mode: vertical-rl;
+                    text-orientation: mixed;
+                }
+            </style>
 
-                <div
-                    class="absolute top-24 -left-10 bg-[#EAFF00] border-2 border-black px-12 py-2 transform -rotate-12 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-                    <span class="font-sans font-bold text-sm tracking-widest text-black">ARM THE LONE WOLF ///</span>
-                </div>
+            <!-- HEAVY INDUSTRIAL INTERFACE LAYER -->
+            <div class="hidden md:block absolute inset-0 z-10 pointer-events-none font-mono">
 
-                <div
-                    class="absolute top-10 right-10 md:right-32 bg-[#FF00FF] text-white border-2 border-black px-4 py-3 transform rotate-6 shadow-[5px_5px_0px_rgba(0,0,0,1)]">
-                    <div class="flex items-center gap-2">
-                        <div class="w-3 h-3 bg-white rounded-full border border-black"></div>
-                        <div class="leading-tight text-center">
-                            <span class="block font-bold text-lg">機密情報</span>
-                            <span class="block text-[0.6rem] font-sans tracking-widest">(CONFIDENTIAL)</span>
+                <!-- LEFT FLANK: THE RULER (MEASUREMENT RAIL) -->
+                <aside id="left-ruler" class="absolute top-0 bottom-0 left-8 w-16 flex flex-col justify-between py-8">
+                    <!-- Ruler Body -->
+                    <div
+                        class="h-full w-full border-r-4 border-black relative flex flex-col justify-between items-end pr-1">
+                        <!-- Ticks generated by CSS/Loop logic conceptually, but hardcoded for now for visual impact -->
+                        <div class="w-4 h-1 bg-black"></div>
+                        <div class="w-2 h-0.5 bg-black"></div>
+                        <div class="w-2 h-0.5 bg-black"></div>
+                        <div class="w-3 h-1 bg-black"></div>
+                        <div class="w-2 h-0.5 bg-black"></div>
+                        <div class="w-4 h-1 bg-black"></div>
+                        <!-- Repeated Ticks -->
+                        <div
+                            class="absolute inset-y-0 right-0 flex flex-col justify-between items-end pr-1 py-12 opacity-50">
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-4 h-[2px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-4 h-[2px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-2 h-[1px] bg-black my-1"></div>
+                            <div class="w-6 h-1 bg-black my-1"></div>
                         </div>
                     </div>
-                </div>
 
-                <div
-                    class="absolute bottom-32 -left-5 bg-[#EAFF00] border-y-4 border-black py-2 pr-12 pl-4 transform rotate-3 shadow-lg">
-                    <div class="font-sans font-black text-2xl text-black tracking-tighter">
-                        非対称戦 <span class="text-sm font-normal tracking-normal">(ASYMMETRIC WARFARE)</span>
-                    </div>
-                </div>
-
-                <div
-                    class="absolute bottom-40 right-5 md:right-20 bg-[#1A1A1A] text-white border-2 border-white p-4 rounded-xl transform -rotate-3 shadow-xl">
-                    <div class="flex flex-col items-center">
-                        <svg class="w-12 h-12 mb-1 fill-white" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C7.58 2 4 5.58 4 10c0 2.62 1.27 4.94 3.23 6.38.45 1.54.91 3.06 1.36 4.54A1.99 1.99 0 0 0 10.51 22h2.98c.95 0 1.77-.66 1.92-1.58l1.36-4.54C18.73 14.94 20 12.62 20 10c0-4.42-3.58-8-8-8zm0 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
-                            <circle cx="9" cy="9" r="1.5" />
-                            <circle cx="15" cy="9" r="1.5" />
-                        </svg>
-                        <span class="font-sans font-bold text-[0.6rem] tracking-widest">DO NOT DISTURB</span>
-                    </div>
-                </div>
-
-                <div class="absolute top-1/2 right-5 md:right-16 transform -translate-y-1/2 rotate-12">
+                    <!-- Heavy Data Blocks -->
                     <div
-                        class="bg-[#FF00FF] text-white w-20 h-20 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_black]">
-                        <span class="font-bold text-sm text-center leading-tight">24h<br>参謀</span>
+                        class="absolute top-24 -left-2 bg-black text-white p-2 vertical-rl font-bold tracking-widest text-xs">
+                        SYS_MON_ACTIVE
                     </div>
-                </div>
 
-                <div
-                    class="absolute top-40 right-[15%] bg-white border border-gray-300 p-4 w-40 shadow-md transform -rotate-2 hidden md:block">
-                    <div class="w-20 h-6 bg-gray-200/50 absolute -top-3 left-1/2 -translate-x-1/2 rotate-1"></div>
-                    <p class="font-serif font-bold text-sm text-gray-800">思考実験中...</p>
-                    <p class="font-sans text-[0.5rem] text-gray-400 mt-1">THOUGHT EXPERIMENT<br>IN PROGRESS...</p>
-                </div>
-
-                <div class="absolute bottom-10 right-10 bg-white border border-black p-2 transform rotate-2">
-                    <div class="flex items-end gap-[1px] h-8">
-                        <div class="w-1 h-full bg-black"></div>
-                        <div class="w-2 h-full bg-black"></div>
-                        <div class="w-1 h-3/4 bg-black"></div>
-                        <div class="w-3 h-full bg-black"></div>
-                        <div class="w-1 h-full bg-black"></div>
-                        <div class="w-2 h-3/4 bg-black"></div>
+                    <div
+                        class="absolute bottom-24 -left-2 bg-black text-neon p-2 vertical-rl font-bold tracking-widest text-xs">
+                        AX-2026_GRID
                     </div>
-                    <div class="text-[0.5rem] font-sans text-center mt-1">PROTOTYPE v1.2</div>
-                </div>
+                </aside>
 
-                <svg class="absolute bottom-32 left-[30%] w-24 h-24 stroke-black fill-none transform rotate-12 hidden md:block"
-                    viewBox="0 0 100 100">
-                    <path d="M10 80 Q 50 10 90 20" stroke-width="2" marker-end="url(#arrowhead)" />
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="black" />
-                        </marker>
-                    </defs>
-                </svg>
+
+                <!-- RIGHT FLANK: THE CIRCUIT BOARD (HARD WIRING) -->
+                <aside id="right-circuit" class="absolute inset-0 pointer-events-none">
+                    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="dot" markerWidth="8" markerHeight="8" refX="4" refY="4">
+                                <circle cx="4" cy="4" r="3" fill="black" />
+                            </marker>
+                            <marker id="square" markerWidth="8" markerHeight="8" refX="4" refY="4">
+                                <rect x="1" y="1" width="6" height="6" fill="black" />
+                            </marker>
+                        </defs>
+
+                        <!-- Circuit Line 1: Confidential -->
+                        <path d="M 100% 20% H 85% V 25%" fill="none" stroke="black" stroke-width="2"
+                            marker-end="url(#square)" vector-effect="non-scaling-stroke" />
+
+                        <!-- Circuit Line 2: Asymmetric -->
+                        <path d="M 100% 50% H 90% V 45% H 80%" fill="none" stroke="black" stroke-width="2"
+                            marker-end="url(#dot)" vector-effect="non-scaling-stroke" />
+
+                        <!-- Circuit Line 3: Focus Mode -->
+                        <path d="M 100% 80% H 85% V 75%" fill="none" stroke="black" stroke-width="2"
+                            marker-end="url(#square)" vector-effect="non-scaling-stroke" />
+                    </svg>
+
+                    <!-- Modules Positioned exactly at line ends -->
+
+                    <!-- Module 1: Confidential -->
+                    <div class="absolute top-[25%] right-[15%] transform translate-x-4 translate-y-2">
+                        <div class="bg-black text-white px-6 py-2 border-l-4 border-[#FF00FF] shadow-none">
+                            <div class="font-sans font-bold text-sm tracking-widest">CONFIDENTIAL_FILE</div>
+                            <div class="text-[0.5rem] text-gray-400">ACCESS_LEVEL: 5</div>
+                        </div>
+                    </div>
+
+                    <!-- Module 2: Asymmetric -->
+                    <div class="absolute top-[45%] right-[20%] transform translate-x-4 -translate-y-1/2">
+                        <div class="bg-[#EAFF00] text-black px-6 py-4 border-2 border-black shadow-none">
+                            <div class="font-sans font-black text-xl tracking-tighter leading-none">
+                                ASYMMETRIC<br>WARFARE</div>
+                        </div>
+                    </div>
+
+                    <!-- Module 3: Focus -->
+                    <div class="absolute top-[75%] right-[15%] transform translate-x-4 translate-y-2">
+                        <div class="bg-white text-black px-4 py-2 border-2 border-black flex items-center gap-2">
+                            <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+                            <div class="font-sans font-bold text-xs tracking-widest">FOCUS_MODE: ON</div>
+                        </div>
+                    </div>
+
+                </aside>
 
             </div>
 
-            <div class="relative z-20 text-center py-12">
+            <div class="relative z-20 text-center py-12" id="magnetic-title-container">
 
                 <div
                     class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] border-2 border-black px-4 py-1 rotate-[-2deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-30">
@@ -281,33 +318,49 @@
 
                 <div class="flex flex-col items-center justify-center leading-[0.8] select-none">
 
-                    <div class="relative group hover:scale-105 transition-transform duration-300">
+                    <div class="relative group active-magnetic-zone">
                         <div
                             class="rubi-tag -top-4 left-0 md:-left-4 bg-black text-white transform -rotate-6 border border-white px-3 py-1 text-sm md:text-base">
                             政治</div>
                         <h1
-                            class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pl-2">
-                            POLITICAL
+                            class="magnetic-text font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pl-2">
+                            <!-- JS will split this: POLITICAL -->
+                            <span class="char inline-block">P</span><span class="char inline-block">O</span><span
+                                class="char inline-block">L</span><span class="char inline-block">I</span><span
+                                class="char inline-block">T</span><span class="char inline-block">I</span><span
+                                class="char inline-block">C</span><span class="char inline-block">A</span><span
+                                class="char inline-block">L</span>
                         </h1>
                     </div>
 
-                    <div class="relative group mt-2 md:mt-4 hover:scale-105 transition-transform duration-300">
+                    <div class="relative group mt-2 md:mt-4 active-magnetic-zone">
                         <div
                             class="rubi-tag -top-4 right-0 md:-right-4 bg-black text-white transform rotate-6 border border-white px-3 py-1 text-sm md:text-base">
                             工学</div>
                         <h1
-                            class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pr-2">
-                            ENGINEERING
+                            class="magnetic-text font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pr-2">
+                            <!-- JS will split this: ENGINEERING -->
+                            <span class="char inline-block">E</span><span class="char inline-block">N</span><span
+                                class="char inline-block">G</span><span class="char inline-block">I</span><span
+                                class="char inline-block">N</span><span class="char inline-block">E</span><span
+                                class="char inline-block">E</span><span class="char inline-block">R</span><span
+                                class="char inline-block">I</span><span class="char inline-block">N</span><span
+                                class="char inline-block">G</span>
                         </h1>
                     </div>
 
-                    <div class="relative group mt-2 md:mt-4 hover:scale-105 transition-transform duration-300">
+                    <div class="relative group mt-2 md:mt-4 active-magnetic-zone">
                         <div
                             class="rubi-tag -top-5 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] text-black border border-black px-4 py-1 text-sm md:text-base">
                             研究所</div>
-                        <h1 class="font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-transparent"
+                        <h1 class="magnetic-text font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-transparent"
                             style="-webkit-text-stroke: 2px #1A1A1A; filter: drop-shadow(4px 4px 0px white);">
-                            LABORATORY
+                            <!-- JS will split this: LABORATORY -->
+                            <span class="char inline-block">L</span><span class="char inline-block">A</span><span
+                                class="char inline-block">B</span><span class="char inline-block">O</span><span
+                                class="char inline-block">R</span><span class="char inline-block">A</span><span
+                                class="char inline-block">T</span><span class="char inline-block">O</span><span
+                                class="char inline-block">R</span><span class="char inline-block">Y</span>
                         </h1>
                     </div>
                 </div>
@@ -829,10 +882,123 @@
         gsap.registerPlugin(ScrollTrigger);
 
         // --- PRE-UPDATE WORLD ANIMATIONS ---
+        // --- PRE-UPDATE WORLD ANIMATIONS & BOOT SEQUENCE ---
         window.addEventListener('load', () => {
 
-            // 1. Header Animations (Version A / Chaos BG)
-            // Parallax for Background SVGs
+            // --- 0. BOOT SEQUENCE (PROTOCOL ACTIVATION) ---
+            const bootTl = gsap.timeline();
+            const bootLogs = [
+                "ESTABLISHING_SECURE_CONNECTION...",
+                "SCANNING_LOCAL_POLITICAL_NODES...",
+                "DETECTING_ANOMALIES...",
+                "LOADING_GRAPHICAL_INTERFACE...",
+                "PROTOCOL: AX-2026_INIT"
+            ];
+
+            // 0.1 Log Streaming
+            bootTl.call(() => {
+                let i = 0;
+                const logEl = document.getElementById('boot-log');
+                const interval = setInterval(() => {
+                    if (i < bootLogs.length) {
+                        const div = document.createElement('div');
+                        div.textContent = `> ${bootLogs[i]}`;
+                        div.className = "mb-1 text-neon";
+                        logEl.appendChild(div);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 300); // Slower log speed
+            })
+                // 0.2 Loader Pulse
+                .to("#boot-loader > div", { width: "100%", duration: 2.5, ease: "power2.inOut" }, 0)
+
+                // 0.3 Impact & Reveal
+                .to("#boot-sequence", {
+                    scaleY: 0,
+                    transformOrigin: "top",
+                    duration: 0.6,
+                    ease: "expo.inOut",
+                    delay: 2.8 // Wait for logs
+                })
+                // 0.4 Title Slam
+                .from("#magnetic-title-container .group", {
+                    y: 100,
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "elastic.out(1, 0.5)"
+                }, "-=0.2");
+
+
+            // --- 1. MAGNETIC KINETIC TYPOGRAPHY ---
+            const magneticContainer = document.getElementById('magnetic-title-container');
+            const magneticZones = document.querySelectorAll('.active-magnetic-zone');
+
+            // Mouse Interaction
+            magneticContainer.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+
+                magneticZones.forEach(zone => {
+                    const chars = zone.querySelectorAll('.char');
+
+                    chars.forEach(char => {
+                        const rect = char.getBoundingClientRect();
+                        const charX = rect.left + rect.width / 2;
+                        const charY = rect.top + rect.height / 2;
+
+                        const dist = Math.hypot(mouseX - charX, mouseY - charY);
+                        const maxDist = 200; // Interaction radius
+
+                        if (dist < maxDist) {
+                            const strength = (maxDist - dist) / maxDist;
+                            const moveX = (charX - mouseX) * strength * 0.5; // Repulsion factor
+                            const moveY = (charY - mouseY) * strength * 0.5;
+                            const rotate = (Math.random() - 0.5) * 20 * strength; // Random chaotic rotation
+
+                            gsap.to(char, {
+                                x: moveX,
+                                y: moveY,
+                                rotation: rotate,
+                                duration: 0.3,
+                                ease: "power2.out",
+                                color: "#EAFF00", // Turn Neon on impact
+                                textShadow: "0 0 10px #EAFF00"
+                            });
+                        } else {
+                            // Return to base
+                            gsap.to(char, {
+                                x: 0,
+                                y: 0,
+                                rotation: 0,
+                                duration: 0.6,
+                                ease: "elastic.out(1, 0.3)",
+                                color: "", // Reset color
+                                textShadow: "none"
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Idle Glitch (Random Twitches)
+            setInterval(() => {
+                const allChars = document.querySelectorAll('.char');
+                const randomChar = allChars[Math.floor(Math.random() * allChars.length)];
+
+                if (Math.random() > 0.7) { // 30% chance roughly
+                    const tl = gsap.timeline();
+                    tl.to(randomChar, { x: 2, skewX: 20, color: "#CD7F32", duration: 0.05 })
+                        .to(randomChar, { x: -2, skewX: -20, duration: 0.05 })
+                        .to(randomChar, { x: 0, skewX: 0, color: "", duration: 0.05 });
+                }
+            }, 2000);
+
+
+            // 2. Parallax for Background SVGs (Existing)
             gsap.to('#legacy-system > div:first-child > svg', {
                 y: 100,
                 ease: "none",
@@ -844,30 +1010,7 @@
                 }
             });
 
-            // Floating Badges (Zero G Effect)
-            // Targets the badges inside the z-10 container
-            gsap.utils.toArray('#legacy-system .z-10 > div, #legacy-system .z-10 > svg').forEach((el) => {
-                gsap.to(el, {
-                    y: "random(-15, 15)",
-                    x: "random(-10, 10)",
-                    rotation: "random(-5, 5)", // Adds subtle rotation to existing rotation
-                    duration: "random(3, 6)",
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                });
-            });
-
-            // Floating Badges & Rubis (Main Content)
-            gsap.utils.toArray('#legacy-system .rubi-tag').forEach((el) => {
-                gsap.to(el, {
-                    y: "random(-5, 5)",
-                    duration: "random(2, 3)",
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                });
-            });
+            // 3. Floating Badges (Zero G Effect) (Existing)
 
             // Title Groups Hover Effect (Enhance existing CSS hover)
             gsap.utils.toArray('#legacy-system .group').forEach((el) => {

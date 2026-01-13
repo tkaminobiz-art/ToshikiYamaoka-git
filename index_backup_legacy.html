@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山岡としき | 政治を、アップデートする右腕。</title>
+    <meta name="description" content="元市議会議員・マーケター山岡としき。政治家の「熱量」を「熱狂」に変える翻訳者。">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&family=Shippori+Mincho:wght@400;500;700&family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <!-- Physics Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- Grid Overlay (Noise & Crosshairs) -->
+<div class="noise-overlay"></div>
+<div class="grid-crosshairs"></div>
+
+<!-- BOOT SEQUENCE (Terminal) -->
+<div class="boot-screen">
+    <div class="terminal-content">
+        <span class="blink">_</span>
+    </div>
+</div>
+
+<div class="lab-wrapper">
+    <!-- Sidebar -->
+    <aside class="system-sidebar">
+        <div class="sidebar-top">
+            <span class="sys-text">AX-2026 PROTOCOL // GOV_OS</span>
+            <span class="sys-text">STATUS: UNSTABLE</span>
+        </div>
+        <div class="marquee-track-vertical">
+            <div class="marquee-content">
+                /// CAUTION: LEGACY SYSTEM PURGE /// AX-2026 PROTOCOL ACTIVE /// HUMAN CAPITAL REQUIRED ///
+                /// CAUTION: LEGACY SYSTEM PURGE /// AX-2026 PROTOCOL ACTIVE /// HUMAN CAPITAL REQUIRED ///
+            </div>
+        </div>
+        <nav class="lab-nav">
+            <ul>
+                <li><a href="#hero">00. ROOT</a></li>
+                <li><a href="#problem">01. ERROR</a></li>
+                <li><a href="#files">02. FILES</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="lab-main">
+        <!-- Header (Mobile) -->
+        <header class="lab-header mobile-only">
+            <div class="logo">AX-2026</div>
+        </header>
+
+        <!-- HERO -->
+        <section id="hero" class="hero-section">
+            <div class="hero-bg"></div> <!-- Texture layer -->
+
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="stencil-title glitch-text" data-physics="true">AX-2026</h1>
+                    <h2 class="stroke-title" data-physics="true">REVOLUTION</h2>
+
+                    <div class="hero-meta">
+                        <div class="floating-data" data-physics="true">
+                            <p>INIT_SYSTEM: LOCAL_GOV_OS</p>
+                            <p>TARGET: THE_SHIFT</p>
+                            <p>STATUS: <span class="alert-text">CRITICAL_UPDATE</span></p>
+                        </div>
+                        <div class="vertical-copy" data-physics="true">
+                            <p>デジタルと熱量の融合による構造改革。</p>
+                            <p>「拡張された政治家」への進化。</p>
+                        </div>
+                        <div class="mission-statement" data-physics="true">
+                            <p class="sys-text">MISSION: TO REBUILD DEMOCRACY WITH CODE AND HEART.</p>
+                            <p class="sys-text">TARGET: LOCAL GOVERNMENT / PUBLIC SECTOR.</p>
+                            <p class="sys-text">REF: AX-2026-GOV-REFORM-INITIATIVE.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Button -->
+                    <button id="trigger-chaos" class="btn-chaos">
+                        <span class="btn-text">構造改革を実行 / ACTIVATE AX</span>
+                        <div class="btn-glitch"></div>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- Horizontal Warning Tape -->
+            <div class="warning-tape" data-physics="true">
+                <div class="tape-content">
+                    /// WARNING: DEMOCRACY UNDER CONSTRUCTION /// DO NOT CROSS /// AX-2026 ///
+                    /// WARNING: DEMOCRACY UNDER CONSTRUCTION /// DO NOT CROSS /// AX-2026 ///
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: DIRECTOR'S LOG (Profile) -->
+        <section id="problem" class="content-section problem-section">
+            <div class="corner-decoration top-right">LAT: 35.6895</div>
+            <div class="corner-decoration bottom-left">SYS_LOG_01</div>
+            <div class="container">
+                <div class="section-header">
+                    <div class="header-meta">
+                        <span class="phase-tag">PHASE: 01 // DIRECTOR'S LOG</span>
+                        <span class="ref-code">REF: YAMAOKA-PROFILE-26</span>
+                    </div>
+                    <h2 class="section-title">
+                        <span class="highlight-yellow">WARNING:</span><br>
+                        なぜ、あなたの政治活動は「届かない」のか？
+                    </h2>
+                </div>
+
+                <div class="problem-grid">
+                    <div class="problem-visual">
+                        <!-- 'REALITY' visual -->
+                        <div class="rejected-stamp">REALITY</div>
+                        <img src="assets/images/yamaokagrid1.png" alt="Director Yamaoka" class="halftone-img">
+                    </div>
+                    <div class="problem-text">
+                        <div class="error-log">
+                            <p class="sys-text">> ERROR: 0x404 [CONNECTION_LOST]</p>
+                            <p class="sys-text">> WARNING: INEFFICIENCY_DETECTED</p>
+                            <p class="sys-text">> ROOT_CAUSE: LACK_OF_DESIGN</p>
+                            <p class="sys-text">> STATUS: REBOOT_REQUIRED</p>
+                        </div>
+                        <p class="dense-copy">
+                            28歳でトップ当選させていただいた私が、議会の内側で直面した課題。<br>
+                            それは、<strong>「圧倒的な非効率」と「デザインの力の欠如」</strong>でした。<br><br>
+                            徹夜で練り上げた一般質問も、魂を込めた街頭演説も、「読みづらいチラシ」一枚で、手に取ってもらえない。「更新されないHP」一つで、若者との接点を失ってしまう。<br><br>
+                            汗をかけば報われる時代は、変わりつつあります。今必要なのは、地域を回る泥臭い活動と、最先端テクノロジーの<strong>「融合」</strong>です。<br>
+                            クリエイティブで「信頼」を作り、AIで「時間」を創る。これは単なるビジネスではありません。「本気で地域を良くしたい」と願うあなたへの、同志としての提案です。
+                        </p>
+                        <div class="key-metrics">
+                            <div class="metric">
+                                <span class="label">ID</span>
+                                <span class="value">YAMAOKA</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">ROLE</span>
+                                <span class="value alert-text">DIRECTOR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SOLUTIONS (Declassified Files) -->
+        <section id="files" class="content-section files-section">
+            <div class="corner-decoration top-right">LONG: 139.6917</div>
+            <div class="corner-decoration bottom-left">SEC: ARCHIVE</div>
+            <div class="container">
+                <div class="section-header">
+                    <div class="header-meta">
+                        <span class="phase-tag">PHASE: 02 // DECLASSIFIED</span>
+                        <span class="ref-code">REF: SOL-ARCHIVE-26</span>
+                    </div>
+                    <h2 class="section-title">SOLUTIONS ARCHIVE</h2>
+                </div>
+
+                <div class="file-grid">
+                    <!-- FILE 01: VISUAL REBOOT -->
+                    <div class="file-folder" data-file="01">
+                        <div class="folder-tab">FILE_01 /// VISUAL REBOOT</div>
+                        <div class="folder-body">
+                            <div class="folder-meta">
+                                <span>TARGET: VOTERS</span>
+                                <span>TYPE: PSYCHOLOGICAL</span>
+                                <span class="badge-high">PRIORITY: MAX</span>
+                            </div>
+                            <h3>圧倒的権威の構築。</h3>
+                            <p>「有権者の記憶に残る、あなたの『座席』を確保する。」<br>
+                                心を込めて配ったチラシが捨てられる痛み。それは中身の問題ではありません。「読む」前に「感じる」デザインの敗北です。写真、フォント、配色。すべてを計算し尽くし、「頼れるリーダー」としての存在感を確立します。
+                            </p>
+                            <ul class="protocol-list">
+                                <li>> Identity Architecture</li>
+                                <li>> Election Winning LP</li>
+                                <li>> Propaganda Tools (Flyers)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FILE 02: AI INTELLIGENCE -->
+                    <div class="file-folder" data-file="02">
+                        <div class="folder-tab">FILE_02 /// AI INTELLIGENCE</div>
+                        <div class="folder-body">
+                            <div class="folder-meta">
+                                <span>TARGET: EFFICIENCY</span>
+                                <span>TYPE: AUTOMATION</span>
+                            </div>
+                            <h3>参謀の量産。</h3>
+                            <p>「一人会派でも、AIがあれば『100人の政策秘書』を持つのと同じです。」<br>
+                                議事録分析や答弁書案作成に追われ、地域に出る時間がない。「勉強不足」への恐怖。それらはもう過去のものです。AIシンクタンクによる分析力と、あなたの分身となる「Legacy
+                                Archive」が、最強の右腕となります。</p>
+                            <ul class="protocol-list">
+                                <li>> Assembly AI Bootcamp</li>
+                                <li>> The "Shadow" System (Bot)</li>
+                                <li>> Time Hacking & Policy Making</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FILE 03: SNS WARFARE -->
+                    <div class="file-folder" data-file="03">
+                        <div class="folder-tab">FILE_03 /// SNS WARFARE</div>
+                        <div class="folder-body">
+                            <div class="folder-meta">
+                                <span>TARGET: AIR_SPACE</span>
+                                <span>STATUS: ENGAGE</span>
+                            </div>
+                            <h3>空中戦の制圧。</h3>
+                            <p>「目指すべきは『いいね』の数ではなく、実際の『票』です。」<br>
+                                毎朝の義務的な投稿、反応のない報告。それを選挙からの逆算による「戦略的伏線」へと変えます。AIによる炎上予兆検知と危機管理体制で、攻めと守りの広報を盤石にします。</p>
+                            <ul class="protocol-list">
+                                <li>> Strategic Consulting</li>
+                                <li>> Ghostwriting with AI</li>
+                                <li>> Risk Management & Alert</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FILE 04: FUTURE VISION -->
+                    <div class="file-folder" data-file="04">
+                        <div class="folder-tab">FILE_04 /// FUTURE VISION</div>
+                        <div class="folder-body">
+                            <div class="folder-meta">
+                                <span>TARGET: 2050</span>
+                                <span>SCOPE: SCENARIO</span>
+                            </div>
+                            <h3>縮小する未来を書き換える。</h3>
+                            <p>AIが予測する2050年の厳しいデータ。しかし、未来を選択し決断するのはAIではなく、政治家であるあなたです。客観的な予測データから逆算し、「地域を生き返らせるための楽観シナリオ」と政策を共に立案します。
+                            </p>
+                            <ul class="protocol-list">
+                                <li>> Data-Driven Policy</li>
+                                <li>> 2050 Scenario Planning</li>
+                                <li>> Regional Revival Strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2 class="stencil-title">ARE YOU READY?</h2>
+                <p class="dense-copy">AX-2026 PROTOCOL AWAITING INPUT.</p>
+                <div class="cta-group">
+                    <a href="#" class="btn-alert">無料戦略診断 (DIAGNOSIS)</a>
+                    <a href="#" class="btn-secondary">AX-2026 メンバーシップ (LINE)</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM FOOTER -->
+        <footer class="system-footer">
+            <div class="container footer-grid">
+                <div class="footer-col">
+                    <h4>SYSTEM MAP</h4>
+                    <ul>
+                        <li><a href="#hero">ROOT</a></li>
+                        <li><a href="#problem">ERROR_LOGS</a></li>
+                        <li><a href="#files">ARCHIVES</a></li>
+                        <li><a href="#contact">INPUT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>LEGAL PROTOCOLS</h4>
+                    <ul>
+                        <li><a href="#">PRIVACY_POLICY</a></li>
+                        <li><a href="#">TERMS_OF_SERVICE</a></li>
+                        <li><a href="#">DATA_GOVERNANCE</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONNECTION</h4>
+                    <ul>
+                        <li>
+                            <p>YAMAOKA TOSHIKI</p>
+                        </li>
+                        <li>
+                            <p>FORMER CITY COUNCIL</p>
+                        </li>
+                        <li>
+                            <p>TOKYO, JAPAN</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>STATUS</h4>
+                    <p class="sys-text">MEMORY: 64TB</p>
+                    <p class="sys-text">UPTIME: 99.99%</p>
+                    <p class="sys-text">VERSION: 2.0.4</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AX-2026 PROTOCOL. ALL RIGHTS RESERVED.</p>
+                <p>LAT: 35.6895 / LONG: 139.6917</p>
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+<script src="main.js"></script>
+</body>
+
+</html>
