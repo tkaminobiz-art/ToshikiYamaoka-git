@@ -168,6 +168,23 @@
         </div>
     </div>
 
+    <!-- RESTORED: SYSTEM UPDATE OVERLAY -->
+    <div id="update-overlay"
+        class="fixed inset-0 z-[10000] bg-black hidden flex flex-col items-center justify-center font-mono">
+        <div class="absolute top-10 left-10 text-neon text-xs tracking-[0.2em] blink">SYSTEM UPDATE IN PROGRESS...</div>
+
+        <!-- Console Output -->
+        <div id="console-output"
+            class="w-full max-w-2xl h-64 overflow-y-auto text-neon text-sm p-4 font-bold border-l-4 border-neon mb-8 bg-black/50">
+        </div>
+
+        <!-- Progress Bar -->
+        <div id="progress-container" class="w-full max-w-xl h-2 bg-gray-800 relative opacity-0">
+            <div id="progress-bar" class="absolute top-0 left-0 h-full bg-neon w-0"></div>
+        </div>
+        <div id="progress-text" class="text-neon mt-2 text-xs tracking-widest opacity-0">0%</div>
+    </div>
+
 
     <!-- MAGNETIC INTERACTION CONTAINER -->
     <div id="magnetic-field" class="fixed inset-0 z-0 pointer-events-none"></div>
@@ -256,7 +273,8 @@
 
                 <!-- RIGHT FLANK: THE CIRCUIT BOARD (HARD WIRING) -->
                 <aside id="right-circuit" class="absolute inset-0 pointer-events-none">
-                    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="none" viewBox="0 0 100 100">
                         <defs>
                             <marker id="dot" markerWidth="8" markerHeight="8" refX="4" refY="4">
                                 <circle cx="4" cy="4" r="3" fill="black" />
@@ -267,15 +285,15 @@
                         </defs>
 
                         <!-- Circuit Line 1: Confidential -->
-                        <path d="M 100% 20% H 85% V 25%" fill="none" stroke="black" stroke-width="2"
+                        <path d="M 100 20 H 85 V 25" fill="none" stroke="black" stroke-width="0.2"
                             marker-end="url(#square)" vector-effect="non-scaling-stroke" />
 
                         <!-- Circuit Line 2: Asymmetric -->
-                        <path d="M 100% 50% H 90% V 45% H 80%" fill="none" stroke="black" stroke-width="2"
+                        <path d="M 100 50 H 90 V 45 H 80" fill="none" stroke="black" stroke-width="0.2"
                             marker-end="url(#dot)" vector-effect="non-scaling-stroke" />
 
                         <!-- Circuit Line 3: Focus Mode -->
-                        <path d="M 100% 80% H 85% V 75%" fill="none" stroke="black" stroke-width="2"
+                        <path d="M 100 80 H 85 V 75" fill="none" stroke="black" stroke-width="0.2"
                             marker-end="url(#square)" vector-effect="non-scaling-stroke" />
                     </svg>
 
@@ -548,7 +566,7 @@
                 </div>
             </div>
 
-            <div class="relative group cursor-pointer mt-12 z-20" onclick="activateUpdate()">
+            <div class="relative group mt-12 z-20">
                 <div
                     class="absolute inset-0 bg-red-600 transform translate-x-1 translate-y-1 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-100 opacity-0 group-hover:opacity-100">
                 </div>
@@ -556,8 +574,8 @@
                     class="absolute inset-0 bg-cyan-600 transform -translate-x-1 -translate-y-1 group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-100 opacity-0 group-hover:opacity-100">
                 </div>
 
-                <button
-                    class="relative bg-black text-white border-4 border-white px-8 md:px-16 py-8 shadow-[10px_10px_0px_#CD7F32] group-hover:shadow-[15px_15px_0px_#FF0000] group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] transition-all duration-200 overflow-hidden">
+                <button onclick="activateUpdate()"
+                    class="relative cursor-pointer bg-black text-white border-4 border-white px-8 md:px-16 py-8 shadow-[10px_10px_0px_#CD7F32] group-hover:shadow-[15px_15px_0px_#FF0000] group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] transition-all duration-200 overflow-hidden">
                     <div
                         class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LDI1NSwgMC4xKSIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none">
                     </div>
@@ -1059,12 +1077,20 @@
         });
 
         // --- SYSTEM UPDATE TRANSITION (ENHANCED) ---
-        function activateUpdate() {
+        // Global function for accessibility
+        window.activateUpdate = function () {
+            console.log("System Update Activated"); // Debug Log
+
             const overlay = document.getElementById('update-overlay');
             const consoleOutput = document.getElementById('console-output');
             const progressBar = document.getElementById('progress-bar');
             const progressText = document.getElementById('progress-text');
             const progressContainer = document.getElementById('progress-container');
+
+            if (!overlay) {
+                console.error("Overlay element not found!");
+                return;
+            }
 
             const legacySystem = document.getElementById('legacy-system');
             const newServices = document.getElementById('new-services');
@@ -1073,6 +1099,8 @@
             overlay.classList.remove('hidden');
 
             const tl = gsap.timeline();
+
+
 
             // 1. Console Diagnosis Sequence
             const logs = [
