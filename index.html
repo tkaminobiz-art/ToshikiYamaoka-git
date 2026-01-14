@@ -811,7 +811,7 @@
                                 <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
 
                                 <button onclick="activateUpdate()" id="reboot-btn"
-                                    class="inline-block border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden">
+                                    class="inline-block opacity-100 visibility-visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden">
                                     <div
                                         class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                     </div>
@@ -1355,6 +1355,8 @@
                         "PREPARING OVERWRITE...",
                         "DELETING OLD DEPENDENCIES..."
                     ];
+
+
 
                     tl.to(consoleOutput, { opacity: 1, duration: 0.1 })
                         .call(() => {
