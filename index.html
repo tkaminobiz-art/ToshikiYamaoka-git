@@ -436,7 +436,7 @@
                 <div
                     class="relative z-10 w-full max-w-7xl mx-auto px-4 text-center flex-grow flex flex-col justify-center perspective-[1000px]">
 
-                    <div class="mb-4">
+                    <div class="mb-2 md:mb-6">
                         <div
                             class="anim-text-sub inline-block bg-black text-[#EAFF00] px-6 py-2 transform -rotate-1 shadow-lg">
                             <p class="font-jp font-bold text-sm md:text-lg tracking-widest">
@@ -460,7 +460,7 @@
 
                         <div id="text-camp-container"
                             class="absolute top-0 left-0 w-full h-full flex items-center justify-center z-20 pointer-events-none">
-                            <div class="relative transform translate-y-4 md:translate-y-8">
+                            <div class="relative transform -translate-y-2 md:-translate-y-4">
                                 <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-0 left-1/2 transform -translate-x-1/2 opacity-80"
                                     style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2)); width: 100vw; text-align: center;">
                                     CAMP
@@ -473,9 +473,9 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 relative z-30 flex flex-col items-center">
+                    <div class="mt-24 md:mt-32 relative z-30 flex flex-col items-center">
                         <div id="target-box"
-                            class="anim-element inline-block bg-white border-4 border-black px-8 md:px-12 py-3 md:py-5 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1 relative group">
+                            class="anim-element inline-block bg-white border-4 border-black px-10 py-4 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1 relative group hover:scale-105 transition-transform">
                             <div
                                 class="absolute -top-4 -right-6 bg-[#EAFF00] text-black font-jp font-bold text-xs px-2 py-1 transform rotate-6 border border-black shadow-sm">
                                 対象：地方議員・候補予定者
@@ -516,73 +516,22 @@
                     gsap.registerPlugin(ScrollTrigger);
 
                     const tl = gsap.timeline();
-
-                    // --- OPENING ANIMATION ---
                     tl.to("#boot-flash", { duration: 0.1, opacity: 0, ease: "power2.out" })
-
-                        // REBOOT (Scale Down Slam)
-                        .from("#text-reboot-container", {
-                            duration: 1,
-                            scale: 3,
-                            opacity: 0,
-                            ease: "expo.out",
-                            force3D: true
-                        }, "-=0.1")
-
-                        // CAMP (Lateral Glitch Slide)
-                        .from("#text-camp-container", {
-                            duration: 0.6,
-                            x: 50,
-                            opacity: 0,
-                            skewX: -20,
-                            ease: "back.out(1.7)"
-                        }, "-=0.8")
-
-                        // Elements Pop Up
+                        .from("#text-reboot-container", { duration: 1, scale: 3, opacity: 0, ease: "expo.out", force3D: true }, "-=0.1")
+                        .from("#text-camp-container", { duration: 0.6, x: 50, opacity: 0, skewX: -20, ease: "back.out(1.7)" }, "-=0.8")
                         .from(".anim-sticker", { duration: 0.8, scale: 0, opacity: 0, rotation: 180, stagger: 0.2, ease: "elastic.out(1, 0.5)" }, "-=0.4")
                         .from(".anim-element", { duration: 0.6, y: 50, opacity: 0, stagger: 0.1, ease: "power2.out" }, "-=0.5")
                         .from(".anim-text-sub", { duration: 0.5, opacity: 0 }, "-=0.3")
                         .from(".anim-ui", { duration: 0.5, y: 20, opacity: 0 }, "-=0.3");
 
-
-                    // --- MOUSE PARALLAX (DEPTH EFFECT) ---
                     const section = document.getElementById("hero-section");
-
                     section.addEventListener("mousemove", (e) => {
-                        // Calculate mouse position (-1 to 1)
                         const xPos = (e.clientX / window.innerWidth - 0.5) * 2;
                         const yPos = (e.clientY / window.innerHeight - 0.5) * 2;
-
-                        // 1. Background (Moves slightly)
                         gsap.to("#layer-bg", { duration: 1, x: xPos * 20, y: yPos * 20, ease: "power2.out" });
-
-                        // 2. REBOOT (Back Layer - Moves slowly opposite to mouse)
-                        gsap.to("#text-reboot-container", {
-                            duration: 1.2,
-                            x: xPos * -15,
-                            y: yPos * -15,
-                            rotationY: xPos * 2,
-                            ease: "power2.out"
-                        });
-
-                        // 3. CAMP (Front Layer - Moves faster opposite to mouse)
-                        // This speed difference creates the 3D gap
-                        gsap.to("#text-camp-container", {
-                            duration: 1,
-                            x: xPos * -40,
-                            y: yPos * -40,
-                            rotationY: xPos * 5,
-                            rotationX: yPos * -5,
-                            ease: "power2.out"
-                        });
-
-                        // 4. Stickers (Closest Layer - Moves fastest)
-                        gsap.to(".anim-sticker", {
-                            duration: 0.8,
-                            x: xPos * -70,
-                            y: yPos * -70,
-                            ease: "power2.out"
-                        });
+                        gsap.to("#text-reboot-container", { duration: 1.2, x: xPos * -15, y: yPos * -15, rotationY: xPos * 2, ease: "power2.out" });
+                        gsap.to("#text-camp-container", { duration: 1, x: xPos * -40, y: yPos * -40, rotationY: xPos * 5, rotationX: yPos * -5, ease: "power2.out" });
+                        gsap.to(".anim-sticker", { duration: 0.8, x: xPos * -70, y: yPos * -70, ease: "power2.out" });
                     });
                 });
             </script>
