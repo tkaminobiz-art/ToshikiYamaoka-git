@@ -811,7 +811,7 @@
                                 <p>古い思考（OS）を手放す時が来ました。</p>
                             </div>
 
-                            <div class="mt-16">
+                            <div class="mt-16 anim-wrapper">
                                 <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしませんか。</p>
 
                                 <button onclick="activateUpdate()"
@@ -840,7 +840,7 @@
 
                     scenes.forEach((scene, index) => {
                         // Text Stagger Animation
-                        gsap.from(scene.querySelectorAll('h2, h3, p, div'), {
+                        gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper'), {
                             y: 50,
                             opacity: 0,
                             duration: 1,
