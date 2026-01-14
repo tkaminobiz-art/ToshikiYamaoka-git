@@ -372,6 +372,7 @@
             </div>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
             <header id="hero-section"
                 class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#ECECEC] cursor-crosshair">
@@ -383,7 +384,6 @@
                 </div>
 
                 <div id="layer-deco" class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-
                     <svg class="absolute top-1/2 left-10 w-64 h-64 opacity-20 z-0" viewBox="0 0 100 100">
                         <path d="M0 50 H 20 L 30 20 L 40 80 L 50 50 H 100" fill="none" stroke="black"
                             stroke-width="2" />
@@ -402,15 +402,14 @@
                     </div>
 
                     <div id="sticker-left"
-                        class="anim-sticker absolute top-24 md:top-32 left-4 md:left-10 transform rotate-[-8deg] z-30 drop-shadow-xl">
+                        class="anim-sticker absolute top-24 md:top-32 left-4 md:left-10 transform rotate-[-8deg] z-[100] drop-shadow-xl">
                         <div
-                            class="absolute -top-3 -left-4 w-16 h-6 bg-red-600 transform rotate-[-15deg] opacity-80 z-40">
+                            class="absolute -top-3 -left-4 w-16 h-6 bg-red-600 transform rotate-[-15deg] opacity-80 z-[101]">
                         </div>
                         <div
-                            class="absolute -bottom-2 -right-3 w-12 h-5 bg-red-600 transform rotate-[10deg] opacity-80 z-40">
+                            class="absolute -bottom-2 -right-3 w-12 h-5 bg-red-600 transform rotate-[10deg] opacity-80 z-[101]">
                         </div>
-
-                        <div class="bg-[#F8F8F0] text-black border-2 border-gray-300 p-4 max-w-[240px] relative z-30"
+                        <div class="bg-[#F8F8F0] text-black border-2 border-gray-300 p-4 max-w-[240px] relative z-[100]"
                             style="clip-path: polygon(2% 0%, 98% 1%, 100% 95%, 96% 100%, 1% 99%, 0% 4%);">
                             <p
                                 class="font-jp font-black text-2xl md:text-3xl leading-tight border-b-4 border-red-600 inline-block mb-1">
@@ -444,29 +443,33 @@
                         </p>
                     </div>
 
-                    <div class="relative leading-[0.85] select-none mb-4">
+                    <div class="relative h-[20vw] md:h-[15rem] flex items-center justify-center mb-8 select-none">
+
                         <h1 id="text-reboot"
-                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#1A1A1A] mix-blend-multiply relative z-10 origin-center">
+                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#1A1A1A] mix-blend-multiply relative z-10 leading-none">
                             REBOOT
                         </h1>
-                        <p
-                            class="anim-text-sub absolute top-0 left-1/2 -translate-x-1/2 -mt-4 font-jp font-bold text-xs md:text-xl tracking-[1em] text-gray-500">
-                            再起動</p>
 
-                        <div id="text-camp-group"
-                            class="absolute top-[0.6em] left-1/2 transform -translate-x-1/2 w-full z-20">
-                            <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-0 left-1/2 transform -translate-x-1/2 opacity-80"
-                                style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2));">
-                                CAMP
-                            </h1>
-                            <h1
-                                class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#EAFF00] absolute top-[0.05em] left-[51%] transform -translate-x-1/2 mix-blend-multiply opacity-60">
-                                CAMP
-                            </h1>
+                        <p
+                            class="anim-text-sub absolute top-0 left-1/2 transform -translate-x-1/2 -mt-2 font-jp font-bold text-xs md:text-xl tracking-[1em] text-gray-500 z-10">
+                            再起動
+                        </p>
+
+                        <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                            <div id="text-camp-wrapper" class="relative">
+                                <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-2 opacity-80"
+                                    style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2)); width: 100vw; text-align: center;">
+                                    CAMP
+                                </h1>
+                                <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#EAFF00] absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-3 mix-blend-multiply opacity-60"
+                                    style="width: 100vw; text-align: center;">
+                                    CAMP
+                                </h1>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-[8vw] md:mt-32 relative z-30 flex flex-col items-center">
+                    <div class="mt-8 md:mt-12 relative z-30 flex flex-col items-center">
                         <div id="target-box"
                             class="anim-element inline-block bg-white border-4 border-black px-10 py-4 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1 relative group">
                             <div
@@ -487,7 +490,6 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="anim-ui absolute bottom-0 left-0 w-full flex justify-center pb-8 z-20">
@@ -509,85 +511,53 @@
                 document.addEventListener("DOMContentLoaded", (event) => {
                     gsap.registerPlugin(ScrollTrigger);
 
-                    // --- 1. BOOT SEQUENCE (衝撃のオープニング) ---
                     const tl = gsap.timeline();
 
-                    // Flash White -> Clear
+                    // 1. FLASH
                     tl.to("#boot-flash", { duration: 0.1, opacity: 0, ease: "power2.out" })
 
-                        // "REBOOT" Slams in (Huge Scale to Normal)
+                        // 2. REBOOT (Scale Effect)
                         .from("#text-reboot", {
                             duration: 0.8,
-                            scale: 10,
+                            scale: 5, // 少し控えめにして負荷軽減
                             opacity: 0,
                             ease: "expo.out",
                             force3D: true
                         }, "-=0.1")
 
-                        // "CAMP" Glitches in
-                        .from("#text-camp-group", {
-                            duration: 0.5,
-                            x: 100,
+                        // 3. CAMP (Glitch Effect without breaking layout)
+                        // x移動ではなく、scaleとskewでグリッチ感を出すことで座標ズレを防ぐ
+                        .from("#text-camp-wrapper", {
+                            duration: 0.4,
+                            scale: 1.5,
                             opacity: 0,
                             skewX: 20,
-                            ease: "rough({ template: none.out, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false })"
-                        }, "-=0.6")
-
-                        // Stickers Slap on (Elastic effect)
-                        .from(".anim-sticker", {
-                            duration: 0.8,
-                            scale: 2,
-                            opacity: 0,
-                            rotation: 45,
-                            stagger: 0.2,
-                            ease: "elastic.out(1, 0.3)"
-                        }, "-=0.3")
-
-                        // Other Elements Slide Up
-                        .from(".anim-element", {
-                            duration: 0.6,
-                            y: 50,
-                            opacity: 0,
-                            stagger: 0.1,
-                            ease: "power2.out"
+                            ease: "elastic.out(1, 0.5)"
                         }, "-=0.5")
 
+                        // 4. Elements
+                        .from(".anim-sticker", { duration: 0.8, scale: 2, opacity: 0, rotation: 45, stagger: 0.2, ease: "elastic.out(1, 0.3)" }, "-=0.3")
+                        .from(".anim-element", { duration: 0.6, y: 50, opacity: 0, stagger: 0.1, ease: "power2.out" }, "-=0.5")
                         .from(".anim-text-sub", { duration: 0.5, opacity: 0 }, "-=0.3")
                         .from(".anim-ui", { duration: 0.5, y: 20, opacity: 0 }, "-=0.3");
 
-
-                    // --- 2. MOUSE PARALLAX (没入する奥行き) ---
+                    // 5. Mouse Interaction
                     const section = document.getElementById("hero-section");
-
                     section.addEventListener("mousemove", (e) => {
                         const xPos = (e.clientX / window.innerWidth - 0.5);
                         const yPos = (e.clientY / window.innerHeight - 0.5);
 
-                        // Background moves slightly (Far away)
-                        gsap.to("#layer-bg", {
-                            duration: 1,
-                            x: xPos * 20,
-                            y: yPos * 20,
-                            ease: "power2.out"
-                        });
+                        gsap.to("#layer-bg", { duration: 1, x: xPos * 20, y: yPos * 20, ease: "power2.out" });
 
-                        // Text moves moderately (Middle)
+                        // テキストレイヤーは回転のみにして座標移動を減らす（ズレ防止）
                         gsap.to("#layer-text", {
                             duration: 1,
-                            x: xPos * -30, // Moves opposite to mouse
-                            y: yPos * -30,
-                            rotationY: xPos * 5, // Subtle 3D tilt
+                            rotationY: xPos * 5,
                             rotationX: yPos * -5,
                             ease: "power2.out"
                         });
 
-                        // Stickers move fast (Close up)
-                        gsap.to(".anim-sticker", {
-                            duration: 0.8,
-                            x: xPos * -60,
-                            y: yPos * -60,
-                            ease: "power2.out"
-                        });
+                        gsap.to(".anim-sticker", { duration: 0.8, x: xPos * -40, y: yPos * -40, ease: "power2.out" });
                     });
                 });
             </script>
