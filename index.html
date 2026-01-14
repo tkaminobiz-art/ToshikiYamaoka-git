@@ -1506,83 +1506,104 @@
 
         // --- POST-UPDATE WORLD ANIMATIONS (Core Team etc) ---
         function initNewWorldAnimations() {
-            // Force ScrollTrigger refresh to detect new layout
-            ScrollTrigger.refresh();
+            // Ensure DOM layout is complete before calculating triggers
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    ScrollTrigger.refresh();
 
-            // 1. Master Title Sequence (New Weapons)
-            const serviceHeader = document.querySelector("#tactical-gears .text-center");
-            if (serviceHeader) {
-                gsap.fromTo(serviceHeader.children,
-                    { y: 30, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        autoAlpha: 1,
-                        stagger: 0.1,
-                        duration: 1,
-                        ease: "power3.out"
+                    // 1. Master Title Sequence (New Weapons)
+                    const serviceHeader = document.querySelector("#tactical-gears .text-center");
+                    if (serviceHeader) {
+                        gsap.fromTo(serviceHeader.children,
+                            { y: 30, opacity: 0 },
+                            {
+                                y: 0,
+                                opacity: 1,
+                                autoAlpha: 1,
+                                stagger: 0.1,
+                                duration: 1,
+                                ease: "power3.out"
+                            }
+                        );
                     }
-                );
-            }
 
-            // 2. Arsenal Cards Stagger
-            gsap.from("#tactical-gears .grid > div", {
-                y: 60,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: "#tactical-gears .grid",
-                    start: "top 80%"
-                }
-            });
-
-            // 3. Core Team Section Animations
-            // We use a slight delay or scroll trigger ensuring the user scrolls down to see it
-            const coreTeamSection = document.getElementById("core-team"); // The nested section
-
-            if (coreTeamSection) {
-                // Background Grid Parallax
-                gsap.to(coreTeamSection.querySelector('.absolute.inset-0'), {
-                    y: 50,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: coreTeamSection,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true
-                    }
-                });
-
-                // File Cards "Stamp" Reveal
-                gsap.utils.toArray(coreTeamSection.querySelectorAll(".grid > div")).forEach((card, i) => {
-                    gsap.from(card, {
-                        scale: 1.05,
-                        autoAlpha: 0,
-                        filter: "blur(5px)",
-                        duration: 0.6,
-                        delay: i * 0.2,
-                        ease: "power2.out",
-                        clearProps: "filter, transform", // Ensure clean final state
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 90%" // Trigger slightly earlier
+                    // 2. Arsenal Cards Stagger
+                    // Changed to fromTo to ensure visibility if trigger fails or is already passed
+                    gsap.fromTo("#tactical-gears .grid > div",
+                        { y: 60, opacity: 0, autoAlpha: 0 },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            autoAlpha: 1,
+                            duration: 0.8,
+                            stagger: 0.2,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: "#tactical-gears .grid",
+                                start: "top 80%"
+                            }
                         }
-                    });
-                });
+                    );
 
-                // Synergy Section
-                gsap.from(coreTeamSection.querySelector(".bg-ink"), {
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: coreTeamSection.querySelector(".bg-ink"),
-                        start: "top 80%"
+                    // 3. Core Team Section Animations
+                    const coreTeamSection = document.getElementById("core-team");
+
+                    if (coreTeamSection) {
+                        // Background Grid Parallax
+                        gsap.to(coreTeamSection.querySelector('.absolute.inset-0'), {
+                            y: 50,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: coreTeamSection,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: true
+                            }
+                        });
+
+                        // File Cards "Stamp" Reveal
+                        gsap.utils.toArray(coreTeamSection.querySelectorAll(".grid > div")).forEach((card, i) => {
+                            gsap.fromTo(card,
+                                {
+                                    scale: 1.05,
+                                    autoAlpha: 0,
+                                    filter: "blur(5px)"
+                                },
+                                {
+                                    scale: 1,
+                                    autoAlpha: 1,
+                                    filter: "blur(0px)",
+                                    duration: 0.6,
+                                    delay: i * 0.2,
+                                    ease: "power2.out",
+                                    clearProps: "filter, transform",
+                                    scrollTrigger: {
+                                        trigger: card,
+                                        start: "top 90%"
+                                    }
+                                }
+                            );
+                        });
+
+                        // Synergy Section
+                        const synergyBg = coreTeamSection.querySelector(".bg-ink");
+                        if (synergyBg) {
+                            gsap.fromTo(synergyBg,
+                                { y: 50, opacity: 0 },
+                                {
+                                    y: 0,
+                                    opacity: 1,
+                                    duration: 1,
+                                    scrollTrigger: {
+                                        trigger: synergyBg,
+                                        start: "top 80%"
+                                    }
+                                }
+                            );
+                        }
                     }
                 });
-            }
+            }, 100); // 100ms delay for safety
         }
     </script>
 </body>
