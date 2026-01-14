@@ -811,7 +811,8 @@
                                 <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
 
                                 <button onclick="activateUpdate()" id="reboot-btn"
-                                    class="inline-block opacity-100 visibility-visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden">
+                                    class="no-anim inline-block opacity-100 !visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden"
+                                    style="opacity: 1 !important; transform: none !important;">
                                     <div
                                         class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                     </div>
@@ -836,7 +837,7 @@
 
                     scenes.forEach((scene, index) => {
                         // Text Stagger Animation
-                        gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper'), {
+                        gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper:not(.no-anim)'), {
                             y: 50,
                             opacity: 0,
                             duration: 1,
