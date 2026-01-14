@@ -525,7 +525,7 @@
                 }
             </style>
 
-            <section id="chronicle-root" class="relative bg-black text-white overflow-hidden">
+            <section id="legacy-system" class="relative bg-black text-white overflow-hidden">
 
                 <div
                     class="fixed top-0 left-0 w-full h-full pointer-events-none z-[100] px-4 py-4 mix-blend-difference">
@@ -814,13 +814,16 @@
                             <div class="mt-16">
                                 <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしませんか。</p>
 
-                                <a href="#hero-section"
-                                    class="inline-block border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group">
+                                <button onclick="activateUpdate()"
+                                    class="inline-block border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden">
+                                    <div
+                                        class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    </div>
                                     <span
-                                        class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00]">EXECUTE
-                                        PROGRAM >></span>
-                                    再起動プログラム（REBOOT CAMP）へ
-                                </a>
+                                        class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00] relative z-10">SYSTEM_REBOOT
+                                        >></span>
+                                    <span class="relative z-10">ボタンを押してRebootしてください。</span>
+                                </button>
                             </div>
                         </div>
                     </div>
