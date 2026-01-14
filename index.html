@@ -384,52 +384,53 @@
                 </div>
 
                 <div id="layer-deco" class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-                    <svg class="absolute top-1/2 left-10 w-64 h-64 opacity-20 z-0" viewBox="0 0 100 100">
+
+                    <svg class="absolute top-0 right-0 w-96 h-96 opacity-10 z-0 transform rotate-90"
+                        viewBox="0 0 100 100">
                         <path d="M0 50 H 20 L 30 20 L 40 80 L 50 50 H 100" fill="none" stroke="black"
-                            stroke-width="2" />
+                            stroke-width="1" />
                     </svg>
 
-                    <div
-                        class="anim-element absolute top-10 -left-10 bg-[#EAFF00] border-y-4 border-black py-2 px-20 transform -rotate-12 shadow-lg z-10">
-                        <span class="font-sans font-black text-xl tracking-widest text-black opacity-60">CAUTION:
-                            REBOOTING ///</span>
-                    </div>
-
-                    <div
-                        class="anim-element absolute bottom-40 -right-5 bg-black text-white border-2 border-[#EAFF00] p-6 transform rotate-6 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] z-10">
-                        <p class="font-sans text-xs tracking-widest text-[#EAFF00]">SYSTEM STATUS:</p>
-                        <p class="font-sans text-3xl font-black leading-none">CRITICAL<br>UPDATE</p>
-                    </div>
-
-                    <div id="sticker-left"
-                        class="anim-sticker absolute top-24 md:top-32 left-4 md:left-10 transform rotate-[-8deg] z-[100] drop-shadow-xl">
+                    <div class="absolute top-0 left-0 z-10">
                         <div
-                            class="absolute -top-3 -left-4 w-16 h-6 bg-red-600 transform rotate-[-15deg] opacity-80 z-[101]">
+                            class="anim-element bg-[#EAFF00] border-b-4 border-r-4 border-black py-2 px-12 transform -rotate-3 shadow-md origin-top-left">
+                            <span class="font-sans font-black text-lg tracking-widest text-black opacity-80">CAUTION:
+                                REBOOTING ///</span>
                         </div>
-                        <div
-                            class="absolute -bottom-2 -right-3 w-12 h-5 bg-red-600 transform rotate-[10deg] opacity-80 z-[101]">
-                        </div>
-                        <div class="bg-[#F8F8F0] text-black border-2 border-gray-300 p-4 max-w-[240px] relative z-[100]"
-                            style="clip-path: polygon(2% 0%, 98% 1%, 100% 95%, 96% 100%, 1% 99%, 0% 4%);">
-                            <p
-                                class="font-jp font-black text-2xl md:text-3xl leading-tight border-b-4 border-red-600 inline-block mb-1">
-                                今からでも、<br>遅くない。
-                            </p>
-                            <p class="font-jp font-bold text-xs text-gray-600 leading-tight">
-                                （ベテラン議員こそ、変われる。）
-                            </p>
+
+                        <div id="sticker-left"
+                            class="anim-sticker relative mt-4 ml-8 transform -rotate-2 z-[100] drop-shadow-xl">
+                            <div
+                                class="absolute -top-2 -left-3 w-12 h-5 bg-red-600 transform rotate-[-10deg] opacity-80 z-[101]">
+                            </div>
+                            <div class="bg-[#F8F8F0] text-black border-2 border-gray-300 p-4 max-w-[220px] relative z-[100]"
+                                style="clip-path: polygon(2% 0%, 98% 1%, 100% 95%, 96% 100%, 1% 99%, 0% 4%);">
+                                <p
+                                    class="font-jp font-black text-2xl leading-tight border-b-4 border-red-600 inline-block mb-1">
+                                    今からでも、<br>遅くない。
+                                </p>
+                                <p class="font-jp font-bold text-[0.7rem] text-gray-600 leading-tight">
+                                    （ベテラン議員こそ、変われる。）
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <div id="sticker-right"
-                        class="anim-sticker absolute top-1/3 right-4 md:right-20 transform rotate-[12deg] z-20 drop-shadow-[5px_5px_0px_rgba(0,0,0,0.4)]">
+                        class="anim-sticker absolute top-8 right-8 transform rotate-2 z-20 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.3)]">
                         <div class="bg-[#EAFF00] text-black border-4 border-black p-3 relative z-20">
-                            <p class="font-jp font-black text-lg md:text-xl leading-none tracking-tight">
+                            <p class="font-jp font-black text-lg leading-none tracking-tight">
                                 <span class="block text-sm mb-1">その</span>
                                 「経験」<span class="text-red-600">×</span>AI
                                 <span class="block text-sm mt-1 text-right">で、武器にしろ。</span>
                             </p>
                         </div>
+                    </div>
+
+                    <div
+                        class="anim-element absolute bottom-8 right-8 bg-black text-white border-2 border-[#EAFF00] p-5 transform -rotate-2 shadow-[6px_6px_0px_rgba(0,0,0,0.3)] z-10 text-right">
+                        <p class="font-sans text-xs tracking-widest text-[#EAFF00] mb-1">SYSTEM STATUS:</p>
+                        <p class="font-sans text-2xl font-black leading-none">CRITICAL<br>UPDATE</p>
                     </div>
                 </div>
 
