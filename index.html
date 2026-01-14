@@ -309,67 +309,7 @@
                 }
             </style>
 
-            <!-- HEAVY INDUSTRIAL INTERFACE LAYER -->
-            <div class="hidden md:block absolute inset-0 z-10 pointer-events-none font-mono">
 
-
-
-
-                <!-- RIGHT FLANK: THE CIRCUIT BOARD (HARD WIRING) -->
-                <aside id="right-circuit" class="absolute inset-0 pointer-events-none">
-                    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg"
-                        preserveAspectRatio="none" viewBox="0 0 100 100">
-                        <defs>
-                            <marker id="dot" markerWidth="8" markerHeight="8" refX="4" refY="4">
-                                <circle cx="4" cy="4" r="3" fill="black" />
-                            </marker>
-                            <marker id="square" markerWidth="8" markerHeight="8" refX="4" refY="4">
-                                <rect x="1" y="1" width="6" height="6" fill="black" />
-                            </marker>
-                        </defs>
-
-                        <!-- Circuit Line 1: Confidential -->
-                        <path d="M 100 20 H 85 V 25" fill="none" stroke="black" stroke-width="0.2"
-                            marker-end="url(#square)" vector-effect="non-scaling-stroke" />
-
-                        <!-- Circuit Line 2: Asymmetric -->
-                        <path d="M 100 50 H 90 V 45 H 80" fill="none" stroke="black" stroke-width="0.2"
-                            marker-end="url(#dot)" vector-effect="non-scaling-stroke" />
-
-                        <!-- Circuit Line 3: Focus Mode -->
-                        <path d="M 100 80 H 85 V 75" fill="none" stroke="black" stroke-width="0.2"
-                            marker-end="url(#square)" vector-effect="non-scaling-stroke" />
-                    </svg>
-
-                    <!-- Modules Positioned exactly at line ends -->
-
-                    <!-- Module 1: Confidential -->
-                    <div class="absolute top-[25%] right-[15%] transform translate-x-4 translate-y-2">
-                        <div class="bg-black text-white px-6 py-2 border-l-4 border-[#FF00FF] shadow-none">
-                            <div class="font-sans font-bold text-sm tracking-widest">CONFIDENTIAL_FILE</div>
-                            <div class="text-[0.5rem] text-gray-400">ACCESS_LEVEL: 5</div>
-                        </div>
-                    </div>
-
-                    <!-- Module 2: Asymmetric -->
-                    <div class="absolute top-[38%] right-[12%] transform translate-x-4 -translate-y-1/2">
-                        <div class="bg-[#EAFF00] text-black px-6 py-4 border-2 border-black shadow-none">
-                            <div class="font-sans font-black text-xl tracking-tighter leading-none">
-                                ASYMMETRIC<br>WARFARE</div>
-                        </div>
-                    </div>
-
-                    <!-- Module 3: Focus -->
-                    <div class="absolute top-[75%] right-[15%] transform translate-x-4 translate-y-2">
-                        <div class="bg-white text-black px-4 py-2 border-2 border-black flex items-center gap-2">
-                            <div class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
-                            <div class="font-sans font-bold text-xs tracking-widest">FOCUS_MODE: ON</div>
-                        </div>
-                    </div>
-
-                </aside>
-
-            </div>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
