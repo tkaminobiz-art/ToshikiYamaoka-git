@@ -29,6 +29,7 @@
                     fontFamily: {
                         serif: ['"Shippori Mincho"', 'serif'],
                         sans: ['"Oswald"', 'sans-serif'],
+                        oswald: ['"Oswald"', 'sans-serif'],
                         jp: ['"Noto Sans JP"', 'sans-serif'],
                     },
                     animation: {
@@ -85,6 +86,89 @@
         .stroke-white {
             -webkit-text-stroke: 1px white;
             color: transparent;
+        }
+
+        /* GLITCH TEXT EFFECT */
+        .glitch-text {
+            position: relative;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f0f0f0;
+            /* Match bg color */
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-1 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% {
+                clip: rect(20px, 9999px, 15px, 0);
+            }
+
+            20% {
+                clip: rect(60px, 9999px, 70px, 0);
+            }
+
+            40% {
+                clip: rect(20px, 9999px, 5px, 0);
+            }
+
+            60% {
+                clip: rect(80px, 9999px, 50px, 0);
+            }
+
+            80% {
+                clip: rect(10px, 9999px, 40px, 0);
+            }
+
+            100% {
+                clip: rect(50px, 9999px, 20px, 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(15px, 9999px, 80px, 0);
+            }
+
+            20% {
+                clip: rect(85px, 9999px, 10px, 0);
+            }
+
+            40% {
+                clip: rect(50px, 9999px, 30px, 0);
+            }
+
+            60% {
+                clip: rect(10px, 9999px, 70px, 0);
+            }
+
+            80% {
+                clip: rect(30px, 9999px, 5px, 0);
+            }
+
+            100% {
+                clip: rect(60px, 9999px, 90px, 0);
+            }
         }
 
         /* RUBI STYLES */
@@ -327,69 +411,89 @@
 
             </div>
 
-            <div class="relative z-20 text-center py-12" id="magnetic-title-container">
+            <!-- HERO BLUEPRINT SECTION -->
+            <div class="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-[#f0f0f0] select-none py-20"
+                id="hero-blueprint">
 
-                <div
-                    class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] border-2 border-black px-4 py-1 rotate-[-2deg] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-30">
-                    <span class="font-sans font-bold text-sm tracking-widest text-black">ONE MAN ARMY</span>
+                <!-- Background Grid System -->
+                <div class="absolute inset-0 z-0 opacity-20 pointer-events-none"
+                    style="background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px); background-size: 40px 40px;">
+                </div>
+                <div class="absolute inset-0 z-0 opacity-10 pointer-events-none"
+                    style="background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px); background-size: 200px 200px;">
                 </div>
 
-                <div class="flex flex-col items-center justify-center leading-[0.8] select-none">
+                <!-- CORNER MARKERS -->
+                <div class="absolute top-8 left-8 w-8 h-8 border-t-4 border-l-4 border-black z-10"></div>
+                <div class="absolute top-8 right-8 w-8 h-8 border-t-4 border-r-4 border-black z-10"></div>
+                <div class="absolute bottom-8 left-8 w-8 h-8 border-b-4 border-l-4 border-black z-10"></div>
+                <div class="absolute bottom-8 right-8 w-8 h-8 border-b-4 border-r-4 border-black z-10"></div>
 
-                    <div class="relative group active-magnetic-zone">
-                        <div
-                            class="rubi-tag -top-4 left-0 md:-left-4 bg-black text-white transform -rotate-6 border border-white px-3 py-1 text-sm md:text-base">
-                            再起動</div>
+                <!-- MAIN CONTROLS -->
+                <div class="relative z-10 w-full max-w-[1600px] mx-auto px-4 md:px-12 flex flex-col">
+
+                    <!-- REBOOT -->
+                    <div class="relative self-start group">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-black text-white text-xs font-mono px-2 py-1 tracking-widest">PHASE_01 //
+                                再起動</span>
+                            <div class="h-[1px] w-24 bg-black"></div>
+                        </div>
                         <h1
-                            class="magnetic-text font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pl-2">
-                            <!-- JS will split this: REBOOT -->
-                            <span class="char inline-block">R</span><span class="char inline-block">E</span><span
-                                class="char inline-block">B</span><span class="char inline-block">O</span><span
-                                class="char inline-block">O</span><span class="char inline-block">T</span>
+                            class="font-oswald font-bold text-[18vw] md:text-[13rem] leading-[0.8] tracking-tighter text-[#0a0a0a] transform group-hover:skew-x-2 transition-transform duration-300 origin-bottom-left mix-blend-darken">
+                            REBOOT
                         </h1>
+                        <!-- Technical Data -->
+                        <div
+                            class="absolute -right-12 top-10 font-mono text-[0.6rem] text-gray-500 hidden md:block text-right">
+                            SYS.ROOT<br>FORCE_OVERWRITE<br>PID:001
+                        </div>
                     </div>
 
-                    <div class="relative group mt-2 md:mt-4 active-magnetic-zone">
-                        <div
-                            class="rubi-tag -top-4 right-0 md:-right-4 bg-black text-white transform rotate-6 border border-white px-3 py-1 text-sm md:text-base">
-                            実践</div>
-                        <h1
-                            class="magnetic-text font-sans font-black text-7xl md:text-[9rem] tracking-tighter text-[#1A1A1A] drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] pr-2">
-                            <!-- JS will split this: CAMP -->
-                            <span class="char inline-block">C</span><span class="char inline-block">A</span><span
-                                class="char inline-block">M</span><span class="char inline-block">P</span>
+                    <!-- CAMP -->
+                    <div class="relative self-end -mt-8 md:-mt-24 group">
+                        <h1 class="font-oswald font-bold text-[18vw] md:text-[13rem] leading-[0.8] tracking-tighter text-transparent transform group-hover:-skew-x-2 transition-transform duration-300 origin-bottom-right drop-shadow-[4px_4px_0px_rgba(205,127,50,0.4)]"
+                            style="-webkit-text-stroke: 3px #1a1a1a;">
+                            CAMP
                         </h1>
+                        <div class="absolute -top-6 right-0 md:-right-8 flex items-center gap-2">
+                            <div class="h-[1px] w-12 bg-[#CD7F32]"></div>
+                            <span
+                                class="bg-[#CD7F32] text-white text-xs font-mono px-2 py-1 tracking-widest shadow-[4px_4px_0px_black] group-hover:shadow-[2px_2px_0px_black] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">PHASE_02
+                                // 実践</span>
+                        </div>
                     </div>
 
-                    <div class="relative group mt-2 md:mt-4 active-magnetic-zone">
+                    <!-- COUNCILLOR -->
+                    <div class="relative mt-16 md:mt-24 border-y-2 border-black py-6 bg-white/80 backdrop-blur-sm">
                         <div
-                            class="rubi-tag -top-5 left-1/2 transform -translate-x-1/2 bg-[#EAFF00] text-black border border-black px-4 py-1 text-sm md:text-base">
-                            議員</div>
-                        <h1 class="magnetic-text font-sans font-black text-5xl md:text-[6rem] tracking-tighter text-transparent whitespace-nowrap"
-                            style="-webkit-text-stroke: 2px #1A1A1A; filter: drop-shadow(4px 4px 0px white);">
-                            <!-- JS will split this: FOR COUNCILLOR -->
-                            <span class="char inline-block">F</span><span class="char inline-block">O</span><span
-                                class="char inline-block">R</span>
-                            <span class="inline-block w-4 md:w-8"></span>
-                            <span class="char inline-block">C</span><span class="char inline-block">O</span><span
-                                class="char inline-block">U</span><span class="char inline-block">N</span><span
-                                class="char inline-block">C</span><span class="char inline-block">I</span><span
-                                class="char inline-block">L</span><span class="char inline-block">L</span><span
-                                class="char inline-block">O</span><span class="char inline-block">R</span>
-                        </h1>
+                            class="flex flex-col md:flex-row justify-between items-center font-mono font-bold text-xl md:text-4xl tracking-widest text-[#1A1A1A] gap-4">
+                            <div class="flex items-center gap-4">
+                                <span>FOR</span>
+                                <span
+                                    class="text-xs text-gray-400 font-normal hidden md:block">////////////////////////////////</span>
+                            </div>
+
+                            <span class="glitch-text" data-text="COUNCILLOR">COUNCILLOR</span>
+
+                            <div class="flex items-center gap-4">
+                                <span
+                                    class="text-xs text-gray-400 font-normal hidden md:block">////////////////////////////////</span>
+                                <span class="bg-black text-white text-xs px-3 py-1 self-center">PHASE_03 // 議員</span>
+                            </div>
+                        </div>
+                        <!-- Running Line (Decoration) -->
+                        <div class="absolute top-[50%] left-0 w-full h-[1px] bg-red-500/30 pointer-events-none"></div>
                     </div>
+
                 </div>
 
-                <div
-                    class="mt-16 inline-block bg-white text-[#1A1A1A] px-10 py-8 transform rotate-1 border-4 border-black shadow-[10px_10px_0px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform max-w-2xl mx-4 relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-200/50 rotate-1"></div>
-
-                    <p class="font-serif font-bold text-xl md:text-3xl tracking-wider leading-relaxed">
-                        「一人会派」を、<br class="md:hidden">「最強の組織」へ。
-                    </p>
-                    <div class="w-full h-[3px] bg-black my-4"></div>
-                    <p class="font-sans text-sm tracking-[0.4em] text-gray-600 text-center font-bold">ARM THE LONE WOLF.
-                    </p>
+                <!-- Decorative Measure Lines -->
+                <div class="absolute top-0 bottom-0 left-12 w-[1px] bg-black/10 hidden md:block">
+                    <div class="absolute top-[20%] -left-1 text-[0.6rem] font-mono text-gray-400 rotate-90">AXIS_Y</div>
+                </div>
+                <div class="absolute left-0 right-0 bottom-12 h-[1px] bg-black/10 hidden md:block">
+                    <div class="absolute left-[20%] -bottom-4 text-[0.6rem] font-mono text-gray-400">AXIS_X</div>
                 </div>
             </div>
 
@@ -1044,79 +1148,32 @@
                     delay: 2.8 // Wait for logs
                 })
                 // 0.4 Title Slam
-                .from("#magnetic-title-container .group", {
+                .from("#hero-blueprint .group", {
                     y: 100,
                     opacity: 0,
                     scale: 0.9,
                     duration: 1.2,
                     stagger: 0.2,
-                    ease: "elastic.out(1, 0.5)"
+                    ease: "power4.out"
                 }, "-=0.2");
 
 
-            // --- 1. MAGNETIC KINETIC TYPOGRAPHY ---
-            const magneticContainer = document.getElementById('magnetic-title-container');
-            const magneticZones = document.querySelectorAll('.active-magnetic-zone');
+            // --- 1. BLUEPRINT INTERACTION (New) ---
+            const heroSection = document.getElementById('hero-blueprint');
+            // Simple parallax for the blueprint text
+            if (heroSection) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                    const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-            // Mouse Interaction
-            magneticContainer.addEventListener('mousemove', (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-
-                magneticZones.forEach(zone => {
-                    const chars = zone.querySelectorAll('.char');
-
-                    chars.forEach(char => {
-                        const rect = char.getBoundingClientRect();
-                        const charX = rect.left + rect.width / 2;
-                        const charY = rect.top + rect.height / 2;
-
-                        const dist = Math.hypot(mouseX - charX, mouseY - charY);
-                        const maxDist = 200; // Interaction radius
-
-                        if (dist < maxDist) {
-                            const strength = (maxDist - dist) / maxDist;
-                            const moveX = (charX - mouseX) * strength * 0.5; // Repulsion factor
-                            const moveY = (charY - mouseY) * strength * 0.5;
-                            const rotate = (Math.random() - 0.5) * 20 * strength; // Random chaotic rotation
-
-                            gsap.to(char, {
-                                x: moveX,
-                                y: moveY,
-                                rotation: rotate,
-                                duration: 0.3,
-                                ease: "power2.out",
-                                color: "#EAFF00", // Turn Neon on impact
-                                textShadow: "0 0 10px #EAFF00"
-                            });
-                        } else {
-                            // Return to base
-                            gsap.to(char, {
-                                x: 0,
-                                y: 0,
-                                rotation: 0,
-                                duration: 0.6,
-                                ease: "elastic.out(1, 0.3)",
-                                color: "", // Reset color
-                                textShadow: "none"
-                            });
-                        }
+                    gsap.to("#hero-blueprint h1", {
+                        x: x,
+                        y: y,
+                        duration: 1,
+                        ease: "power2.out"
                     });
                 });
-            });
-
-            // Idle Glitch (Random Twitches)
-            setInterval(() => {
-                const allChars = document.querySelectorAll('.char');
-                const randomChar = allChars[Math.floor(Math.random() * allChars.length)];
-
-                if (Math.random() > 0.7) { // 30% chance roughly
-                    const tl = gsap.timeline();
-                    tl.to(randomChar, { x: 2, skewX: 20, color: "#CD7F32", duration: 0.05 })
-                        .to(randomChar, { x: -2, skewX: -20, duration: 0.05 })
-                        .to(randomChar, { x: 0, skewX: 0, color: "", duration: 0.05 });
-                }
-            }, 2000);
+            }
 
 
             // 2. Parallax for Background SVGs (Existing)
