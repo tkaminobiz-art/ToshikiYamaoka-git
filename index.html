@@ -371,17 +371,18 @@
 
             </div>
 
-            <header
-                class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#ECECEC]">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-                <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+            <header id="hero-section"
+                class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#ECECEC] cursor-crosshair">
+
+                <div id="layer-bg" class="absolute inset-0 z-0 pointer-events-none opacity-40">
                     <div
                         class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')]">
                     </div>
                 </div>
 
-
-                <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                <div id="layer-deco" class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
 
                     <svg class="absolute top-1/2 left-10 w-64 h-64 opacity-20 z-0" viewBox="0 0 100 100">
                         <path d="M0 50 H 20 L 30 20 L 40 80 L 50 50 H 100" fill="none" stroke="black"
@@ -389,20 +390,19 @@
                     </svg>
 
                     <div
-                        class="absolute top-10 -left-10 bg-[#EAFF00] border-y-4 border-black py-2 px-20 transform -rotate-12 shadow-lg z-10">
+                        class="anim-element absolute top-10 -left-10 bg-[#EAFF00] border-y-4 border-black py-2 px-20 transform -rotate-12 shadow-lg z-10">
                         <span class="font-sans font-black text-xl tracking-widest text-black opacity-60">CAUTION:
                             REBOOTING ///</span>
                     </div>
 
                     <div
-                        class="absolute bottom-40 -right-5 bg-black text-white border-2 border-[#EAFF00] p-6 transform rotate-6 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] z-10">
+                        class="anim-element absolute bottom-40 -right-5 bg-black text-white border-2 border-[#EAFF00] p-6 transform rotate-6 shadow-[8px_8px_0px_rgba(0,0,0,0.3)] z-10">
                         <p class="font-sans text-xs tracking-widest text-[#EAFF00]">SYSTEM STATUS:</p>
                         <p class="font-sans text-3xl font-black leading-none">CRITICAL<br>UPDATE</p>
                     </div>
 
-
-                    <div
-                        class="absolute top-24 md:top-32 left-4 md:left-10 transform rotate-[-8deg] z-30 drop-shadow-xl animate-pulse-slow">
+                    <div id="sticker-left"
+                        class="anim-sticker absolute top-24 md:top-32 left-4 md:left-10 transform rotate-[-8deg] z-30 drop-shadow-xl">
                         <div
                             class="absolute -top-3 -left-4 w-16 h-6 bg-red-600 transform rotate-[-15deg] opacity-80 z-40">
                         </div>
@@ -422,8 +422,8 @@
                         </div>
                     </div>
 
-                    <div
-                        class="absolute top-1/3 right-4 md:right-20 transform rotate-[12deg] z-20 drop-shadow-[5px_5px_0px_rgba(0,0,0,0.4)]">
+                    <div id="sticker-right"
+                        class="anim-sticker absolute top-1/3 right-4 md:right-20 transform rotate-[12deg] z-20 drop-shadow-[5px_5px_0px_rgba(0,0,0,0.4)]">
                         <div class="bg-[#EAFF00] text-black border-4 border-black p-3 relative z-20">
                             <p class="font-jp font-black text-lg md:text-xl leading-none tracking-tight">
                                 <span class="block text-sm mb-1">その</span>
@@ -432,58 +432,165 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
 
-                <div class="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
+                <div id="layer-text"
+                    class="relative z-10 w-full max-w-7xl mx-auto px-4 text-center perspective-[1000px]">
 
-                    <div class="inline-block bg-black text-white px-4 py-1 mb-4 transform -rotate-1">
-                        <p class="font-sans text-xs md:text-sm tracking-[0.4em] font-bold text-[#EAFF00]">PHASE_01 //
-                            SYSTEM RESTART</p>
+                    <div
+                        class="anim-text-sub inline-block bg-black text-[#EAFF00] px-6 py-2 mb-6 transform -rotate-1 shadow-lg">
+                        <p class="font-jp font-bold text-sm md:text-lg tracking-widest">
+                            地方議員のための「戦略実装」プログラム
+                        </p>
                     </div>
 
-                    <div class="relative leading-[0.85] select-none">
-                        <h1
-                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#1A1A1A] mix-blend-multiply relative z-10">
+                    <div class="relative leading-[0.85] select-none mb-4">
+                        <h1 id="text-reboot"
+                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#1A1A1A] mix-blend-multiply relative z-10 origin-center">
                             REBOOT
                         </h1>
+                        <p
+                            class="anim-text-sub absolute top-0 left-1/2 -translate-x-1/2 -mt-4 font-jp font-bold text-xs md:text-xl tracking-[1em] text-gray-500">
+                            再起動</p>
 
-                        <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-[0.6em] left-1/2 transform -translate-x-1/2 z-20 opacity-80"
-                            style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2));">
-                            CAMP
-                        </h1>
-
-                        <h1
-                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#EAFF00] absolute top-[0.65em] left-[51%] transform -translate-x-1/2 z-0 mix-blend-multiply opacity-60">
-                            CAMP
-                        </h1>
+                        <div id="text-camp-group"
+                            class="absolute top-[0.6em] left-1/2 transform -translate-x-1/2 w-full z-20">
+                            <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-0 left-1/2 transform -translate-x-1/2 opacity-80"
+                                style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2));">
+                                CAMP
+                            </h1>
+                            <h1
+                                class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#EAFF00] absolute top-[0.05em] left-[51%] transform -translate-x-1/2 mix-blend-multiply opacity-60">
+                                CAMP
+                            </h1>
+                        </div>
                     </div>
 
-                    <div class="mt-[6vw] md:mt-32 relative z-30">
-                        <div
-                            class="inline-block bg-white border-4 border-black px-8 py-4 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1">
-                            <p class="font-sans text-xl md:text-3xl font-black tracking-widest text-black">
+                    <div class="mt-[8vw] md:mt-32 relative z-30 flex flex-col items-center">
+                        <div id="target-box"
+                            class="anim-element inline-block bg-white border-4 border-black px-10 py-4 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1 relative group">
+                            <div
+                                class="absolute -top-4 -right-6 bg-[#EAFF00] text-black font-jp font-bold text-xs px-2 py-1 transform rotate-6 border border-black shadow-sm">
+                                対象：地方議員・候補予定者
+                            </div>
+                            <p class="font-sans text-xl md:text-4xl font-black tracking-widest text-black">
                                 FOR COUNCILLOR
+                            </p>
+                        </div>
+
+                        <div
+                            class="anim-text-sub mt-10 font-jp font-bold text-base md:text-xl text-gray-900 bg-white/90 px-8 py-6 border-l-4 border-[#EAFF00] shadow-lg max-w-2xl text-left md:text-center leading-relaxed backdrop-blur-sm">
+                            <p class="mb-2 text-sm text-gray-500 tracking-widest">WARNING: 昭和の戦い方は、もう通用しない。</p>
+                            <p>
+                                AI・データ・デザイン。<br>
+                                最新の武器を装備し、あなたの政治家人生を<span class="bg-[#EAFF00] px-1">「アップデート」</span>する。
                             </p>
                         </div>
                     </div>
 
+                </div>
+
+                <div class="anim-ui absolute bottom-0 left-0 w-full flex justify-center pb-8 z-20">
                     <div
-                        class="mt-12 md:mt-16 font-jp font-bold text-lg md:text-2xl text-gray-800 bg-white/80 inline-block px-6 py-2 backdrop-blur-sm">
-                        <p>政治家人生を、ここから<span class="border-b-4 border-[#EAFF00]">「再起動」</span>せよ。</p>
-                    </div>
-
-                </div>
-
-                <div class="absolute bottom-0 left-0 w-full flex justify-center pb-8 z-20">
-                    <div class="flex flex-col items-center gap-2 animate-bounce">
-                        <span class="font-sans text-[0.6rem] tracking-widest bg-black text-white px-2">SCROLL TO
-                            ACCESS</span>
-                        <div class="w-[2px] h-8 bg-black"></div>
+                        class="flex flex-col items-center gap-2 animate-bounce cursor-pointer opacity-80 hover:opacity-100">
+                        <span
+                            class="font-jp font-bold text-xs tracking-widest bg-black text-white px-3 py-1 rounded-full">
+                            詳細を見る
+                        </span>
+                        <div class="w-[2px] h-12 bg-black"></div>
                     </div>
                 </div>
+
+                <div id="boot-flash" class="absolute inset-0 bg-white z-50 pointer-events-none"></div>
 
             </header>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", (event) => {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    // --- 1. BOOT SEQUENCE (衝撃のオープニング) ---
+                    const tl = gsap.timeline();
+
+                    // Flash White -> Clear
+                    tl.to("#boot-flash", { duration: 0.1, opacity: 0, ease: "power2.out" })
+
+                        // "REBOOT" Slams in (Huge Scale to Normal)
+                        .from("#text-reboot", {
+                            duration: 0.8,
+                            scale: 10,
+                            opacity: 0,
+                            ease: "expo.out",
+                            force3D: true
+                        }, "-=0.1")
+
+                        // "CAMP" Glitches in
+                        .from("#text-camp-group", {
+                            duration: 0.5,
+                            x: 100,
+                            opacity: 0,
+                            skewX: 20,
+                            ease: "rough({ template: none.out, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false })"
+                        }, "-=0.6")
+
+                        // Stickers Slap on (Elastic effect)
+                        .from(".anim-sticker", {
+                            duration: 0.8,
+                            scale: 2,
+                            opacity: 0,
+                            rotation: 45,
+                            stagger: 0.2,
+                            ease: "elastic.out(1, 0.3)"
+                        }, "-=0.3")
+
+                        // Other Elements Slide Up
+                        .from(".anim-element", {
+                            duration: 0.6,
+                            y: 50,
+                            opacity: 0,
+                            stagger: 0.1,
+                            ease: "power2.out"
+                        }, "-=0.5")
+
+                        .from(".anim-text-sub", { duration: 0.5, opacity: 0 }, "-=0.3")
+                        .from(".anim-ui", { duration: 0.5, y: 20, opacity: 0 }, "-=0.3");
+
+
+                    // --- 2. MOUSE PARALLAX (没入する奥行き) ---
+                    const section = document.getElementById("hero-section");
+
+                    section.addEventListener("mousemove", (e) => {
+                        const xPos = (e.clientX / window.innerWidth - 0.5);
+                        const yPos = (e.clientY / window.innerHeight - 0.5);
+
+                        // Background moves slightly (Far away)
+                        gsap.to("#layer-bg", {
+                            duration: 1,
+                            x: xPos * 20,
+                            y: yPos * 20,
+                            ease: "power2.out"
+                        });
+
+                        // Text moves moderately (Middle)
+                        gsap.to("#layer-text", {
+                            duration: 1,
+                            x: xPos * -30, // Moves opposite to mouse
+                            y: yPos * -30,
+                            rotationY: xPos * 5, // Subtle 3D tilt
+                            rotationX: yPos * -5,
+                            ease: "power2.out"
+                        });
+
+                        // Stickers move fast (Close up)
+                        gsap.to(".anim-sticker", {
+                            duration: 0.8,
+                            x: xPos * -60,
+                            y: yPos * -60,
+                            ease: "power2.out"
+                        });
+                    });
+                });
+            </script>
 
 
             <section class="bg-[#111] text-white py-32 px-4 border-t-8 border-neon relative overflow-hidden">
