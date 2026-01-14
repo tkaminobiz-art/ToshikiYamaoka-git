@@ -276,7 +276,7 @@
 
     <div id="legacy-system">
 
-        <header id="legacy-system"
+        <div id="hero-bg-wrapper"
             class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E5E5E5]">
 
             <div id="header-canvas-container" class="absolute inset-0 z-0 pointer-events-none">
@@ -448,1069 +448,1143 @@
                 <div id="boot-flash" class="absolute inset-0 bg-white z-[200] pointer-events-none"></div>
 
             </header>
+        </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", (event) => {
-                    gsap.registerPlugin(ScrollTrigger);
-                    const tl = gsap.timeline();
-                    tl.to("#boot-flash", { duration: 0.1, opacity: 0, ease: "power2.out" })
-                        .from("#text-reboot-container", { duration: 1, scale: 3, opacity: 0, ease: "expo.out", force3D: true }, "-=0.1")
-                        .from("#text-camp-container", { duration: 0.6, x: 50, opacity: 0, skewX: -20, ease: "back.out(1.7)" }, "-=0.8")
-                        .from(".anim-sticker", { duration: 0.8, scale: 0, opacity: 0, rotation: 180, stagger: 0.2, ease: "elastic.out(1, 0.5)" }, "-=0.4")
-                        .from(".anim-element", { duration: 0.6, y: 50, opacity: 0, stagger: 0.1, ease: "power2.out" }, "-=0.5")
-                        .from(".anim-text-sub", { duration: 0.5, opacity: 0 }, "-=0.3")
-                        .from(".anim-ui", { duration: 0.5, y: 20, opacity: 0 }, "-=0.3");
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                gsap.registerPlugin(ScrollTrigger);
+                const tl = gsap.timeline();
+                tl.to("#boot-flash", { duration: 0.1, opacity: 0, ease: "power2.out" })
+                    .from("#text-reboot-container", { duration: 1, scale: 3, opacity: 0, ease: "expo.out", force3D: true }, "-=0.1")
+                    .from("#text-camp-container", { duration: 0.6, x: 50, opacity: 0, skewX: -20, ease: "back.out(1.7)" }, "-=0.8")
+                    .from(".anim-sticker", { duration: 0.8, scale: 0, opacity: 0, rotation: 180, stagger: 0.2, ease: "elastic.out(1, 0.5)" }, "-=0.4")
+                    .from(".anim-element", { duration: 0.6, y: 50, opacity: 0, stagger: 0.1, ease: "power2.out" }, "-=0.5")
+                    .from(".anim-text-sub", { duration: 0.5, opacity: 0 }, "-=0.3")
+                    .from(".anim-ui", { duration: 0.5, y: 20, opacity: 0 }, "-=0.3");
 
-                    const section = document.getElementById("hero-section");
-                    if (window.matchMedia("(min-width: 768px)").matches) {
-                        section.addEventListener("mousemove", (e) => {
-                            const xPos = (e.clientX / window.innerWidth - 0.5) * 2;
-                            const yPos = (e.clientY / window.innerHeight - 0.5) * 2;
-                            gsap.to("#layer-bg", { duration: 1, x: xPos * 20, y: yPos * 20, ease: "power2.out" });
-                            gsap.to("#text-reboot-container", { duration: 1.2, x: xPos * -15, y: yPos * -15, rotationY: xPos * 2, ease: "power2.out" });
-                            gsap.to("#text-camp-container", { duration: 1, x: xPos * -40, y: yPos * -40, rotationY: xPos * 5, rotationX: yPos * -5, ease: "power2.out" });
-                        });
-                    }
-                });
-            </script>
-
-
-            <link
-                href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;900&family=Zen+Old+Mincho:wght@900&family=Share+Tech+Mono&display=swap"
-                rel="stylesheet">
-
-
-            <style>
-                /* EVA-style Typography */
-                .font-eva {
-                    font-family: 'Zen Old Mincho', 'Shippori Mincho', serif;
+                const section = document.getElementById("hero-section");
+                if (window.matchMedia("(min-width: 768px)").matches) {
+                    section.addEventListener("mousemove", (e) => {
+                        const xPos = (e.clientX / window.innerWidth - 0.5) * 2;
+                        const yPos = (e.clientY / window.innerHeight - 0.5) * 2;
+                        gsap.to("#layer-bg", { duration: 1, x: xPos * 20, y: yPos * 20, ease: "power2.out" });
+                        gsap.to("#text-reboot-container", { duration: 1.2, x: xPos * -15, y: yPos * -15, rotationY: xPos * 2, ease: "power2.out" });
+                        gsap.to("#text-camp-container", { duration: 1, x: xPos * -40, y: yPos * -40, rotationY: xPos * 5, rotationX: yPos * -5, ease: "power2.out" });
+                    });
                 }
+            });
+        </script>
 
-                .font-ui {
-                    font-family: 'Share Tech Mono', monospace;
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;900&family=Zen+Old+Mincho:wght@900&family=Share+Tech+Mono&display=swap"
+            rel="stylesheet">
+
+
+        <style>
+            /* EVA-style Typography */
+            .font-eva {
+                font-family: 'Zen Old Mincho', 'Shippori Mincho', serif;
+            }
+
+            .font-ui {
+                font-family: 'Share Tech Mono', monospace;
+            }
+
+            /* Text Shadow for High Contrast */
+            .text-glow {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+
+            .text-glow-red {
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+            }
+
+            /* Scanline Effect */
+            .scanlines {
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+                background-size: 100% 4px;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 50;
+            }
+
+            /* Blinking Cursor */
+            .blink {
+                animation: blinker 1s linear infinite;
+            }
+
+            @keyframes blinker {
+                50% {
+                    opacity: 0;
                 }
+            }
+        </style>
 
-                /* Text Shadow for High Contrast */
-                .text-glow {
-                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-                }
+        <section id="chronicle-section" class="relative bg-black text-white overflow-hidden">
 
-                .text-glow-red {
-                    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-                }
-
-                /* Scanline Effect */
-                .scanlines {
-                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
-                    background-size: 100% 4px;
-                    position: absolute;
-                    inset: 0;
-                    pointer-events: none;
-                    z-index: 50;
-                }
-
-                /* Blinking Cursor */
-                .blink {
-                    animation: blinker 1s linear infinite;
-                }
-
-                @keyframes blinker {
-                    50% {
-                        opacity: 0;
-                    }
-                }
-            </style>
-
-            <section id="legacy-system" class="relative bg-black text-white overflow-hidden">
-
-                <div
-                    class="absolute top-0 left-0 w-full h-full pointer-events-none z-[100] px-4 py-4 mix-blend-difference">
-                    <div class="flex justify-between items-start font-ui text-xs text-[#EAFF00]">
-                        <div>
-                            <p>ARCHIVE_ID: AX-2026-LOG</p>
-                            <p>ACCESS_LEVEL: CLASSIFIED</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="blink">RECORDING...</p>
-                            <p id="chronicle-timer">00:00:00:00</p>
-                        </div>
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-[100] px-4 py-4 mix-blend-difference">
+                <div class="flex justify-between items-start font-ui text-xs text-[#EAFF00]">
+                    <div>
+                        <p>ARCHIVE_ID: AX-2026-LOG</p>
+                        <p>ACCESS_LEVEL: CLASSIFIED</p>
                     </div>
-                    <div class="absolute top-1/2 left-4 w-4 h-[1px] bg-[#EAFF00]"></div>
-                    <div class="absolute top-1/2 right-4 w-4 h-[1px] bg-[#EAFF00]"></div>
-                    <div class="absolute top-4 left-1/2 w-[1px] h-4 bg-[#EAFF00]"></div>
-                    <!-- Bottom marker removed to prevent confusion with button -->
+                    <div class="text-right">
+                        <p class="blink">RECORDING...</p>
+                        <p id="chronicle-timer">00:00:00:00</p>
+                    </div>
+                </div>
+                <div class="absolute top-1/2 left-4 w-4 h-[1px] bg-[#EAFF00]"></div>
+                <div class="absolute top-1/2 right-4 w-4 h-[1px] bg-[#EAFF00]"></div>
+                <div class="absolute top-4 left-1/2 w-[1px] h-4 bg-[#EAFF00]"></div>
+                <!-- Bottom marker removed to prevent confusion with button -->
+            </div>
+
+            <div class="scanlines fixed top-0 left-0 w-full h-screen"></div>
+
+            <div class="scene min-h-screen flex items-center justify-center relative border-b border-gray-800"
+                data-theme="black">
+                <div class="text-center z-10">
+                    <p class="font-ui text-red-600 text-sm tracking-[0.5em] mb-4 animate-pulse">
+                        INTERNAL_CHRONICLE_DATA</p>
+                    <h2 class="font-eva font-black text-6xl md:text-9xl tracking-tighter leading-none mb-2">
+                        THE GREAT<br>REWRITE
+                    </h2>
+                    <div class="h-1 w-full bg-white my-6"></div>
+                    <p class="font-eva font-bold text-xl md:text-3xl tracking-[0.2em]">
+                        〜再起動（REBOOT）のためのクロニクル〜
+                    </p>
+                </div>
+            </div>
+
+            <div class="scene min-h-screen flex items-center justify-center relative bg-[#1a0f00] border-b border-gray-800"
+                data-theme="sepia">
+                <div
+                    class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]">
                 </div>
 
-                <div class="scanlines fixed top-0 left-0 w-full h-screen"></div>
+                <div class="max-w-4xl px-6 relative z-10">
+                    <div class="flex items-baseline gap-4 mb-8 border-l-8 border-orange-600 pl-6">
+                        <span class="font-ui text-6xl md:text-8xl font-bold text-orange-600 opacity-50">2000</span>
+                        <h3 class="font-eva text-3xl md:text-5xl font-black">熱狂と体温の時代</h3>
+                    </div>
 
-                <div class="scene min-h-screen flex items-center justify-center relative border-b border-gray-800"
-                    data-theme="black">
-                    <div class="text-center z-10">
-                        <p class="font-ui text-red-600 text-sm tracking-[0.5em] mb-4 animate-pulse">
-                            INTERNAL_CHRONICLE_DATA</p>
-                        <h2 class="font-eva font-black text-6xl md:text-9xl tracking-tighter leading-none mb-2">
-                            THE GREAT<br>REWRITE
-                        </h2>
-                        <div class="h-1 w-full bg-white my-6"></div>
-                        <p class="font-eva font-bold text-xl md:text-3xl tracking-[0.2em]">
-                            〜再起動（REBOOT）のためのクロニクル〜
+                    <div class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-orange-100/90 text-justify">
+                        <p>
+                            「熱量」で人を動かし、「足」で信頼を稼ぐ。<br>
+                            それが、<span class="text-orange-500 font-black">確かな正義</span>でした。
+                        </p>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base md:text-lg border-t border-orange-900 pt-8">
+                            <div>
+                                <p class="mb-4">世界はまだ、オフラインで回っていました。<br>会いたければ行く。伝えたければ叫ぶ。</p>
+                                <p>ポケットの中の携帯電話は、まだ会話のためだけの道具でした。</p>
+                                <p class="mt-4 text-orange-400">>> センター問い合わせを繰り返した指先の感覚。</p>
+                                <p class="text-orange-400">>> 着メロ本を片手に打ち込んだ、電子音の響き。</p>
+                            </div>
+                            <div class="bg-black/30 p-6 border border-orange-900">
+                                <p class="font-bold mb-4">「24時間戦えますか」</p>
+                                <p>という問いに、誇りを持ってYESと答えた夜。<br>私たちは確かに、信じていました。</p>
+                                <p class="mt-4 font-black border-b border-orange-500 inline-block">流した汗の量は裏切らないと。
+                                </p>
+                                <p class="mt-2">この「根性」と「情熱」さえあれば、未来永劫、勝ち続けられるはずだと。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scene min-h-screen flex items-center justify-center relative bg-[#000a14] border-b border-gray-800"
+                data-theme="blue">
+                <div class="absolute top-20 right-10 w-64 h-32 border border-cyan-900 bg-cyan-900/10 hidden md:block">
+                </div>
+                <div class="absolute bottom-20 left-10 w-40 h-40 border border-cyan-900 rounded-full hidden md:block">
+                </div>
+
+                <div class="max-w-4xl px-6 relative z-10">
+                    <div
+                        class="flex flex-row-reverse items-baseline gap-4 mb-8 border-r-8 border-cyan-500 pr-6 text-right">
+                        <span class="font-ui text-6xl md:text-8xl font-bold text-cyan-500 opacity-50">2025</span>
+                        <h3 class="font-eva text-3xl md:text-5xl font-black">正解と焦燥の時代</h3>
+                    </div>
+
+                    <div class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-cyan-100/90 text-justify">
+                        <p class="text-center md:text-right">
+                            「正しさ」という檻の中で、<br>息苦しさを感じていませんか。
+                        </p>
+                        <div class="bg-cyan-950/30 border border-cyan-500/30 p-8 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 bg-cyan-500 text-black text-xs px-2 py-1 font-ui">
+                                SYSTEM_LOG_ERROR</div>
+                            <p class="mb-4">いつからでしょうか。<br>目の前の有権者ではなく、<span
+                                    class="text-cyan-400">サーバーのログ</span>を窺うようになったのは。</p>
+
+                            <ul class="space-y-2 text-base md:text-lg opacity-80 list-disc list-inside font-mono">
+                                <li>「不眠不休の努力」 >> <span class="bg-red-900 text-red-200 px-1">BLACK_LABOR</span></li>
+                                <li>「熱血指導」 >> <span class="bg-red-900 text-red-200 px-1">HARASSMENT_RECORD</span>
+                                </li>
+                            </ul>
+
+                            <p class="mt-6">
+                                街頭演説の声はノイズキャンセリングで消され、<br>
+                                握手の手は消毒液で拭われていく。
+                            </p>
+                        </div>
+
+                        <div class="text-center mt-12">
+                            <p class="font-bold text-white text-xl md:text-3xl">お気づきのはずです。</p>
+                            <p class="mt-4">あの頃の必勝法（OS）が、今の時代と適合していないことに。</p>
+                            <p class="text-sm md:text-base text-gray-400 mt-2">
+                                まるでアクセルとブレーキを同時に踏み続けているような、<br>この疲労感の正体に。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scene min-h-screen py-24 relative bg-[#1a0000] text-white border-b border-gray-800"
+                data-theme="red">
+                <div
+                    class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#220000_10px,#220000_20px)] opacity-20">
+                </div>
+
+                <div class="max-w-6xl mx-auto px-6 relative z-10">
+                    <div class="border-t-4 border-b-4 border-red-600 py-6 mb-16 text-center">
+                        <p class="font-ui text-red-500 tracking-[1em] mb-2">WARNING: HISTORICAL FACT</p>
+                        <h2 class="font-eva font-black text-5xl md:text-8xl text-white">REALITY</h2>
+                        <p class="font-eva font-bold text-xl md:text-3xl mt-2 text-red-500">歴史は「淘汰」を繰り返す</p>
+                    </div>
+
+                    <p class="text-center font-eva text-lg md:text-2xl mb-12">
+                        「自分たちは特別だ」そう信じていたエリートたちが、<br>
+                        一夜にして舞台から消えた歴史をご存知ですか。
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
+                            <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">1876
+                            </div>
+                            <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">武士の終焉（廃刀令）
+                            </h4>
+                            <p class="text-sm leading-relaxed text-gray-300 font-eva">
+                                かつて特権階級であった士族たちは、たった一つの政令で「魂」である刀を奪われました。
+                                剣術という高度なスキルも、忠義という精神性も、近代軍隊の前では無力でした。
+                                <br><br>
+                                <span class="text-red-500 font-bold">「昨日までの正義」が、今日は「時代遅れの遺物」になる。</span>これがパラダイムシフトです。
+                            </p>
+                        </div>
+                        <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
+                            <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">
+                                1960s</div>
+                            <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">電話交換手の消失
+                            </h4>
+                            <p class="text-sm leading-relaxed text-gray-300 font-eva">
+                                かつて日本の通信を支えたのは、数十万人の電話交換手たちでした。
+                                「声と声をつなぐ」彼女たちの繊細な技術は、無機質な「自動交換機」にあっけなく置き換えられました。
+                                <br><br>
+                                <span class="text-red-500 font-bold">そこに、人間の情熱が入り込む隙間はありませんでした。</span>
+                            </p>
+                        </div>
+                        <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
+                            <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">
+                                IND.REV</div>
+                            <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">筋肉から動力へ</h4>
+                            <p class="text-sm leading-relaxed text-gray-300 font-eva">
+                                飛脚や駕籠かきが誇った強靭な足腰は、蒸気機関の前では意味をなさなくなりました。
+                                「人力」の価値が暴落し、「動力」を操る者だけが富を得る時代へ。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 text-center bg-red-900/20 border border-red-600 p-8">
+                        <p class="font-eva text-xl md:text-3xl font-bold leading-relaxed">
+                            そして今、2026年。<br>
+                            歴史は再び、残酷なルール変更を突きつけています。<br>
+                            今度は「筋肉」ではなく、<span class="text-red-500 text-4xl mx-2 font-black">「知能」</span>が置き換えられる番です。
                         </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="scene min-h-screen flex items-center justify-center relative bg-[#1a0f00] border-b border-gray-800"
-                    data-theme="sepia">
-                    <div
-                        class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]">
+            <div class="scene min-h-screen flex items-center justify-center relative bg-black border-b border-gray-800 overflow-hidden"
+                data-theme="matrix">
+                <div class="absolute inset-0 opacity-20 pointer-events-none"
+                    style="background-image: linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, .3) 25%, rgba(0, 255, 0, .3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .3) 75%, rgba(0, 255, 0, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, .3) 25%, rgba(0, 255, 0, .3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .3) 75%, rgba(0, 255, 0, .3) 76%, transparent 77%, transparent); background-size: 50px 50px;">
+                </div>
+
+                <div class="max-w-5xl px-6 relative z-10 w-full">
+                    <div class="flex justify-between items-end border-b-2 border-green-500 pb-4 mb-12">
+                        <h3 class="font-eva text-4xl md:text-7xl font-black text-white">
+                            <span class="text-green-500 font-ui block text-2xl mb-2">2050 PREDICTION</span>
+                            聖域なき「知性」の代替
+                        </h3>
+                        <div class="hidden md:block text-right text-green-500 font-ui text-xs">
+                            <p>TARGET: POLITICIANS</p>
+                            <p>STATUS: REPLACEABLE</p>
+                        </div>
                     </div>
 
-                    <div class="max-w-4xl px-6 relative z-10">
-                        <div class="flex items-baseline gap-4 mb-8 border-l-8 border-orange-600 pl-6">
-                            <span class="font-ui text-6xl md:text-8xl font-bold text-orange-600 opacity-50">2000</span>
-                            <h3 class="font-eva text-3xl md:text-5xl font-black">熱狂と体温の時代</h3>
-                        </div>
-
-                        <div
-                            class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-orange-100/90 text-justify">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-8 font-eva text-lg md:text-xl text-gray-300">
+                            <p class="text-2xl font-bold text-white">その席に、あなたはいない。</p>
                             <p>
-                                「熱量」で人を動かし、「足」で信頼を稼ぐ。<br>
-                                それが、<span class="text-orange-500 font-black">確かな正義</span>でした。
+                                「政治家という聖域だけは守られる」<br>
+                                もしそうお考えなら、この現実（データ）を直視してください。
                             </p>
-                            <div
-                                class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base md:text-lg border-t border-orange-900 pt-8">
-                                <div>
-                                    <p class="mb-4">世界はまだ、オフラインで回っていました。<br>会いたければ行く。伝えたければ叫ぶ。</p>
-                                    <p>ポケットの中の携帯電話は、まだ会話のためだけの道具でした。</p>
-                                    <p class="mt-4 text-orange-400">>> センター問い合わせを繰り返した指先の感覚。</p>
-                                    <p class="text-orange-400">>> 着メロ本を片手に打ち込んだ、電子音の響き。</p>
-                                </div>
-                                <div class="bg-black/30 p-6 border border-orange-900">
-                                    <p class="font-bold mb-4">「24時間戦えますか」</p>
-                                    <p>という問いに、誇りを持ってYESと答えた夜。<br>私たちは確かに、信じていました。</p>
-                                    <p class="mt-4 font-black border-b border-orange-500 inline-block">流した汗の量は裏切らないと。
-                                    </p>
-                                    <p class="mt-2">この「根性」と「情熱」さえあれば、未来永劫、勝ち続けられるはずだと。</p>
-                                </div>
+                            <div class="font-ui text-sm text-green-400 space-y-2 pl-4 border-l-2 border-green-800">
+                                <p>> GOLDMAN SACHS: 300M JOBS AUTOMATED</p>
+                                <p>> IMF REPORT: 60% JOBS AT RISK IN ADVANCED ECONOMIES</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scene min-h-screen flex items-center justify-center relative bg-[#000a14] border-b border-gray-800"
-                    data-theme="blue">
-                    <div
-                        class="absolute top-20 right-10 w-64 h-32 border border-cyan-900 bg-cyan-900/10 hidden md:block">
-                    </div>
-                    <div
-                        class="absolute bottom-20 left-10 w-40 h-40 border border-cyan-900 rounded-full hidden md:block">
-                    </div>
-
-                    <div class="max-w-4xl px-6 relative z-10">
-                        <div
-                            class="flex flex-row-reverse items-baseline gap-4 mb-8 border-r-8 border-cyan-500 pr-6 text-right">
-                            <span class="font-ui text-6xl md:text-8xl font-bold text-cyan-500 opacity-50">2025</span>
-                            <h3 class="font-eva text-3xl md:text-5xl font-black">正解と焦燥の時代</h3>
+                            <p>
+                                弁護士も、会計士も、すでにAIに席を譲り始めています。<br>
+                                予算配分、法案作成、民意の調整。<br>
+                                <span class="text-green-500 font-bold">高度な判断業務こそが、AIの最も得意とする領域だからです。</span>
+                            </p>
+                            <p>
+                                「先生、お願いします」と頭を下げる景色は、過去のものとなるでしょう。<br>
+                                これはSFではありません。かつて侍が刀を失ったように、私たちも「既得権益」を失うのです。
+                            </p>
                         </div>
 
                         <div
-                            class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-cyan-100/90 text-justify">
-                            <p class="text-center md:text-right">
-                                「正しさ」という檻の中で、<br>息苦しさを感じていませんか。
+                            class="relative h-full min-h-[300px] border border-green-500 bg-black/50 p-6 flex flex-col justify-center items-center text-center">
+                            <div class="absolute inset-0 bg-green-500/10 animate-pulse"></div>
+                            <p class="font-eva text-xl md:text-2xl font-bold mb-6 relative z-10">
+                                その時、あなたは<br>
+                                アルゴリズムに管理される<br>
+                                <span class="text-4xl block my-2 text-gray-500">「傍観者」</span>
+                                になるか。
                             </p>
-                            <div class="bg-cyan-950/30 border border-cyan-500/30 p-8 relative overflow-hidden">
-                                <div class="absolute top-0 left-0 bg-cyan-500 text-black text-xs px-2 py-1 font-ui">
-                                    SYSTEM_LOG_ERROR</div>
-                                <p class="mb-4">いつからでしょうか。<br>目の前の有権者ではなく、<span
-                                        class="text-cyan-400">サーバーのログ</span>を窺うようになったのは。</p>
-
-                                <ul class="space-y-2 text-base md:text-lg opacity-80 list-disc list-inside font-mono">
-                                    <li>「不眠不休の努力」 >> <span class="bg-red-900 text-red-200 px-1">BLACK_LABOR</span></li>
-                                    <li>「熱血指導」 >> <span class="bg-red-900 text-red-200 px-1">HARASSMENT_RECORD</span>
-                                    </li>
-                                </ul>
-
-                                <p class="mt-6">
-                                    街頭演説の声はノイズキャンセリングで消され、<br>
-                                    握手の手は消毒液で拭われていく。
-                                </p>
-                            </div>
-
-                            <div class="text-center mt-12">
-                                <p class="font-bold text-white text-xl md:text-3xl">お気づきのはずです。</p>
-                                <p class="mt-4">あの頃の必勝法（OS）が、今の時代と適合していないことに。</p>
-                                <p class="text-sm md:text-base text-gray-400 mt-2">
-                                    まるでアクセルとブレーキを同時に踏み続けているような、<br>この疲労感の正体に。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scene min-h-screen py-24 relative bg-[#1a0000] text-white border-b border-gray-800"
-                    data-theme="red">
-                    <div
-                        class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#220000_10px,#220000_20px)] opacity-20">
-                    </div>
-
-                    <div class="max-w-6xl mx-auto px-6 relative z-10">
-                        <div class="border-t-4 border-b-4 border-red-600 py-6 mb-16 text-center">
-                            <p class="font-ui text-red-500 tracking-[1em] mb-2">WARNING: HISTORICAL FACT</p>
-                            <h2 class="font-eva font-black text-5xl md:text-8xl text-white">REALITY</h2>
-                            <p class="font-eva font-bold text-xl md:text-3xl mt-2 text-red-500">歴史は「淘汰」を繰り返す</p>
-                        </div>
-
-                        <p class="text-center font-eva text-lg md:text-2xl mb-12">
-                            「自分たちは特別だ」そう信じていたエリートたちが、<br>
-                            一夜にして舞台から消えた歴史をご存知ですか。
-                        </p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
-                                <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">1876
-                                </div>
-                                <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">武士の終焉（廃刀令）
-                                </h4>
-                                <p class="text-sm leading-relaxed text-gray-300 font-eva">
-                                    かつて特権階級であった士族たちは、たった一つの政令で「魂」である刀を奪われました。
-                                    剣術という高度なスキルも、忠義という精神性も、近代軍隊の前では無力でした。
-                                    <br><br>
-                                    <span
-                                        class="text-red-500 font-bold">「昨日までの正義」が、今日は「時代遅れの遺物」になる。</span>これがパラダイムシフトです。
-                                </p>
-                            </div>
-                            <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
-                                <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">
-                                    1960s</div>
-                                <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">電話交換手の消失
-                                </h4>
-                                <p class="text-sm leading-relaxed text-gray-300 font-eva">
-                                    かつて日本の通信を支えたのは、数十万人の電話交換手たちでした。
-                                    「声と声をつなぐ」彼女たちの繊細な技術は、無機質な「自動交換機」にあっけなく置き換えられました。
-                                    <br><br>
-                                    <span class="text-red-500 font-bold">そこに、人間の情熱が入り込む隙間はありませんでした。</span>
-                                </p>
-                            </div>
-                            <div class="bg-black border-2 border-red-900 p-6 hover:bg-red-950 transition-colors group">
-                                <div class="font-ui text-5xl font-bold text-gray-700 group-hover:text-red-600 mb-2">
-                                    IND.REV</div>
-                                <h4 class="font-eva font-black text-2xl mb-4 border-b border-gray-700 pb-2">筋肉から動力へ</h4>
-                                <p class="text-sm leading-relaxed text-gray-300 font-eva">
-                                    飛脚や駕籠かきが誇った強靭な足腰は、蒸気機関の前では意味をなさなくなりました。
-                                    「人力」の価値が暴落し、「動力」を操る者だけが富を得る時代へ。
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="mt-16 text-center bg-red-900/20 border border-red-600 p-8">
-                            <p class="font-eva text-xl md:text-3xl font-bold leading-relaxed">
-                                そして今、2026年。<br>
-                                歴史は再び、残酷なルール変更を突きつけています。<br>
-                                今度は「筋肉」ではなく、<span class="text-red-500 text-4xl mx-2 font-black">「知能」</span>が置き換えられる番です。
+                            <div class="w-full h-[1px] bg-green-500 my-4"></div>
+                            <p class="font-eva text-xl md:text-2xl font-bold text-white relative z-10">
+                                それとも、<br>
+                                システムを再構築する<br>
+                                <span class="text-5xl block my-2 text-green-500 text-glow">「設計者」</span>
+                                として生き残るか。
                             </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="scene min-h-screen flex items-center justify-center relative bg-black border-b border-gray-800 overflow-hidden"
-                    data-theme="matrix">
-                    <div class="absolute inset-0 opacity-20 pointer-events-none"
-                        style="background-image: linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, .3) 25%, rgba(0, 255, 0, .3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .3) 75%, rgba(0, 255, 0, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, .3) 25%, rgba(0, 255, 0, .3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .3) 75%, rgba(0, 255, 0, .3) 76%, transparent 77%, transparent); background-size: 50px 50px;">
-                    </div>
+            <div class="scene min-h-screen flex items-center justify-center relative bg-white text-black border-b border-gray-800"
+                data-theme="white">
+                <div class="max-w-4xl px-6 text-center relative z-10">
+                    <h2
+                        class="font-sans font-black text-6xl md:text-[10rem] tracking-tighter opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                        REBOOT
+                    </h2>
 
-                    <div class="max-w-5xl px-6 relative z-10 w-full">
-                        <div class="flex justify-between items-end border-b-2 border-green-500 pb-4 mb-12">
-                            <h3 class="font-eva text-4xl md:text-7xl font-black text-white">
-                                <span class="text-green-500 font-ui block text-2xl mb-2">2050 PREDICTION</span>
-                                聖域なき「知性」の代替
-                            </h3>
-                            <div class="hidden md:block text-right text-green-500 font-ui text-xs">
-                                <p>TARGET: POLITICIANS</p>
-                                <p>STATUS: REPLACEABLE</p>
+                    <div class="relative">
+                        <p class="font-ui text-black tracking-[0.5em] mb-6">SYSTEM_RECOVERY_MODE</p>
+                        <h3 class="font-eva font-black text-5xl md:text-7xl mb-12">覚醒の時</h3>
+
+                        <div class="font-eva text-lg md:text-2xl font-bold leading-loose space-y-6">
+                            <p>過去を懐かしむ必要も、未来に怯える必要もありません。</p>
+                            <p>
+                                歴史を振り返れば、変化に適応できなかった者は消え、<br>
+                                <span class="bg-black text-white px-2">適応した者だけが新しい時代を作ってきました。</span>
+                            </p>
+                            <p class="text-base text-gray-600">
+                                刀を置いた士族の一部が、ペンを持ち替え、<br>明治政府のリーダーとなったように。
+                            </p>
+
+                            <div class="py-8">
+                                <p class="text-3xl md:text-4xl font-black">
+                                    今、必要なのは<br>
+                                    小手先の「アップデート」ではないのです。
+                                </p>
                             </div>
+
+                            <p>
+                                自らのOSを初期化し、<br>
+                                再起動（リブート）する勇気を持つことです。
+                            </p>
+                            <p>古い思考（OS）を手放す時が来ました。</p>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div class="space-y-8 font-eva text-lg md:text-xl text-gray-300">
-                                <p class="text-2xl font-bold text-white">その席に、あなたはいない。</p>
-                                <p>
-                                    「政治家という聖域だけは守られる」<br>
-                                    もしそうお考えなら、この現実（データ）を直視してください。
-                                </p>
-                                <div class="font-ui text-sm text-green-400 space-y-2 pl-4 border-l-2 border-green-800">
-                                    <p>> GOLDMAN SACHS: 300M JOBS AUTOMATED</p>
-                                    <p>> IMF REPORT: 60% JOBS AT RISK IN ADVANCED ECONOMIES</p>
-                                </div>
-                                <p>
-                                    弁護士も、会計士も、すでにAIに席を譲り始めています。<br>
-                                    予算配分、法案作成、民意の調整。<br>
-                                    <span class="text-green-500 font-bold">高度な判断業務こそが、AIの最も得意とする領域だからです。</span>
-                                </p>
-                                <p>
-                                    「先生、お願いします」と頭を下げる景色は、過去のものとなるでしょう。<br>
-                                    これはSFではありません。かつて侍が刀を失ったように、私たちも「既得権益」を失うのです。
-                                </p>
-                            </div>
+                        <div class="mt-16">
+                            <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
 
-                            <div
-                                class="relative h-full min-h-[300px] border border-green-500 bg-black/50 p-6 flex flex-col justify-center items-center text-center">
-                                <div class="absolute inset-0 bg-green-500/10 animate-pulse"></div>
-                                <p class="font-eva text-xl md:text-2xl font-bold mb-6 relative z-10">
-                                    その時、あなたは<br>
-                                    アルゴリズムに管理される<br>
-                                    <span class="text-4xl block my-2 text-gray-500">「傍観者」</span>
-                                    になるか。
-                                </p>
-                                <div class="w-full h-[1px] bg-green-500 my-4"></div>
-                                <p class="font-eva text-xl md:text-2xl font-bold text-white relative z-10">
-                                    それとも、<br>
-                                    システムを再構築する<br>
-                                    <span class="text-5xl block my-2 text-green-500 text-glow">「設計者」</span>
-                                    として生き残るか。
-                                </p>
-                            </div>
+                            <button onclick="activateUpdate()" id="reboot-btn"
+                                class="no-anim inline-block opacity-100 !visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden"
+                                style="opacity: 1 !important; transform: none !important;">
+                                <div
+                                    class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                </div>
+                                <span
+                                    class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00] relative z-10">SYSTEM_REBOOT
+                                    >></span>
+                                <span class="relative z-10">ボタンを押してRebootしてください。</span>
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="scene min-h-screen flex items-center justify-center relative bg-white text-black border-b border-gray-800"
-                    data-theme="white">
-                    <div class="max-w-4xl px-6 text-center relative z-10">
-                        <h2
-                            class="font-sans font-black text-6xl md:text-[10rem] tracking-tighter opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
-                            REBOOT
-                        </h2>
+        </section>
 
-                        <div class="relative">
-                            <p class="font-ui text-black tracking-[0.5em] mb-6">SYSTEM_RECOVERY_MODE</p>
-                            <h3 class="font-eva font-black text-5xl md:text-7xl mb-12">覚醒の時</h3>
-
-                            <div class="font-eva text-lg md:text-2xl font-bold leading-loose space-y-6">
-                                <p>過去を懐かしむ必要も、未来に怯える必要もありません。</p>
-                                <p>
-                                    歴史を振り返れば、変化に適応できなかった者は消え、<br>
-                                    <span class="bg-black text-white px-2">適応した者だけが新しい時代を作ってきました。</span>
-                                </p>
-                                <p class="text-base text-gray-600">
-                                    刀を置いた士族の一部が、ペンを持ち替え、<br>明治政府のリーダーとなったように。
-                                </p>
-
-                                <div class="py-8">
-                                    <p class="text-3xl md:text-4xl font-black">
-                                        今、必要なのは<br>
-                                        小手先の「アップデート」ではないのです。
-                                    </p>
-                                </div>
-
-                                <p>
-                                    自らのOSを初期化し、<br>
-                                    再起動（リブート）する勇気を持つことです。
-                                </p>
-                                <p>古い思考（OS）を手放す時が来ました。</p>
-                            </div>
-
-                            <div class="mt-16">
-                                <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
-
-                                <button onclick="activateUpdate()" id="reboot-btn"
-                                    class="no-anim inline-block opacity-100 !visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden"
-                                    style="opacity: 1 !important; transform: none !important;">
-                                    <div
-                                        class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                    </div>
-                                    <span
-                                        class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00] relative z-10">SYSTEM_REBOOT
-                                        >></span>
-                                    <span class="relative z-10">ボタンを押してRebootしてください。</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", (event) => {
-                    gsap.registerPlugin(ScrollTrigger);
-
-                    // Scene Transition Effects
-                    const scenes = document.querySelectorAll('.scene');
-
-                    scenes.forEach((scene, index) => {
-                        // Text Stagger Animation
-                        gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper:not(.no-anim)'), {
-                            y: 50,
-                            opacity: 0,
-                            duration: 1,
-                            stagger: 0.1,
-                            ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: scene,
-                                start: "top 70%",
-                                toggleActions: "play none none reverse"
-                            }
-                        });
-                    });
-
-                    // 2050 Monolith Pulse
-                    gsap.to(".text-glow", {
-                        textShadow: "0 0 20px rgba(0,255,0,1)",
-                        repeat: -1,
-                        yoyo: true,
-                        duration: 1.5
-                    });
-
-                    // Timer Update
-                    setInterval(() => {
-                        const now = new Date();
-                        const timeString = now.toISOString().split('T')[1].slice(0, -1);
-                        document.getElementById('chronicle-timer').innerText = timeString;
-                    }, 100);
-                });
-            </script>
-
-
-            <section id="new-services" class="hidden min-h-screen bg-white py-24 px-4 md:px-6 relative overflow-hidden">
-
-                <div
-                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-gray-100 pointer-events-none select-none z-0 whitespace-nowrap">
-                    AX-2026
-                </div>
-
-                <div class="max-w-7xl mx-auto relative z-10">
-                    <div class="text-center mb-20">
-                        <p
-                            class="font-sans text-neon bg-black inline-block px-4 py-1 text-sm tracking-[0.3em] mb-6 animate-pulse">
-                            INSTALLATION COMPLETE</p>
-                        <h2 class="font-sans text-5xl md:text-8xl font-black mb-6 text-ink leading-[0.9]">
-                            NEW WEAPONS<br>
-                            <span class="text-transparent stroke-text" style="-webkit-text-stroke: 1px #1A1A1A;">READY
-                                TO
-                                DEPLOY</span>
-                        </h2>
-                        <p class="font-jp text-lg md:text-xl font-bold text-gray-600">
-                            あなたの「一人会派」に実装された、3つの非対称兵器。
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-
-                        <div
-                            class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
-                            <div
-                                class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
-                                WEAPON_01</div>
-
-                            <h3 class="font-sans text-4xl font-black mb-2 italic">VISUAL<br><span
-                                    class="text-bronze group-hover:text-neon">DOMINATION</span></h3>
-                            <p
-                                class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
-                                視覚支配プロトコル
-                            </p>
-
-                            <div class="space-y-4 font-jp text-sm leading-relaxed">
-                                <p class="font-bold text-lg">
-                                    「あ、この人が勝つな」と、<br>
-                                    <span
-                                        class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">貼るだけで思わせる。</span>
-                                </p>
-                                <p class="opacity-80">
-                                    有権者の9割は政策を読まない。彼らは0.5秒の「印象」だけで投票先を決める。
-                                    商業デザインの色彩心理学を政治に転用し、新人であっても「現職以上の格」と「圧倒的な勝者のオーラ」を強制的に演出する。
-                                </p>
-                                <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
-                                    <li>>> IDENTITY ARCHITECTURE (ブランド設計)</li>
-                                    <li>>> PSYCHO-COLORING (色彩心理誘導)</li>
-                                    <li>>> PROPAGANDA POSTER (高解像度ポスター)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
-                            <div
-                                class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
-                                WEAPON_02</div>
-
-                            <h3 class="font-sans text-4xl font-black mb-2 italic">SYNTHETIC<br><span
-                                    class="text-bronze group-hover:text-neon">STAFF</span></h3>
-                            <p
-                                class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
-                                拡張参謀 (AI秘書)
-                            </p>
-
-                            <div class="space-y-4 font-jp text-sm leading-relaxed">
-                                <p class="font-bold text-lg">
-                                    徹夜の質問作りを、<br>
-                                    <span
-                                        class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">3分で終わらせる。</span>
-                                </p>
-                                <p class="opacity-80">
-                                    「人件費が出せない」はもう言い訳にならない。
-                                    過去10年分の議事録と地域データを学習したAIが、あなたの右腕となる。
-                                    答弁書の矛盾指摘から、炎上しないSNS投稿の作成まで。事務作業はAIに投げ、あなたは「握手」と「決断」に全リソースを注げ。
-                                </p>
-                                <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
-                                    <li>>> MINUTES ANALYSIS (議事録解析)</li>
-                                    <li>>> SPEECH GENERATION (演説生成)</li>
-                                    <li>>> RISK MANAGEMENT (炎上予知)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div
-                            class="group relative bg-white border-4 border-black p-8 hover:bg-black hover:text-white transition-all duration-300 shadow-[10px_10px_0px_#CD7F32] hover:shadow-[15px_15px_0px_#EAFF00] hover:-translate-y-2">
-                            <div
-                                class="absolute top-0 right-0 bg-black text-white px-3 py-1 font-sans text-xs font-bold group-hover:bg-neon group-hover:text-black">
-                                WEAPON_03</div>
-
-                            <h3 class="font-sans text-4xl font-black mb-2 italic">VOTE<br><span
-                                    class="text-bronze group-hover:text-neon">ENGINEERING</span></h3>
-                            <p
-                                class="font-jp font-bold text-sm tracking-widest mb-6 border-b-2 border-gray-200 group-hover:border-gray-700 pb-4">
-                                集票工学
-                            </p>
-
-                            <div class="space-y-4 font-jp text-sm leading-relaxed">
-                                <p class="font-bold text-lg">
-                                    「お願い」をやめて、<br>
-                                    <span
-                                        class="border-b-4 border-bronze group-hover:border-neon inline-block lh-1">「攻略」に切り替える。</span>
-                                </p>
-                                <p class="opacity-80">
-                                    無駄なドブ板は罪だ。
-                                    LINE公式アカウントとWeb解析を駆使し、「あなたに投票する可能性が高い層」だけをピンポイントで狙い撃つ。
-                                    勘と経験に頼る昭和の選挙を捨て、データを元に票を積み上げる「再現性のある当選プログラム」を構築する。
-                                </p>
-                                <ul class="text-xs space-y-1 mt-4 opacity-60 font-sans">
-                                    <li>>> TARGETING MAP (重点攻略エリア選定)</li>
-                                    <li>>> LINE 1-to-1 MARKETING (個別の囲い込み)</li>
-                                    <li>>> VOTE CONVERSION (投票行動への転換)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <section class="py-24 px-4 md:px-6 bg-[#F0F0F0] border-t-2 border-black relative overflow-hidden">
-
-                    <div class="absolute inset-0 z-0 pointer-events-none opacity-5"
-                        style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 40px 40px;">
-                    </div>
-
-                    <div class="max-w-7xl mx-auto relative z-10">
-
-                        <div class="mb-16 border-l-8 border-black pl-6">
-                            <h2 class="font-sans text-5xl md:text-7xl font-black text-ink mb-2">05. CORE TEAM</h2>
-                            <p class="font-sans text-sm tracking-[0.3em] font-bold text-gray-500 mb-4">// BLOOM ROAD
-                                INC.
-                                LEADERSHIP</p>
-                            <p class="font-jp font-bold text-lg md:text-xl max-w-2xl leading-relaxed">
-                                「政治の論理」と「芸術の感性」。<br>
-                                異なるOSを持つ二人の異端児が、AIを触媒に融合する。
-                            </p>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-
-                            <div
-                                class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#CD7F32] hover:shadow-[12px_12px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 relative group">
-
-                                <!-- Profile Images -->
-                                <div
-                                    class="absolute -right-6 -top-12 w-32 md:w-36 z-20 transform rotate-6 hover:rotate-0 transition-transform duration-300 shadow-xl">
-                                    <img src="./images/yamaoka_wow.jpg" alt="Yamaoka Action"
-                                        class="w-full border-4 border-white">
-                                </div>
-
-                                <div
-                                    class="absolute -top-5 left-6 bg-black text-white px-4 py-1 font-sans text-xs tracking-widest border-2 border-white transform -rotate-1 group-hover:bg-bronze transition-colors z-30">
-                                    $$ FILE: 01 // THE STRATEGIST $$
-                                </div>
-
-                                <div class="mt-4 mb-8 border-b-2 border-gray-200 pb-6 relative z-10">
-                                    <h3 class="font-sans text-4xl md:text-5xl font-black leading-none mb-1">
-                                        TOSHIHIDE<br>YAMAOKA
-                                    </h3>
-                                    <p class="font-jp font-bold text-xl mb-2">山岡 稔季</p>
-                                    <p
-                                        class="font-sans text-xs font-bold bg-gray-100 inline-block px-2 py-1 text-gray-600">
-                                        CEO / Political Tech Strategist
-                                    </p>
-                                </div>
-
-                                <div
-                                    class="bg-gray-50 border-l-4 border-bronze p-4 mb-8 italic font-jp font-bold text-sm md:text-base text-gray-700">
-                                    「政治を内側から見てきた。<br>だからこそ、外側からの『ハッキング』が必要だと気づいた。」
-                                </div>
-
-                                <div class="mb-8">
-                                    <p class="font-sans text-xs font-bold tracking-widest text-gray-400 mb-2">[ PROFILE
-                                        LOG ]
-                                    </p>
-                                    <p class="font-jp text-sm leading-relaxed text-gray-800">
-                                        かつて議場という「密室」に身を置き、昭和然とした政治システムの限界を誰よりも痛感した男。
-                                        「良い政策だけでは、世界は1ミリも動かない」——その冷徹な現実を前に、彼は議員バッジを外し、より強力な武器（テクノロジー）を手に取る道を選んだ。<br><br>
-                                        彼が提供するのは、コンサルティングではない。「OSの書き換え」である。
-                                        SNS、AI、そして元議員としての泥臭い地上戦の知見。これらを統合し、情熱あるリーダーが評価される「勝利の方程式」を設計する。
-                                    </p>
-                                </div>
-
-                                <div class="bg-black text-white p-4 font-mono text-xs leading-relaxed">
-                                    <p class="text-bronze font-bold mb-2">[ SPEC / SPECIALTY ]</p>
-                                    <ul class="space-y-2">
-                                        <li><span class="text-bronze">> Political Hacking:</span> 選挙戦略のフルスタック・エンジニアリング。
-                                        </li>
-                                        <li><span class="text-bronze">> SNS Warfare:</span> 「認知」を「票」に変えるWebマーケティング。</li>
-                                        <li><span class="text-bronze">> AI Implementation:</span> 「想い」を「政策・言語」へ変換するAI実装。
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div
-                                class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#FF00FF] hover:shadow-[12px_12px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 relative group">
-
-                                <!-- Profile Image (Left Side Placement) -->
-                                <div
-                                    class="absolute -left-6 -top-12 w-32 md:w-40 z-20 transform -rotate-6 hover:rotate-0 transition-transform duration-300 shadow-xl">
-                                    <img src="./images/kamino_face.png" alt="Takahiro Kamino Portrait"
-                                        class="w-full border-4 border-white">
-                                </div>
-
-                                <div
-                                    class="absolute -top-5 right-6 bg-black text-white px-4 py-1 font-sans text-xs tracking-widest border-2 border-white transform rotate-1 group-hover:bg-magenta transition-colors z-30">
-                                    $$ FILE: 02 // THE ARCHITECT $$
-                                </div>
-
-                                <div class="mt-4 mb-8 border-b-2 border-gray-200 pb-6 text-right relative z-10">
-                                    <h3 class="font-sans text-4xl md:text-5xl font-black leading-none mb-1">
-                                        TAKAHIRO<br>KAMINO
-                                    </h3>
-                                    <p class="font-jp font-bold text-xl mb-2">神野 貴弘</p>
-                                    <p
-                                        class="font-sans text-xs font-bold bg-gray-100 inline-block px-2 py-1 text-gray-600">
-                                        Chairman / Sensory & Logic Architect
-                                    </p>
-                                </div>
-
-                                <div
-                                    class="bg-gray-50 border-r-4 border-magenta p-4 mb-8 italic font-jp font-bold text-sm md:text-base text-gray-700 text-right">
-                                    「論理（ロジック）で戦い、感性（センス）で魅了する。<br>二律背反を愛せ。」
-                                </div>
-
-                                <div class="mb-8 text-right">
-                                    <p class="font-sans text-xs font-bold tracking-widest text-gray-400 mb-2">[ PROFILE
-                                        LOG ]
-                                    </p>
-                                    <p class="font-jp text-sm leading-relaxed text-gray-800 text-left">
-                                        一人の人間の中に、鋭利な「左脳」と爆発的な「右脳」が共存する、ビジネス界のキメラ（異種混合体）。
-                                        ある時は法務・市場分析のスペシャリストとして緻密な戦略図を描き、次の瞬間にはアーティストとして空間を歪め、料理人として未知の味覚を創造する。<br><br>
-                                        彼が提供するのは、ビジネス、アート、食、法律はすべて等価な「素材」に過ぎない。
-                                        一見相反する要素を高度な次元で衝突・融合（アウフヘーベン）させ、誰も見たことのないビジネスモデルへと昇華させる。
-                                    </p>
-                                </div>
-
-                                <div class="bg-black text-white p-4 font-mono text-xs leading-relaxed text-right">
-                                    <p class="text-magenta font-bold mb-2">[ SPEC / SPECIALTY ]</p>
-                                    <ul class="space-y-2 text-left">
-                                        <li><span class="text-magenta">> Hybrid Design:</span> Web・空間・グラフィックのトータル設計。
-                                        </li>
-                                        <li><span class="text-magenta">> Sensory Engineering:</span> 五感に刺さる体験設計。</li>
-                                        <li><span class="text-magenta">> Strategic Logic:</span> 法務・経営分析に基づく鉄壁のロジック。
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="bg-ink text-white p-8 md:p-12 border-4 border-black relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-neon opacity-20 blur-3xl rounded-full">
-                            </div>
-                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-magenta opacity-20 blur-3xl rounded-full">
-                            </div>
-
-                            <div class="relative z-10 text-center">
-                                <p class="font-sans text-neon text-xs tracking-[0.5em] mb-4">$$ SYSTEM SYNERGY $$</p>
-                                <h3 class="font-sans text-4xl md:text-6xl font-black mb-8 leading-none">
-                                    POLITICS <span class="text-gray-500">×</span> ART <span
-                                        class="text-gray-500">×</span> AI
-                                </h3>
-
-                                <div class="max-w-3xl mx-auto font-jp space-y-6 leading-loose">
-                                    <p class="text-lg md:text-xl font-bold">
-                                        元議員として社会構造の裏側を知り尽くした<br class="md:hidden">山岡の<span
-                                            class="text-bronze border-b-2 border-bronze">「突破力」</span>。<br>
-                                        アーティストとして人の心の機微を知り尽くした<br class="md:hidden">神野の<span
-                                            class="text-magenta border-b-2 border-magenta">「創造力」</span>。
-                                    </p>
-                                    <p class="text-sm md:text-base text-gray-300">
-                                        この二人がタッグを組み、そこに「AI」という最強の加速装置を組み込むことで、<br class="hidden md:inline">
-                                        株式会社BLOOM ROADは単なる代行業者を超えた<br>
-                                        <span class="font-bold text-white text-lg">「事業変革（Business
-                                            Transformation）」</span>のパートナーとなる。
-                                    </p>
-                                </div>
-
-                                <div class="mt-12 pt-8 border-t border-gray-700">
-                                    <p class="font-jp font-bold text-xl md:text-2xl mb-2">
-                                        「古いルールで戦うのは、もう終わりにしよう。」
-                                    </p>
-                                    <p class="text-gray-400 text-sm mb-8">
-                                        既存の枠に収まりきらない議員、経営者、そして挑戦者たちへ。
-                                    </p>
-
-                                    <a href="https://line.me/R/ti/p/@988ukvro" target="_blank"
-                                        class="inline-block bg-white text-black font-bold py-4 px-12 text-lg hover:bg-neon transition-colors border-2 border-transparent hover:border-white">
-                                        私たちと共にアップデートする ->
-                                    </a>
-
-                                    <div
-                                        class="mt-8 max-w-lg mx-auto bg-gray-900 border-l-4 border-gray-500 p-4 text-left">
-                                        <p class="font-jp text-sm text-gray-300 leading-relaxed">
-                                            <span class="text-neon font-bold">[ NOTE ]</span><br>
-                                            あなたの「色」を塗り替えるのではありません。<br>
-                                            あなたの「本来の強み」を、現代の武器で最大化するのです。
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-            </section>
-
-            <script>
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
                 gsap.registerPlugin(ScrollTrigger);
 
-                // --- PRE-UPDATE WORLD ANIMATIONS ---
-                // --- PRE-UPDATE WORLD ANIMATIONS & BOOT SEQUENCE ---
-                window.addEventListener('load', () => {
+                // Scene Transition Effects
+                const scenes = document.querySelectorAll('.scene');
 
-                    // --- 0. BOOT SEQUENCE (PROTOCOL ACTIVATION) ---
-                    const bootTl = gsap.timeline();
-                    const bootLogs = [
-                        "ESTABLISHING_SECURE_CONNECTION...",
-                        "SCANNING_LOCAL_POLITICAL_NODES...",
-                        "DETECTING_ANOMALIES...",
-                        "LOADING_GRAPHICAL_INTERFACE...",
-                        "PROTOCOL: AX-2026_INIT"
-                    ];
+                scenes.forEach((scene, index) => {
+                    // Text Stagger Animation
+                    gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper:not(.no-anim)'), {
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scene,
+                            start: "top 70%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
 
-                    // 0.1 Log Streaming
-                    bootTl.call(() => {
-                        let i = 0;
-                        const logEl = document.getElementById('boot-log');
-                        const interval = setInterval(() => {
-                            if (i < bootLogs.length) {
-                                const div = document.createElement('div');
-                                div.textContent = `> ${bootLogs[i]}`;
-                                div.className = "mb-1 text-neon";
-                                logEl.appendChild(div);
-                                i++;
-                            } else {
-                                clearInterval(interval);
-                            }
-                        }, 300); // Slower log speed
-                    })
-                        // 0.2 Loader Pulse
-                        .to("#boot-loader > div", { width: "100%", duration: 2.5, ease: "power2.inOut" }, 0)
+                // 2050 Monolith Pulse
+                gsap.to(".text-glow", {
+                    textShadow: "0 0 20px rgba(0,255,0,1)",
+                    repeat: -1,
+                    yoyo: true,
+                    duration: 1.5
+                });
 
-                        // 0.3 Impact & Reveal
-                        .to("#boot-sequence", {
-                            scaleY: 0,
-                            transformOrigin: "top",
-                            duration: 0.6,
-                            ease: "expo.inOut",
-                            delay: 2.8 // Wait for logs
-                        })
-                        // 0.4 Title Slam
-                        .from("#hero-blueprint .group", {
-                            y: 100,
-                            opacity: 0,
-                            scale: 0.9,
-                            duration: 1.2,
-                            stagger: 0.2,
-                            ease: "power4.out"
-                        }, "-=0.2");
+                // Timer Update
+                setInterval(() => {
+                    const now = new Date();
+                    const timeString = now.toISOString().split('T')[1].slice(0, -1);
+                    document.getElementById('chronicle-timer').innerText = timeString;
+                }, 100);
+            });
+        </script>
 
 
-                    // --- 1. BLUEPRINT INTERACTION (New) ---
-                    const heroSection = document.getElementById('hero-blueprint');
-                    // Simple parallax for the blueprint text
-                    if (heroSection) {
-                        heroSection.addEventListener('mousemove', (e) => {
-                            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-                            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    </div><!-- End legacy-system -->
+    <div id="new-world" class="hidden">
 
-                            gsap.to("#hero-blueprint h1", {
-                                x: x,
-                                y: y,
-                                duration: 1,
-                                ease: "power2.out"
-                            });
-                        });
+        <section id="tactical-gears"
+            class="relative py-20 md:py-32 bg-[#ECECEC] overflow-hidden border-t-8 border-black">
+
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-60">
+                <div
+                    class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')]">
+                </div>
+                <div
+                    class="absolute inset-0 bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] bg-[size:20px_20px]">
+                </div>
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none overflow-hidden select-none opacity-[0.08] z-0">
+                <h2 class="font-sans font-black text-[30vw] text-black leading-none tracking-tighter mix-blend-overlay">
+                    WEAPONS
+                </h2>
+            </div>
+
+
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+
+                <div class="text-center mb-16 relative">
+                    <div
+                        class="inline-block bg-black text-[#EAFF00] px-4 py-1 transform -rotate-2 shadow-md relative top-4 z-20">
+                        <p class="font-ui text-xs tracking-[0.3em] font-bold">INSTALLATION COMPLETE</p>
+                    </div>
+
+                    <h2
+                        class="font-sans font-black text-6xl md:text-[8rem] text-black leading-[0.8] uppercase tracking-tighter relative z-10 mix-blend-darken">
+                        3 TACTICAL<br>GEARS
+                    </h2>
+
+                    <p
+                        class="font-jp font-bold text-sm md:text-xl text-white mt-4 bg-black inline-block px-6 py-2 transform rotate-1 border-2 border-[#EAFF00]">
+                        あなたの「一人会派」に実装される、3つの非対称兵器。
+                    </p>
+                </div>
+
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-3 gap-0 border-4 border-black bg-black shadow-[16px_16px_0px_rgba(0,0,0,0.2)]">
+
+                    <div
+                        class="group relative bg-white p-6 md:p-8 border-b-4 md:border-b-0 md:border-r-4 border-black hover:bg-[#1a1a1a] hover:text-white transition-all duration-300 cursor-crosshair overflow-hidden">
+
+                        <div
+                            class="absolute -top-3 -right-3 md:-top-5 md:-right-5 w-20 h-20 md:w-24 md:h-24 bg-[#CD7F32] rounded-full flex items-center justify-center transform rotate-12 shadow-lg group-hover:scale-110 transition-transform z-20 border-4 border-black text-center">
+                            <p
+                                class="font-jp font-black text-[0.6rem] md:text-xs text-black leading-tight transform -rotate-12">
+                                貼るだけで<br>勝てる。
+                            </p>
+                        </div>
+                        <div
+                            class="absolute top-0 left-0 bg-black text-[#CD7F32] px-2 py-1 font-ui text-[0.6rem] tracking-widest border-r border-b border-black">
+                            01 // VISUAL</div>
+
+                        <div class="mt-8 mb-4">
+                            <h3
+                                class="font-sans font-black text-5xl md:text-6xl leading-[0.85] tracking-tighter group-hover:text-[#CD7F32] transition-colors">
+                                VISUAL<br>DOMINATION
+                            </h3>
+                        </div>
+
+                        <div class="h-1 w-full bg-black group-hover:bg-[#CD7F32] mb-4"></div>
+
+                        <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#CD7F32]">
+                            「あ、この人が勝つな」と、<br>0.5秒で思わせる。
+                        </p>
+                        <p
+                            class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
+                            有権者の9割は政策を読まない。商業デザインの色彩心理学を政治に転用し、ポスター1枚で「圧倒的な勝者のオーラ」を強制的に演出する。
+                        </p>
+
+                        <div
+                            class="font-ui text-[0.6rem] text-gray-500 group-hover:text-gray-400 border-t-2 border-dashed border-black/30 pt-2 flex justify-between">
+                            <span>> TARGET: UNCONSCIOUS BIAS</span>
+                            <span class="font-black text-[#CD7F32]">STATUS: READY</span>
+                        </div>
+                    </div>
+
+
+                    <div
+                        class="group relative bg-white p-6 md:p-8 border-b-4 md:border-b-0 md:border-r-4 border-black hover:bg-[#1a1a1a] hover:text-white transition-all duration-300 cursor-crosshair overflow-hidden">
+
+                        <div
+                            class="absolute -top-3 -right-3 md:-top-5 md:-right-5 w-20 h-20 md:w-24 md:h-24 bg-[#EAFF00] rounded-full flex items-center justify-center transform -rotate-6 shadow-lg group-hover:scale-110 transition-transform z-20 border-4 border-black text-center">
+                            <p
+                                class="font-jp font-black text-[0.6rem] md:text-xs text-black leading-tight transform rotate-6">
+                                もう<br>寝ていい。
+                            </p>
+                        </div>
+                        <div
+                            class="absolute top-0 left-0 bg-black text-[#EAFF00] px-2 py-1 font-ui text-[0.6rem] tracking-widest border-r border-b border-black">
+                            02 // AI STAFF</div>
+
+                        <div class="mt-8 mb-4">
+                            <h3
+                                class="font-sans font-black text-5xl md:text-6xl leading-[0.85] tracking-tighter group-hover:text-[#EAFF00] transition-colors">
+                                SYNTHETIC<br>STAFF
+                            </h3>
+                        </div>
+
+                        <div class="h-1 w-full bg-black group-hover:bg-[#EAFF00] mb-4"></div>
+
+                        <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#EAFF00]">
+                            あなたの「分身」が、<br>24時間働き続ける。
+                        </p>
+                        <p
+                            class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
+                            「金がない」は言い訳にならない。過去の議事録と地域データを学習したAIが、一般質問作成からSNS運用まで代行。あなたは「決断」だけに集中せよ。
+                        </p>
+
+                        <div
+                            class="font-ui text-[0.6rem] text-gray-500 group-hover:text-gray-400 border-t-2 border-dashed border-black/30 pt-2 flex justify-between">
+                            <span>> CAPACITY: UNLIMITED</span>
+                            <span class="font-black text-[#EAFF00]">STATUS: ACTIVE</span>
+                        </div>
+                    </div>
+
+
+                    <div
+                        class="group relative bg-white p-6 md:p-8 border-black hover:bg-[#1a1a1a] hover:text-white transition-all duration-300 cursor-crosshair overflow-hidden">
+
+                        <div
+                            class="absolute -top-3 -right-3 md:-top-5 md:-right-5 w-20 h-20 md:w-24 md:h-24 bg-[#FF00FF] rounded-full flex items-center justify-center transform rotate-3 shadow-lg group-hover:scale-110 transition-transform z-20 border-4 border-black text-center">
+                            <p
+                                class="font-jp font-black text-[0.6rem] md:text-xs text-black leading-tight transform -rotate-3">
+                                票を<br>ハックせよ。
+                            </p>
+                        </div>
+                        <div
+                            class="absolute top-0 left-0 bg-black text-[#FF00FF] px-2 py-1 font-ui text-[0.6rem] tracking-widest border-r border-b border-black">
+                            03 // VOTE ENG</div>
+
+                        <div class="mt-8 mb-4">
+                            <h3
+                                class="font-sans font-black text-5xl md:text-6xl leading-[0.85] tracking-tighter group-hover:text-[#FF00FF] transition-colors">
+                                VOTE<br>ENGINEERING
+                            </h3>
+                        </div>
+
+                        <div class="h-1 w-full bg-black group-hover:bg-[#FF00FF] mb-4"></div>
+
+                        <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#FF00FF]">
+                            「お願い」をやめて、<br>「攻略」に切り替える。
+                        </p>
+                        <p
+                            class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
+                            無駄なドブ板は罪だ。LINEとデータを駆使し、票になる層だけをピンポイントで狙い撃つ。勘と経験を捨て、「再現性のある当選プログラム」を構築する。
+                        </p>
+
+                        <div
+                            class="font-ui text-[0.6rem] text-gray-500 group-hover:text-gray-400 border-t-2 border-dashed border-black/30 pt-2 flex justify-between">
+                            <span>> METHOD: DATA DRIVEN</span>
+                            <span class="font-black text-[#FF00FF]">STATUS: STANDBY</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="text-center relative z-20 mt-16">
+                    <div class="absolute top-1/2 left-0 w-full h-[2px] bg-black -z-10"></div>
+                    <div
+                        class="absolute top-1/2 left-0 w-full h-[2px] bg-[#EAFF00] -z-10 transform translate-y-1 opacity-50">
+                    </div>
+
+                    <a href="#core-team"
+                        class="inline-flex items-center gap-6 bg-black text-white px-8 md:px-20 py-6 border-4 border-black hover:bg-[#EAFF00] hover:text-black hover:border-black transition-all duration-300 group shadow-[8px_8px_0px_#1A1A1A] relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,255,255,0.1)_10px,rgba(255,255,255,0.1)_20px)] group-hover:bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(0,0,0,0.1)_10px,rgba(0,0,0,0.1)_20px)]">
+                        </div>
+
+                        <div class="text-left relative z-10">
+                            <p
+                                class="font-ui text-[0.6rem] md:text-xs tracking-[0.2em] text-[#EAFF00] group-hover:text-black mb-1 font-bold">
+                                WHO CONTROLS THE SYSTEM?</p>
+                            <p class="font-jp font-black text-xl md:text-3xl leading-none">運営ユニット（CORE
+                                TEAM）を確認する</p>
+                        </div>
+                        <div class="bg-white/20 p-3 rounded-full group-hover:bg-black/10 relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-8 w-8 transform group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="core-team"
+            class="py-24 px-4 md:px-6 bg-[#E5E5E5] border-t-4 border-black relative overflow-hidden">
+
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-5"
+                style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 40px 40px;">
+            </div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+
+                <div class="mb-20 border-l-[12px] border-black pl-8">
+                    <h2 class="font-sans text-5xl md:text-8xl font-black text-ink mb-2 leading-none">05. CORE
+                        TEAM</h2>
+                    <p
+                        class="font-sans text-xs tracking-[0.4em] font-bold text-gray-500 mb-6 bg-white inline-block px-2">
+                        // BLOOM ROAD INC. LEADERSHIP</p>
+                    <p class="font-jp font-bold text-xl md:text-2xl max-w-3xl leading-relaxed">
+                        「政治の論理」と「芸術の感性」。<br>
+                        異なるOSを持つ二人の異端児が、AIを触媒に融合する。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+                    <div
+                        class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#CD7F32] hover:shadow-[16px_16px_0px_#1A1A1A] hover:-translate-y-2 transition-all duration-300 relative group">
+                        <div
+                            class="absolute -top-6 left-6 bg-black text-white px-4 py-2 font-sans text-xs tracking-widest border-2 border-white transform -rotate-1 group-hover:bg-bronze transition-colors shadow-md">
+                            $$ FILE: 01 // THE STRATEGIST $$
+                        </div>
+                        <div class="mt-6 mb-8 border-b-4 border-gray-100 pb-6">
+                            <h3 class="font-sans text-5xl md:text-6xl font-black leading-[0.85] mb-2 text-ink">
+                                TOSHIHIDE<br>YAMAOKA
+                            </h3>
+                            <div class="flex items-center gap-3">
+                                <p class="font-jp font-bold text-2xl">山岡 稔季</p>
+                                <span class="h-px flex-grow bg-black"></span>
+                            </div>
+                            <p class="font-sans text-[0.65rem] font-bold tracking-widest text-gray-500 mt-1">
+                                CEO / Political Tech Strategist
+                            </p>
+                        </div>
+                        <div
+                            class="bg-gray-50 border-l-8 border-bronze p-5 mb-8 italic font-jp font-bold text-base md:text-lg text-gray-800 leading-relaxed">
+                            「政治を内側から見てきた。<br>だからこそ、外側からの『ハッキング』が必要だと気づいた。」
+                        </div>
+                        <div class="mb-8">
+                            <p
+                                class="font-sans text-xs font-bold tracking-widest text-bronze mb-3 border-b border-bronze inline-block">
+                                [ PROFILE LOG ]</p>
+                            <p class="font-jp text-sm leading-relaxed text-gray-700 font-medium">
+                                かつて議場という「密室」に身を置き、昭和然とした政治システムの限界を誰よりも痛感した男。
+                                「良い政策だけでは、世界は1ミリも動かない」——その冷徹な現実を前に、彼は議員バッジを外し、より強力な武器（テクノロジー）を手に取る道を選んだ。<br><br>
+                                彼が提供するのは、コンサルティングではない。「OSの書き換え」である。
+                                SNS、AI、そして元議員としての泥臭い地上戦の知見。これらを統合し、情熱あるリーダーが評価される「勝利の方程式」を設計する。
+                            </p>
+                        </div>
+                        <div class="bg-[#1A1A1A] text-white p-5 font-mono text-xs leading-relaxed border border-black">
+                            <p class="text-bronze font-bold mb-3 tracking-widest border-b border-gray-700 pb-1">
+                                :: SPEC / SPECIALTY</p>
+                            <ul class="space-y-2">
+                                <li class="flex gap-2"><span class="text-bronze">></span> <span><strong
+                                            class="text-gray-300">Political Hacking:</strong>
+                                        選挙戦略のフルスタック・エンジニアリング</span></li>
+                                <li class="flex gap-2"><span class="text-bronze">></span> <span><strong
+                                            class="text-gray-300">SNS Warfare:</strong>
+                                        「認知」を「票」に変えるWebマーケティング</span></li>
+                                <li class="flex gap-2"><span class="text-bronze">></span> <span><strong
+                                            class="text-gray-300">AI Implementation:</strong>
+                                        「想い」を「政策・言語」へ変換するAI実装</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white border-4 border-black p-6 md:p-10 shadow-[8px_8px_0px_#FF00FF] hover:shadow-[16px_16px_0px_#1A1A1A] hover:-translate-y-2 transition-all duration-300 relative group">
+                        <div
+                            class="absolute -top-6 right-6 bg-black text-white px-4 py-2 font-sans text-xs tracking-widest border-2 border-white transform rotate-1 group-hover:bg-magenta transition-colors shadow-md">
+                            $$ FILE: 02 // THE ARCHITECT $$
+                        </div>
+                        <div class="mt-6 mb-8 border-b-4 border-gray-100 pb-6 text-right">
+                            <h3 class="font-sans text-5xl md:text-6xl font-black leading-[0.85] mb-2 text-ink">
+                                TAKAHIRO<br>KAMINO
+                            </h3>
+                            <div class="flex items-center gap-3 flex-row-reverse">
+                                <p class="font-jp font-bold text-2xl">神野 貴弘</p>
+                                <span class="h-px flex-grow bg-black"></span>
+                            </div>
+                            <p class="font-sans text-[0.65rem] font-bold tracking-widest text-gray-500 mt-1">
+                                Chairman / Sensory & Logic Architect
+                            </p>
+                        </div>
+                        <div
+                            class="bg-gray-50 border-r-8 border-magenta p-5 mb-8 italic font-jp font-bold text-base md:text-lg text-gray-800 text-right leading-relaxed">
+                            「論理（ロジック）で戦い、感性（センス）で魅了する。<br>二律背反を愛せ。」
+                        </div>
+                        <div class="mb-8 text-right">
+                            <p
+                                class="font-sans text-xs font-bold tracking-widest text-magenta mb-3 border-b border-magenta inline-block">
+                                [ PROFILE LOG ]</p>
+                            <p class="font-jp text-sm leading-relaxed text-gray-700 text-left font-medium">
+                                一人の人間の中に、鋭利な「左脳」と爆発的な「右脳」が共存する、ビジネス界のキメラ（異種混合体）。
+                                ある時は法務・市場分析のスペシャリストとして緻密な戦略図を描き、次の瞬間にはアーティストとして空間を歪め、料理人として未知の味覚を創造する。<br><br>
+                                彼にとって、ビジネス、アート、食、法律はすべて等価な「素材」に過ぎない。
+                                一見相反する要素を高度な次元で衝突・融合（アウフヘーベン）させ、誰も見たことのないビジネスモデルへと昇華させる。
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1A1A1A] text-white p-5 font-mono text-xs leading-relaxed text-right border border-black">
+                            <p class="text-magenta font-bold mb-3 tracking-widest border-b border-gray-700 pb-1">
+                                :: SPEC / SPECIALTY</p>
+                            <ul class="space-y-2 text-left">
+                                <li class="flex gap-2"><span class="text-magenta">></span> <span><strong
+                                            class="text-gray-300">Hybrid Design:</strong>
+                                        Web・空間・グラフィックのトータル設計</span></li>
+                                <li class="flex gap-2"><span class="text-magenta">></span> <span><strong
+                                            class="text-gray-300">Sensory Engineering:</strong>
+                                        五感に刺さる体験設計</span></li>
+                                <li class="flex gap-2"><span class="text-magenta">></span> <span><strong
+                                            class="text-gray-300">Strategic Logic:</strong>
+                                        法務・経営分析に基づく鉄壁のロジック</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    class="bg-ink text-white p-8 md:p-16 border-4 border-black relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-neon opacity-10 blur-[80px] rounded-full pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-64 h-64 bg-magenta opacity-10 blur-[80px] rounded-full pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxwYXRoIGQ9Ik0wIDBoMjB2MjBIMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==')] opacity-50">
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <div class="inline-block border border-gray-600 px-4 py-1 mb-6">
+                            <p class="font-sans text-neon text-xs tracking-[0.5em] animate-pulse">$$ SYSTEM
+                                SYNERGY $$</p>
+                        </div>
+
+                        <h3 class="font-sans text-4xl md:text-7xl font-black mb-10 leading-none">
+                            POLITICS <span class="text-gray-600">×</span> ART <span class="text-gray-600">×</span> AI
+                        </h3>
+
+                        <div class="max-w-4xl mx-auto font-jp space-y-8 leading-loose mb-16">
+                            <p class="text-xl md:text-2xl font-bold">
+                                元議員として社会構造の裏側を知り尽くした<br class="md:hidden">山岡の<span
+                                    class="text-bronze border-b-2 border-bronze pb-1">「突破力」</span>。<br>
+                                アーティストとして人の心の機微を知り尽くした<br class="md:hidden">神野の<span
+                                    class="text-magenta border-b-2 border-magenta pb-1">「創造力」</span>。
+                            </p>
+                            <p class="text-base md:text-lg text-gray-300 font-medium">
+                                この二人がタッグを組み、そこに「AI」という最強の加速装置を組み込むことで、<br class="hidden md:inline">
+                                株式会社BLOOM ROADは単なる代行業者を超えた<br>
+                                <span class="font-bold text-white text-xl md:text-2xl bg-white/10 px-2">「事業変革（Business
+                                    Transformation）」</span>のパートナーとなる。
+                            </p>
+                        </div>
+
+                        <div class="pt-10 border-t border-gray-800">
+                            <p class="font-jp font-bold text-2xl md:text-3xl mb-4">
+                                「古いルールで戦うのは、もう終わりにしよう。」
+                            </p>
+                            <p class="text-gray-400 text-sm md:text-base mb-10 tracking-wider">
+                                既存の枠に収まりきらない議員、経営者、そして挑戦者たちへ。
+                            </p>
+
+                            <a href="https://line.me/R/ti/p/@988ukvro" target="_blank"
+                                class="relative group inline-block">
+                                <div
+                                    class="absolute inset-0 bg-neon transform translate-x-2 translate-y-2 transition-transform group-hover:translate-x-3 group-hover:translate-y-3">
+                                </div>
+                                <div
+                                    class="relative bg-white text-black font-bold py-5 px-16 text-lg md:text-xl border-2 border-black hover:bg-gray-100 flex items-center gap-4 transition-colors">
+                                    <span>私たちと共にアップデートする</span>
+                                    <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                            <p class="mt-4 text-xs text-gray-500 font-sans tracking-wider">
+                                ※ 私たちはあなたの「政治信条」を尊重します。<br>
+                                デザインや戦略は、候補者のキャラクターに合わせて最適化されます。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- PRE-UPDATE WORLD ANIMATIONS ---
+        // --- PRE-UPDATE WORLD ANIMATIONS & BOOT SEQUENCE ---
+        window.addEventListener('load', () => {
+
+            // --- 0. BOOT SEQUENCE (PROTOCOL ACTIVATION) ---
+            const bootTl = gsap.timeline();
+            const bootLogs = [
+                "ESTABLISHING_SECURE_CONNECTION...",
+                "SCANNING_LOCAL_POLITICAL_NODES...",
+                "DETECTING_ANOMALIES...",
+                "LOADING_GRAPHICAL_INTERFACE...",
+                "PROTOCOL: AX-2026_INIT"
+            ];
+
+            // 0.1 Log Streaming
+            bootTl.call(() => {
+                let i = 0;
+                const logEl = document.getElementById('boot-log');
+                const interval = setInterval(() => {
+                    if (i < bootLogs.length) {
+                        const div = document.createElement('div');
+                        div.textContent = `> ${bootLogs[i]}`;
+                        div.className = "mb-1 text-neon";
+                        logEl.appendChild(div);
+                        i++;
+                    } else {
+                        clearInterval(interval);
                     }
+                }, 300); // Slower log speed
+            })
+                // 0.2 Loader Pulse
+                .to("#boot-loader > div", { width: "100%", duration: 2.5, ease: "power2.inOut" }, 0)
+
+                // 0.3 Impact & Reveal
+                .to("#boot-sequence", {
+                    scaleY: 0,
+                    transformOrigin: "top",
+                    duration: 0.6,
+                    ease: "expo.inOut",
+                    delay: 2.8 // Wait for logs
+                })
+                // 0.4 Title Slam
+                .from("#hero-blueprint .group", {
+                    y: 100,
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "power4.out"
+                }, "-=0.2");
 
 
-                    // 2. Parallax for Background SVGs (Existing)
-                    gsap.to('#legacy-system > div:first-child > svg', {
-                        y: 100,
+            // --- 1. BLUEPRINT INTERACTION (New) ---
+            const heroSection = document.getElementById('hero-blueprint');
+            // Simple parallax for the blueprint text
+            if (heroSection) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+                    gsap.to("#hero-blueprint h1", {
+                        x: x,
+                        y: y,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+                });
+            }
+
+
+            // 2. Parallax for Background SVGs (Existing)
+            gsap.to('#legacy-system > div:first-child > svg', {
+                y: 100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#legacy-system",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // 3. Floating Badges (Zero G Effect) (Existing)
+
+            // Title Groups Hover Effect (Enhance existing CSS hover)
+            gsap.utils.toArray('#legacy-system .group').forEach((el) => {
+                gsap.from(el, {
+                    y: 20,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.5
+                });
+            });
+
+            // 2. Great Rewrite Section (History Logs)
+            gsap.utils.toArray('.space-y-40 > div').forEach((section) => {
+                // Main Content Fade Up
+                gsap.fromTo(section.querySelector('.relative.z-10'),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+
+                // Background Year Parallax
+                const bgYear = section.querySelector('.text-\\[8rem\\]') || section.querySelector('.text-\\[10rem\\]');
+                if (bgYear) {
+                    gsap.to(bgYear, {
+                        y: 150,
                         ease: "none",
                         scrollTrigger: {
-                            trigger: "#legacy-system",
-                            start: "top top",
+                            trigger: section,
+                            start: "top bottom",
                             end: "bottom top",
                             scrub: true
                         }
                     });
+                }
+            });
+        });
 
-                    // 3. Floating Badges (Zero G Effect) (Existing)
+        // --- SYSTEM UPDATE TRANSITION (ENHANCED) ---
+        // Global function for accessibility
+        window.activateUpdate = function () {
+            console.log("System Update Activated"); // Debug Log
 
-                    // Title Groups Hover Effect (Enhance existing CSS hover)
-                    gsap.utils.toArray('#legacy-system .group').forEach((el) => {
-                        gsap.from(el, {
-                            y: 20,
-                            opacity: 0,
-                            duration: 1,
-                            ease: "power3.out",
-                            delay: 0.5
-                        });
-                    });
+            const overlay = document.getElementById('update-overlay');
+            const consoleOutput = document.getElementById('console-output');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const progressContainer = document.getElementById('progress-container');
 
-                    // 2. Great Rewrite Section (History Logs)
-                    gsap.utils.toArray('.space-y-40 > div').forEach((section) => {
-                        // Main Content Fade Up
-                        gsap.fromTo(section.querySelector('.relative.z-10'),
-                            { y: 50, opacity: 0 },
-                            {
-                                y: 0,
-                                opacity: 1,
-                                duration: 1,
-                                ease: "power3.out",
-                                scrollTrigger: {
-                                    trigger: section,
-                                    start: "top 80%",
-                                    toggleActions: "play none none reverse"
-                                }
-                            }
-                        );
+            if (!overlay) {
+                console.error("Overlay element not found!");
+                return;
+            }
 
-                        // Background Year Parallax
-                        const bgYear = section.querySelector('.text-\\[8rem\\]') || section.querySelector('.text-\\[10rem\\]');
-                        if (bgYear) {
-                            gsap.to(bgYear, {
-                                y: 150,
-                                ease: "none",
-                                scrollTrigger: {
-                                    trigger: section,
-                                    start: "top bottom",
-                                    end: "bottom top",
-                                    scrub: true
-                                }
-                            });
+            const legacySystem = document.getElementById('legacy-system');
+            const newServices = document.getElementById('new-world');
+
+            // Show Overlay
+            overlay.classList.remove('hidden');
+
+            const tl = gsap.timeline();
+
+
+
+            // 1. Console Diagnosis Sequence
+            const logs = [
+                "INITIATING SYSTEM DIAGNOSIS...",
+                "DETECTED: CRITICAL ERROR IN [JAPANESE_POLITICS.EXE]",
+                "> ERROR: LOGIC_NOT_FOUND",
+                "> ERROR: PASSION_DISCONNECT",
+                "> WARNING: LEGACY SYSTEM UNSTABLE",
+                "--------------------------------",
+                "SCANNING REPLACEMENT KERNEL...",
+                "FOUND: AX-2026 PROTOCOL (YAMAOKA_KAMINO_BUILD)",
+                "PREPARING OVERWRITE...",
+                "DELETING OLD DEPENDENCIES..."
+            ];
+
+
+
+            tl.to(consoleOutput, { opacity: 1, duration: 0.1 })
+                .call(() => {
+                    let i = 0;
+                    consoleOutput.innerHTML = ""; // Clear previous logs
+                    const interval = setInterval(() => {
+                        if (i < logs.length) {
+                            const div = document.createElement('div');
+                            div.textContent = `> ${logs[i]}`;
+                            div.className = "mb-1";
+                            consoleOutput.appendChild(div);
+                            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                            i++;
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 80); // Speed of logs
+                })
+                .to({}, { duration: 2.0 }) // Wait for logs to finish
+
+            // 2. Glitch / Instability
+            tl.to(legacySystem, {
+                filter: "invert(1) hue-rotate(180deg) blur(2px)",
+                duration: 0.1,
+                yoyo: true,
+                repeat: 5
+            }, "-=1.5")
+
+            // 3. Progress Bar Sequence
+            tl.to([progressContainer, progressText], { opacity: 1, duration: 0.2 })
+                .to(progressBar, {
+                    width: "100%",
+                    duration: 1.5,
+                    ease: "power2.inOut",
+                    onUpdate: function () {
+                        const progress = Math.round(this.progress() * 100);
+                        progressText.innerText = `${progress}%`;
+                    }
+                })
+
+            // 4. Blackout & Switch
+            tl.to(overlay, {
+                backgroundColor: "#fff",
+                duration: 0.05,
+                yoyo: true,
+                repeat: 1,
+                onComplete: () => {
+                    // Flash effect sound could go here
+                }
+            })
+                .to(overlay, { backgroundColor: "#000", duration: 0.1 })
+                .call(() => {
+                    // Actual DOM Switch
+                    window.scrollTo(0, 0);
+                    legacySystem.style.display = 'none';
+                    newServices.classList.remove('hidden');
+                })
+
+            // 5. Reveal New World (CRT Turn On Effect)
+            tl.to(overlay, {
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.5,
+                onComplete: () => {
+                    overlay.classList.add('hidden');
+                    initNewWorldAnimations();
+                }
+            });
+        }
+
+        // --- POST-UPDATE WORLD ANIMATIONS (Core Team etc) ---
+        function initNewWorldAnimations() {
+            // Force ScrollTrigger refresh to detect new layout
+            ScrollTrigger.refresh();
+
+            // 1. Master Title Sequence (New Weapons)
+            const serviceHeader = document.querySelector("#tactical-gears .text-center");
+            if (serviceHeader) {
+                gsap.fromTo(serviceHeader.children,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        autoAlpha: 1,
+                        stagger: 0.1,
+                        duration: 1,
+                        ease: "power3.out"
+                    }
+                );
+            }
+
+            // 2. Arsenal Cards Stagger
+            gsap.from("#tactical-gears .grid > div", {
+                y: 60,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: "#tactical-gears .grid",
+                    start: "top 80%"
+                }
+            });
+
+            // 3. Core Team Section Animations
+            // We use a slight delay or scroll trigger ensuring the user scrolls down to see it
+            const coreTeamSection = document.getElementById("core-team"); // The nested section
+
+            if (coreTeamSection) {
+                // Background Grid Parallax
+                gsap.to(coreTeamSection.querySelector('.absolute.inset-0'), {
+                    y: 50,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: coreTeamSection,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+
+                // File Cards "Stamp" Reveal
+                gsap.utils.toArray(coreTeamSection.querySelectorAll(".grid > div")).forEach((card, i) => {
+                    gsap.from(card, {
+                        scale: 1.05,
+                        autoAlpha: 0,
+                        filter: "blur(5px)",
+                        duration: 0.6,
+                        delay: i * 0.2,
+                        ease: "power2.out",
+                        clearProps: "filter, transform", // Ensure clean final state
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 90%" // Trigger slightly earlier
                         }
                     });
                 });
 
-                // --- SYSTEM UPDATE TRANSITION (ENHANCED) ---
-                // Global function for accessibility
-                window.activateUpdate = function () {
-                    console.log("System Update Activated"); // Debug Log
-
-                    const overlay = document.getElementById('update-overlay');
-                    const consoleOutput = document.getElementById('console-output');
-                    const progressBar = document.getElementById('progress-bar');
-                    const progressText = document.getElementById('progress-text');
-                    const progressContainer = document.getElementById('progress-container');
-
-                    if (!overlay) {
-                        console.error("Overlay element not found!");
-                        return;
+                // Synergy Section
+                gsap.from(coreTeamSection.querySelector(".bg-ink"), {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: coreTeamSection.querySelector(".bg-ink"),
+                        start: "top 80%"
                     }
-
-                    const legacySystem = document.getElementById('legacy-system');
-                    const newServices = document.getElementById('new-services');
-
-                    // Show Overlay
-                    overlay.classList.remove('hidden');
-
-                    const tl = gsap.timeline();
-
-
-
-                    // 1. Console Diagnosis Sequence
-                    const logs = [
-                        "INITIATING SYSTEM DIAGNOSIS...",
-                        "DETECTED: CRITICAL ERROR IN [JAPANESE_POLITICS.EXE]",
-                        "> ERROR: LOGIC_NOT_FOUND",
-                        "> ERROR: PASSION_DISCONNECT",
-                        "> WARNING: LEGACY SYSTEM UNSTABLE",
-                        "--------------------------------",
-                        "SCANNING REPLACEMENT KERNEL...",
-                        "FOUND: AX-2026 PROTOCOL (YAMAOKA_KAMINO_BUILD)",
-                        "PREPARING OVERWRITE...",
-                        "DELETING OLD DEPENDENCIES..."
-                    ];
-
-
-
-                    tl.to(consoleOutput, { opacity: 1, duration: 0.1 })
-                        .call(() => {
-                            let i = 0;
-                            consoleOutput.innerHTML = ""; // Clear previous logs
-                            const interval = setInterval(() => {
-                                if (i < logs.length) {
-                                    const div = document.createElement('div');
-                                    div.textContent = `> ${logs[i]}`;
-                                    div.className = "mb-1";
-                                    consoleOutput.appendChild(div);
-                                    consoleOutput.scrollTop = consoleOutput.scrollHeight;
-                                    i++;
-                                } else {
-                                    clearInterval(interval);
-                                }
-                            }, 80); // Speed of logs
-                        })
-                        .to({}, { duration: 2.0 }) // Wait for logs to finish
-
-                    // 2. Glitch / Instability
-                    tl.to(legacySystem, {
-                        filter: "invert(1) hue-rotate(180deg) blur(2px)",
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 5
-                    }, "-=1.5")
-
-                    // 3. Progress Bar Sequence
-                    tl.to([progressContainer, progressText], { opacity: 1, duration: 0.2 })
-                        .to(progressBar, {
-                            width: "100%",
-                            duration: 1.5,
-                            ease: "power2.inOut",
-                            onUpdate: function () {
-                                const progress = Math.round(this.progress() * 100);
-                                progressText.innerText = `${progress}%`;
-                            }
-                        })
-
-                    // 4. Blackout & Switch
-                    tl.to(overlay, {
-                        backgroundColor: "#fff",
-                        duration: 0.05,
-                        yoyo: true,
-                        repeat: 1,
-                        onComplete: () => {
-                            // Flash effect sound could go here
-                        }
-                    })
-                        .to(overlay, { backgroundColor: "#000", duration: 0.1 })
-                        .call(() => {
-                            // Actual DOM Switch
-                            window.scrollTo(0, 0);
-                            legacySystem.style.display = 'none';
-                            newServices.classList.remove('hidden');
-                        })
-
-                    // 5. Reveal New World (CRT Turn On Effect)
-                    tl.to(overlay, {
-                        opacity: 0,
-                        duration: 0.8,
-                        delay: 0.5,
-                        onComplete: () => {
-                            overlay.classList.add('hidden');
-                            initNewWorldAnimations();
-                        }
-                    });
-                }
-
-                // --- POST-UPDATE WORLD ANIMATIONS (Core Team etc) ---
-                function initNewWorldAnimations() {
-                    // Force ScrollTrigger refresh to detect new layout
-                    ScrollTrigger.refresh();
-
-                    // 1. Master Title Sequence (New Weapons)
-                    const serviceHeader = document.querySelector("#new-services .text-center");
-                    if (serviceHeader) {
-                        gsap.fromTo(serviceHeader.children,
-                            { y: 30, opacity: 0 },
-                            {
-                                y: 0,
-                                opacity: 1,
-                                autoAlpha: 1,
-                                stagger: 0.1,
-                                duration: 1,
-                                ease: "power3.out"
-                            }
-                        );
-                    }
-
-                    // 2. Arsenal Cards Stagger
-                    gsap.from("#new-services .grid:first-of-type > div", {
-                        y: 60,
-                        opacity: 0,
-                        duration: 0.8,
-                        stagger: 0.2,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: "#new-services .grid:first-of-type",
-                            start: "top 80%"
-                        }
-                    });
-
-                    // 3. Core Team Section Animations
-                    // We use a slight delay or scroll trigger ensuring the user scrolls down to see it
-                    const coreTeamSection = document.querySelector("#new-services section"); // The nested section
-
-                    if (coreTeamSection) {
-                        // Background Grid Parallax
-                        gsap.to(coreTeamSection.querySelector('.absolute.inset-0'), {
-                            y: 50,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: coreTeamSection,
-                                start: "top bottom",
-                                end: "bottom top",
-                                scrub: true
-                            }
-                        });
-
-                        // File Cards "Stamp" Reveal
-                        gsap.utils.toArray(coreTeamSection.querySelectorAll(".grid > div")).forEach((card, i) => {
-                            gsap.fromTo(card,
-                                { scale: 1.05, opacity: 0, filter: "blur(5px)" },
-                                {
-                                    scale: 1,
-                                    opacity: 1,
-                                    filter: "blur(0px)",
-                                    duration: 0.5,
-                                    delay: i * 0.2,
-                                    ease: "power2.out",
-                                    scrollTrigger: {
-                                        trigger: card,
-                                        start: "top 85%"
-                                    }
-                                }
-                            );
-                        });
-
-                        // Synergy Section
-                        gsap.from(coreTeamSection.querySelector(".bg-ink"), {
-                            y: 50,
-                            opacity: 0,
-                            duration: 1,
-                            scrollTrigger: {
-                                trigger: coreTeamSection.querySelector(".bg-ink"),
-                                start: "top 80%"
-                            }
-                        });
-                    }
-                }
-            </script>
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>
