@@ -411,394 +411,387 @@
 
             </div>
 
-            <!-- HERO BLUEPRINT SECTION -->
-            <div class="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-[#f0f0f0] select-none py-20"
-                id="hero-blueprint">
+            <header
+                class="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#ECECEC]">
 
-                <!-- Background Grid System -->
-                <div class="absolute inset-0 z-0 opacity-20 pointer-events-none"
-                    style="background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px); background-size: 40px 40px;">
-                </div>
-                <div class="absolute inset-0 z-0 opacity-10 pointer-events-none"
-                    style="background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px); background-size: 200px 200px;">
+                <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+                    <div
+                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')]">
+                    </div>
                 </div>
 
-                <!-- CORNER MARKERS -->
-                <div class="absolute top-8 left-8 w-8 h-8 border-t-4 border-l-4 border-black z-10"></div>
-                <div class="absolute top-8 right-8 w-8 h-8 border-t-4 border-r-4 border-black z-10"></div>
-                <div class="absolute bottom-8 left-8 w-8 h-8 border-b-4 border-l-4 border-black z-10"></div>
-                <div class="absolute bottom-8 right-8 w-8 h-8 border-b-4 border-r-4 border-black z-10"></div>
+                <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div
+                        class="absolute top-10 -left-10 bg-[#EAFF00] border-y-4 border-black py-2 px-20 transform -rotate-12 shadow-lg">
+                        <span class="font-sans font-black text-xl tracking-widest text-black">CAUTION: REBOOTING
+                            ///</span>
+                    </div>
 
-                <!-- MAIN CONTROLS -->
-                <div class="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-12 flex flex-col">
+                    <div
+                        class="absolute bottom-20 -right-5 bg-black text-white border-2 border-[#EAFF00] p-6 transform rotate-6 shadow-[8px_8px_0px_rgba(0,0,0,0.3)]">
+                        <p class="font-sans text-xs tracking-widest text-[#EAFF00]">SYSTEM STATUS:</p>
+                        <p class="font-sans text-3xl font-black leading-none">CRITICAL<br>UPDATE</p>
+                    </div>
 
-                    <!-- REBOOT -->
-                    <div class="relative self-start group">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="bg-black text-white text-xs font-mono px-2 py-1 tracking-widest">PHASE_01 //
-                                再起動</span>
-                            <div class="h-[1px] w-24 bg-black"></div>
-                        </div>
+                    <svg class="absolute top-1/2 left-10 w-64 h-64 opacity-20" viewBox="0 0 100 100">
+                        <path d="M0 50 H 20 L 30 20 L 40 80 L 50 50 H 100" fill="none" stroke="black"
+                            stroke-width="2" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
+
+                    <div class="inline-block bg-black text-white px-4 py-1 mb-4 transform -rotate-1">
+                        <p class="font-sans text-xs md:text-sm tracking-[0.4em] font-bold text-[#EAFF00]">PHASE_01 //
+                            SYSTEM RESTART</p>
+                    </div>
+
+                    <div class="relative leading-[0.85] select-none">
                         <h1
-                            class="font-oswald font-bold text-[15vw] md:text-[10rem] leading-[0.8] tracking-tighter text-[#0a0a0a] transform group-hover:skew-x-2 transition-transform duration-300 origin-bottom-left mix-blend-darken">
+                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#1A1A1A] mix-blend-multiply relative z-10">
                             REBOOT
                         </h1>
-                        <!-- Technical Data -->
-                        <div
-                            class="absolute -right-12 top-10 font-mono text-[0.6rem] text-gray-500 hidden md:block text-right">
-                            SYS.ROOT<br>FORCE_OVERWRITE<br>PID:001
-                        </div>
-                    </div>
 
-                    <!-- CAMP -->
-                    <div class="relative self-end -mt-8 md:-mt-24 group">
-                        <h1 class="font-oswald font-bold text-[15vw] md:text-[10rem] leading-[0.8] tracking-tighter text-transparent transform group-hover:-skew-x-2 transition-transform duration-300 origin-bottom-right drop-shadow-[4px_4px_0px_rgba(205,127,50,0.4)]"
-                            style="-webkit-text-stroke: 3px #1a1a1a;">
+                        <h1 class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-transparent stroke-text absolute top-[0.6em] left-1/2 transform -translate-x-1/2 z-20 opacity-80"
+                            style="-webkit-text-stroke: 3px #CD7F32; filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.2));">
                             CAMP
                         </h1>
-                        <div class="absolute -top-6 right-0 md:-right-8 flex items-center gap-2">
-                            <div class="h-[1px] w-12 bg-[#CD7F32]"></div>
-                            <span
-                                class="bg-[#CD7F32] text-white text-xs font-mono px-2 py-1 tracking-widest shadow-[4px_4px_0px_black] group-hover:shadow-[2px_2px_0px_black] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">PHASE_02
-                                // 実践</span>
+
+                        <h1
+                            class="font-sans font-black text-[18vw] md:text-[13rem] tracking-tighter text-[#EAFF00] absolute top-[0.65em] left-[51%] transform -translate-x-1/2 z-0 mix-blend-multiply opacity-60">
+                            CAMP
+                        </h1>
+                    </div>
+
+                    <div class="mt-[6vw] md:mt-32 relative z-30">
+                        <div
+                            class="inline-block bg-white border-4 border-black px-8 py-4 shadow-[8px_8px_0px_#1A1A1A] transform rotate-1">
+                            <p class="font-sans text-xl md:text-3xl font-black tracking-widest text-black">
+                                FOR COUNCILLOR
+                            </p>
                         </div>
                     </div>
 
-                    <!-- COUNCILLOR -->
-                    <div class="relative mt-16 md:mt-24 border-y-2 border-black py-6 bg-white/80 backdrop-blur-sm">
-                        <div
-                            class="flex flex-col md:flex-row justify-between items-center font-mono font-bold text-xl md:text-4xl tracking-widest text-[#1A1A1A] gap-4">
-                            <div class="flex items-center gap-4">
-                                <span>FOR</span>
-                                <span
-                                    class="text-xs text-gray-400 font-normal hidden md:block">////////////////////////////////</span>
-                            </div>
-
-                            <span class="glitch-text" data-text="COUNCILLOR">COUNCILLOR</span>
-
-                            <div class="flex items-center gap-4">
-                                <span
-                                    class="text-xs text-gray-400 font-normal hidden md:block">////////////////////////////////</span>
-                                <span class="bg-black text-white text-xs px-3 py-1 self-center">PHASE_03 // 議員</span>
-                            </div>
-                        </div>
-                        <!-- Running Line (Decoration) -->
-                        <div class="absolute top-[50%] left-0 w-full h-[1px] bg-red-500/30 pointer-events-none"></div>
-                    </div>
-
-                </div>
-
-                <!-- Decorative Measure Lines -->
-                <div class="absolute top-0 bottom-0 left-12 w-[1px] bg-black/10 hidden md:block">
-                    <div class="absolute top-[20%] -left-1 text-[0.6rem] font-mono text-gray-400 rotate-90">AXIS_Y</div>
-                </div>
-                <div class="absolute left-0 right-0 bottom-12 h-[1px] bg-black/10 hidden md:block">
-                    <div class="absolute left-[20%] -bottom-4 text-[0.6rem] font-mono text-gray-400">AXIS_X</div>
-                </div>
-            </div>
-
-            <div
-                class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20">
-                <span
-                    class="font-sans text-xs tracking-widest mb-2 bg-black text-white px-3 py-1 border border-white">SCROLL
-                    TO HISTORY</span>
-                <div class="w-[2px] h-12 bg-black"></div>
-            </div>
-
-        </header>
-
-
-        <section class="bg-[#111] text-white py-32 px-4 border-t-8 border-neon relative overflow-hidden">
-
-            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden select-none">
-                <div
-                    class="text-[20rem] font-black font-sans leading-none text-gray-800 whitespace-nowrap opacity-20 transform -rotate-12 origin-top-left">
-                    REWRITE HISTORY 2000-2050
-                </div>
-            </div>
-
-            <div class="max-w-6xl mx-auto relative z-10">
-                <h2 class="font-sans text-5xl md:text-8xl font-black mb-32 text-center leading-none">
-                    THE <span class="text-neon stroke-white" style="-webkit-text-stroke: 0px;">GREAT</span><br>
-                    REWRITE
-                    <span class="block text-base md:text-xl font-jp font-bold tracking-[0.5em] text-gray-400 mt-4">2000
-                        - 2050 文明の断層ログ</span>
-                </h2>
-
-                <div class="space-y-40">
-
-                    <div class="relative group">
-                        <div
-                            class="absolute -left-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-[#333] z-0 group-hover:text-[#555] transition-colors leading-none">
-                            2000</div>
-
-                        <div class="relative z-10 border-l-4 border-gray-600 pl-8 md:pl-16 py-4 mt-8">
-                            <div class="flex items-baseline gap-4 mb-6">
-                                <span
-                                    class="bg-gray-600 text-black font-bold px-3 py-1 text-xs tracking-widest">PAST_LOG</span>
-                                <h3 class="text-3xl md:text-5xl font-black font-jp">「所有」と「熱狂」の時代</h3>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                                <div class="font-jp text-gray-300 space-y-6 leading-relaxed">
-                                    <p class="text-lg font-bold text-white border-b border-gray-700 pb-2">■ 身体感覚</p>
-                                    <p>
-                                        情報は「足」で稼ぐものだった。駅の伝言板。公衆電話の行列。<br>
-                                        <span class="text-neon">「センター問い合わせ」</span>を連打し、アンテナを伸ばして電波を探す。<br>
-                                        「24時間戦えますか」というCMが、まだ冗談ではなかった時代。
-                                    </p>
-                                </div>
-                                <div class="bg-gray-900 p-6 border border-gray-700 transform rotate-1">
-                                    <h4 class="font-sans text-xl font-bold text-gray-500 mb-4">POLITICAL OS v1.0</h4>
-                                    <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-gray-300">
-                                        <li>選挙は「握手」と「ドブ板」が全て。</li>
-                                        <li>情報はテレビと新聞が独占。</li>
-                                        <li>「個人情報」という概念の希薄さ。</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <div
-                            class="absolute -right-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-neon opacity-20 z-0 animate-pulse-fast leading-none">
-                            2025</div>
-
-                        <div class="relative z-10 border-r-4 border-neon pr-8 md:pr-16 py-4 mt-8 text-right">
-                            <div class="flex flex-row-reverse items-baseline gap-4 mb-6">
-                                <span
-                                    class="bg-neon text-black font-bold px-3 py-1 text-xs tracking-widest animate-pulse">CURRENT_LOG</span>
-                                <h3 class="text-3xl md:text-5xl font-black font-jp text-white">「体験」と「焦燥」の時代</h3>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 direction-rtl">
-                                <div class="font-jp text-gray-200 space-y-6 leading-relaxed text-right md:order-2">
-                                    <p class="text-lg font-bold text-neon border-b border-neon pb-2 inline-block">■ 身体感覚
-                                    </p>
-                                    <p>
-                                        スマホを忘れることは、脳を忘れることと同義。<br>
-                                        <span class="text-neon">「タイパ」</span>に取り憑かれ、映画を倍速で観る。<br>
-                                        見たくない現実はアルゴリズムが遮断し、心地よい分断の中にいる。
-                                    </p>
-                                </div>
-                                <div
-                                    class="bg-white p-6 border-4 border-neon transform -rotate-1 shadow-[10px_10px_0px_#CD7F32] md:order-1 text-left">
-                                    <h4 class="font-sans text-xl font-bold text-black mb-4">POLITICAL OS v2.5</h4>
-                                    <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-ink">
-                                        <li>無党派層は「スマホ」の中にしかいない。</li>
-                                        <li>失言は切り抜かれ、永遠に拡散される。</li>
-                                        <li>「感情」をハックした者が勝つ認知戦。</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative group mt-32">
-                        <div
-                            class="absolute left-1/2 transform -translate-x-1/2 -top-24 md:-top-32 w-full text-center z-0">
-                            <span
-                                class="text-[8rem] md:text-[13rem] font-sans font-black text-transparent stroke-white opacity-40 blur-[1px]">2050</span>
-                        </div>
-
-                        <div
-                            class="relative z-10 bg-black/90 border border-gray-700 p-8 md:p-16 backdrop-blur-md overflow-hidden shadow-2xl">
-                            <div
-                                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDAsIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==')] opacity-30">
-                            </div>
-
-                            <div class="relative z-20 text-center">
-                                <span
-                                    class="bg-magenta text-white font-bold px-4 py-1 text-sm tracking-widest mb-6 inline-block shadow-[4px_4px_0px_white]">FUTURE_PREDICTION</span>
-                                <h3 class="text-4xl md:text-6xl font-black font-jp text-white mb-16 drop-shadow-lg">
-                                    「人間」の再定義</h3>
-
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
-                                    <div class="border-t-4 border-magenta pt-6">
-                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO DEVICE</h4>
-                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
-                                            スマホという「板」は消滅する。<br>
-                                            情報は網膜に直接投影され、思考するだけで送信される。<br>
-                                            オンラインとオフラインの境界線は完全に溶解する。
-                                        </p>
-                                    </div>
-                                    <div class="border-t-4 border-magenta pt-6">
-                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO AGING</h4>
-                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
-                                            老化は「治療可能な疾患」となる。<br>
-                                            寿命の格差は、そのまま経済格差となる。<br>
-                                            死生観そのものが書き換わり、宗教と倫理が衝突する。
-                                        </p>
-                                    </div>
-                                    <div class="border-t-4 border-magenta pt-6">
-                                        <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO WORK</h4>
-                                        <p class="font-jp text-gray-300 text-sm leading-relaxed">
-                                            労働はAIとロボットが行う。<br>
-                                            政治家の仕事は「利益誘導」から、<br>
-                                            人類の「存在意義（何のために生きるか）」の提示へとシフトする。
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="mt-20 p-8 border-2 border-white inline-block relative bg-black">
-                                    <p class="font-jp font-bold text-xl md:text-2xl leading-relaxed text-white">
-                                        この垂直な進化の壁を、<br>
-                                        あなたは素手で登るつもりですか？
-                                    </p>
-                                    <div class="absolute -bottom-3 -right-3 w-6 h-6 bg-neon"></div>
-                                    <div class="absolute -top-3 -left-3 w-6 h-6 bg-magenta"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <div class="relative w-full py-32 flex flex-col items-center justify-center bg-[#111] overflow-hidden">
-
-            <div
-                class="absolute w-full h-8 bg-neon border-y-2 border-black flex items-center overflow-hidden opacity-80 pointer-events-none mb-40 transform -rotate-1">
-                <div class="animate-marquee whitespace-nowrap font-sans font-bold text-black text-xs tracking-[0.5em]">
-                    WARNING: IRREVERSIBLE PROCESS /// OLD SYSTEM WILL BE DELETED /// 警告：古い常識は削除されます /// CAUTION ///
-                </div>
-            </div>
-
-            <!-- SYSTEM ALERT MODULE -->
-            <div class="relative z-20 mt-12 w-full max-w-5xl mx-auto px-4">
-
-                <!-- TERMINAL WINDOW FRAME -->
-                <div
-                    class="bg-black border-4 border-red-600 relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.5)] group/module p-8 md:p-12">
-
-                    <!-- SCANLINE OVERLAY -->
                     <div
-                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMCwgMCwgMC4xKSIvPgo8L3N2Zz4=')] opacity-50 pointer-events-none z-10">
-                    </div>
-
-                    <!-- WINDOW HEADER -->
-                    <div
-                        class="absolute top-0 left-0 right-0 bg-red-600 text-black px-4 py-2 flex justify-between items-center font-mono font-bold z-30">
-                        <div class="flex items-center gap-2">
-                            <span class="animate-pulse">⚠</span>
-                            <span>CRITICAL SYSTEM ALERT</span>
-                        </div>
-                        <div class="text-xs">ERR_CODE: LEGACY_OVERLOAD</div>
-                    </div>
-
-                    <div class="relative z-20 mt-12">
-
-                        <!-- STATUS MONITOR GRID -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 font-mono">
-
-                            <!-- CURRENT SYSTEM STATUS -->
-                            <div class="border border-gray-800 bg-gray-900/50 p-6 relative group">
-                                <div class="absolute top-0 left-0 bg-gray-800 text-gray-500 text-[0.6rem] px-2 py-1">
-                                    CURRENT VER.</div>
-                                <h4
-                                    class="text-gray-500 text-xl font-bold mt-4 line-through decoration-red-600 decoration-4">
-                                    TRADITIONAL POLITICS</h4>
-                                <div class="mt-4 text-xs space-y-2 text-gray-600">
-                                    <p class="flex justify-between"><span>> PERFORMANCE:</span> <span>CRITICAL
-                                            LOW</span></p>
-                                    <p class="flex justify-between"><span>> TRUST LEVEL:</span> <span>ERROR_404</span>
-                                    </p>
-                                    <p class="flex justify-between"><span>> FUTURE COMPAT:</span> <span>NONE</span></p>
-                                </div>
-                                <div
-                                    class="mt-6 bg-red-900/30 border border-red-900 text-red-500 text-center py-2 text-xs font-bold animate-pulse">
-                                    [ LIMIT REACHED ]
-                                </div>
-                            </div>
-
-                            <!-- TARGET SYSTEM STATUS -->
-                            <div class="border-2 border-neon bg-neon/5 p-6 relative">
-                                <div class="absolute top-0 left-0 bg-neon text-black text-[0.6rem] px-2 py-1 font-bold">
-                                    TARGET VER.</div>
-                                <h4 class="text-white text-xl font-bold mt-4">NEXT GEN OS <span
-                                        class="text-neon text-xs ml-2">v2026.0</span></h4>
-                                <div class="mt-4 text-xs space-y-2 text-gray-300">
-                                    <p class="flex justify-between"><span class="text-neon">> PERFORMANCE:</span>
-                                        <span>UNLIMITED</span>
-                                    </p>
-                                    <p class="flex justify-between"><span class="text-neon">> SPEED:</span>
-                                        <span>INSTANT</span>
-                                    </p>
-                                    <p class="flex justify-between"><span class="text-neon">> ARCHITECTURE:</span>
-                                        <span>HUMAN x AI</span>
-                                    </p>
-                                </div>
-                                <div class="mt-6 bg-neon text-black text-center py-2 text-xs font-bold animate-pulse">
-                                    [ READY TO INSTALL ]
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- THE BUTTON (EMBEDDED) -->
-                        <div class="text-center relative inline-block w-full">
-                            <!-- Hover Box 1: Red -->
-                            <div
-                                class="absolute inset-0 bg-red-600 transform translate-x-1 translate-y-1 group-hover/module:translate-x-2 group-hover/module:translate-y-2 transition-transform duration-100 opacity-0 group-hover/module:opacity-100 pointer-events-none">
-                            </div>
-                            <!-- Hover Box 2: Cyan -->
-                            <div
-                                class="absolute inset-0 bg-cyan-600 transform -translate-x-1 -translate-y-1 group-hover/module:-translate-x-2 group-hover/module:-translate-y-2 transition-transform duration-100 opacity-0 group-hover/module:opacity-100 pointer-events-none">
-                            </div>
-
-                            <!-- HOVER HINT: LEFT ARROW -->
-                            <div
-                                class="hidden md:flex absolute top-1/2 left-4 md:left-[10%] xl:left-[15%] transform -translate-y-1/2 -translate-x-8 group-hover/module:translate-x-0 opacity-0 group-hover/module:opacity-100 transition-all duration-300 items-center gap-2 font-mono font-bold text-neon text-sm tracking-widest pointer-events-none whitespace-nowrap z-50">
-                                <span class="animate-pulse">PUSH</span>
-                                <span>>>></span>
-                            </div>
-
-                            <!-- HOVER HINT: RIGHT ARROW -->
-                            <div
-                                class="hidden md:flex absolute top-1/2 right-4 md:right-[10%] xl:right-[15%] transform -translate-y-1/2 translate-x-8 group-hover/module:translate-x-0 opacity-0 group-hover/module:opacity-100 transition-all duration-300 items-center gap-2 font-mono font-bold text-neon text-sm tracking-widest pointer-events-none whitespace-nowrap z-50">
-                                <span>&lt;&lt;&lt;</span>
-                                <span class="animate-pulse">PUSH</span>
-                            </div>
-
-                            <button onclick="activateUpdate()"
-                                class="relative w-full md:w-auto md:min-w-[500px] cursor-pointer bg-black text-white border-4 border-white px-8 md:px-16 py-6 shadow-[10px_10px_0px_#CD7F32] group-hover/module:shadow-[15px_15px_0px_#FF0000] group-hover/module:translate-x-[-2px] group-hover/module:translate-y-[-2px] transition-all duration-200 overflow-hidden animate-pulse hover:animate-none z-40 mx-auto block">
-                                <div
-                                    class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LDI1NSwgMC4xKSIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none">
-                                </div>
-                                <div class="relative z-10 text-center">
-                                    <p
-                                        class="font-sans text-neon text-xs tracking-[0.4em] mb-1 group-hover:text-white transition-colors">
-                                        &lt; EXECUTE PATCH &gt;</p>
-                                    <h2
-                                        class="font-jp font-black text-2xl md:text-4xl tracking-widest leading-none mt-2">
-                                        政治家OSを<br>
-                                        <span
-                                            class="text-transparent stroke-white bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:text-neon transition-colors"
-                                            style="-webkit-text-stroke: 1px transparent;">更新すると<br>こうなる！</span><span
-                                            class="text-neon blink">_</span>
-                                    </h2>
-                                    <p
-                                        class="text-[0.6rem] md:text-xs text-red-500 font-bold tracking-[0.3em] mt-3 animate-pulse">
-                                        /// PUSH TO INSTALL ///
-                                    </p>
-                                </div>
-                                <div
-                                    class="absolute bottom-0 left-0 h-1 bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out">
-                                </div>
-                            </button>
-                        </div>
-
+                        class="mt-12 md:mt-16 font-jp font-bold text-lg md:text-2xl text-gray-800 bg-white/80 inline-block px-6 py-2 backdrop-blur-sm">
+                        <p>政治家人生を、ここから<span class="border-b-4 border-[#EAFF00]">「再起動」</span>せよ。</p>
                     </div>
 
                 </div>
-            </div>
 
-            <div class="mt-8 text-center max-w-lg mx-auto bg-black/50 backdrop-blur border-l-4 border-red-600 p-4">
-                <p class="text-red-500 font-bold text-sm md:text-base animate-pulse">※ 警告：実行すると、古い常識はすべて「削除」されます。</p>
+                <div class="absolute bottom-0 left-0 w-full flex justify-center pb-8 z-20">
+                    <div class="flex flex-col items-center gap-2 animate-bounce">
+                        <span class="font-sans text-[0.6rem] tracking-widest bg-black text-white px-2">SCROLL TO
+                            ACCESS</span>
+                        <div class="w-[2px] h-8 bg-black"></div>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <section class="bg-[#111] text-white py-32 px-4 border-t-8 border-neon relative overflow-hidden">
+
+                <div
+                    class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden select-none">
+                    <div
+                        class="text-[20rem] font-black font-sans leading-none text-gray-800 whitespace-nowrap opacity-20 transform -rotate-12 origin-top-left">
+                        REWRITE HISTORY 2000-2050
+                    </div>
+                </div>
+
+                <div class="max-w-6xl mx-auto relative z-10">
+                    <h2 class="font-sans text-5xl md:text-8xl font-black mb-32 text-center leading-none">
+                        THE <span class="text-neon stroke-white" style="-webkit-text-stroke: 0px;">GREAT</span><br>
+                        REWRITE
+                        <span
+                            class="block text-base md:text-xl font-jp font-bold tracking-[0.5em] text-gray-400 mt-4">2000
+                            - 2050 文明の断層ログ</span>
+                    </h2>
+
+                    <div class="space-y-40">
+
+                        <div class="relative group">
+                            <div
+                                class="absolute -left-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-[#333] z-0 group-hover:text-[#555] transition-colors leading-none">
+                                2000</div>
+
+                            <div class="relative z-10 border-l-4 border-gray-600 pl-8 md:pl-16 py-4 mt-8">
+                                <div class="flex items-baseline gap-4 mb-6">
+                                    <span
+                                        class="bg-gray-600 text-black font-bold px-3 py-1 text-xs tracking-widest">PAST_LOG</span>
+                                    <h3 class="text-3xl md:text-5xl font-black font-jp">「所有」と「熱狂」の時代</h3>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                    <div class="font-jp text-gray-300 space-y-6 leading-relaxed">
+                                        <p class="text-lg font-bold text-white border-b border-gray-700 pb-2">■ 身体感覚</p>
+                                        <p>
+                                            情報は「足」で稼ぐものだった。駅の伝言板。公衆電話の行列。<br>
+                                            <span class="text-neon">「センター問い合わせ」</span>を連打し、アンテナを伸ばして電波を探す。<br>
+                                            「24時間戦えますか」というCMが、まだ冗談ではなかった時代。
+                                        </p>
+                                    </div>
+                                    <div class="bg-gray-900 p-6 border border-gray-700 transform rotate-1">
+                                        <h4 class="font-sans text-xl font-bold text-gray-500 mb-4">POLITICAL OS v1.0
+                                        </h4>
+                                        <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-gray-300">
+                                            <li>選挙は「握手」と「ドブ板」が全て。</li>
+                                            <li>情報はテレビと新聞が独占。</li>
+                                            <li>「個人情報」という概念の希薄さ。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div
+                                class="absolute -right-4 -top-16 text-8xl md:text-[10rem] font-sans font-black text-neon opacity-20 z-0 animate-pulse-fast leading-none">
+                                2025</div>
+
+                            <div class="relative z-10 border-r-4 border-neon pr-8 md:pr-16 py-4 mt-8 text-right">
+                                <div class="flex flex-row-reverse items-baseline gap-4 mb-6">
+                                    <span
+                                        class="bg-neon text-black font-bold px-3 py-1 text-xs tracking-widest animate-pulse">CURRENT_LOG</span>
+                                    <h3 class="text-3xl md:text-5xl font-black font-jp text-white">「体験」と「焦燥」の時代</h3>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 direction-rtl">
+                                    <div class="font-jp text-gray-200 space-y-6 leading-relaxed text-right md:order-2">
+                                        <p class="text-lg font-bold text-neon border-b border-neon pb-2 inline-block">■
+                                            身体感覚
+                                        </p>
+                                        <p>
+                                            スマホを忘れることは、脳を忘れることと同義。<br>
+                                            <span class="text-neon">「タイパ」</span>に取り憑かれ、映画を倍速で観る。<br>
+                                            見たくない現実はアルゴリズムが遮断し、心地よい分断の中にいる。
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="bg-white p-6 border-4 border-neon transform -rotate-1 shadow-[10px_10px_0px_#CD7F32] md:order-1 text-left">
+                                        <h4 class="font-sans text-xl font-bold text-black mb-4">POLITICAL OS v2.5</h4>
+                                        <ul class="list-disc pl-5 space-y-3 font-jp font-bold text-ink">
+                                            <li>無党派層は「スマホ」の中にしかいない。</li>
+                                            <li>失言は切り抜かれ、永遠に拡散される。</li>
+                                            <li>「感情」をハックした者が勝つ認知戦。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative group mt-32">
+                            <div
+                                class="absolute left-1/2 transform -translate-x-1/2 -top-24 md:-top-32 w-full text-center z-0">
+                                <span
+                                    class="text-[8rem] md:text-[13rem] font-sans font-black text-transparent stroke-white opacity-40 blur-[1px]">2050</span>
+                            </div>
+
+                            <div
+                                class="relative z-10 bg-black/90 border border-gray-700 p-8 md:p-16 backdrop-blur-md overflow-hidden shadow-2xl">
+                                <div
+                                    class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDAsIDI1NSwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==')] opacity-30">
+                                </div>
+
+                                <div class="relative z-20 text-center">
+                                    <span
+                                        class="bg-magenta text-white font-bold px-4 py-1 text-sm tracking-widest mb-6 inline-block shadow-[4px_4px_0px_white]">FUTURE_PREDICTION</span>
+                                    <h3 class="text-4xl md:text-6xl font-black font-jp text-white mb-16 drop-shadow-lg">
+                                        「人間」の再定義</h3>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+                                        <div class="border-t-4 border-magenta pt-6">
+                                            <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO DEVICE</h4>
+                                            <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                                スマホという「板」は消滅する。<br>
+                                                情報は網膜に直接投影され、思考するだけで送信される。<br>
+                                                オンラインとオフラインの境界線は完全に溶解する。
+                                            </p>
+                                        </div>
+                                        <div class="border-t-4 border-magenta pt-6">
+                                            <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO AGING</h4>
+                                            <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                                老化は「治療可能な疾患」となる。<br>
+                                                寿命の格差は、そのまま経済格差となる。<br>
+                                                死生観そのものが書き換わり、宗教と倫理が衝突する。
+                                            </p>
+                                        </div>
+                                        <div class="border-t-4 border-magenta pt-6">
+                                            <h4 class="font-sans text-3xl font-black text-magenta mb-3">NO WORK</h4>
+                                            <p class="font-jp text-gray-300 text-sm leading-relaxed">
+                                                労働はAIとロボットが行う。<br>
+                                                政治家の仕事は「利益誘導」から、<br>
+                                                人類の「存在意義（何のために生きるか）」の提示へとシフトする。
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-20 p-8 border-2 border-white inline-block relative bg-black">
+                                        <p class="font-jp font-bold text-xl md:text-2xl leading-relaxed text-white">
+                                            この垂直な進化の壁を、<br>
+                                            あなたは素手で登るつもりですか？
+                                        </p>
+                                        <div class="absolute -bottom-3 -right-3 w-6 h-6 bg-neon"></div>
+                                        <div class="absolute -top-3 -left-3 w-6 h-6 bg-magenta"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <div class="relative w-full py-32 flex flex-col items-center justify-center bg-[#111] overflow-hidden">
+
+                <div
+                    class="absolute w-full h-8 bg-neon border-y-2 border-black flex items-center overflow-hidden opacity-80 pointer-events-none mb-40 transform -rotate-1">
+                    <div
+                        class="animate-marquee whitespace-nowrap font-sans font-bold text-black text-xs tracking-[0.5em]">
+                        WARNING: IRREVERSIBLE PROCESS /// OLD SYSTEM WILL BE DELETED /// 警告：古い常識は削除されます /// CAUTION ///
+                    </div>
+                </div>
+
+                <!-- SYSTEM ALERT MODULE -->
+                <div class="relative z-20 mt-12 w-full max-w-5xl mx-auto px-4">
+
+                    <!-- TERMINAL WINDOW FRAME -->
+                    <div
+                        class="bg-black border-4 border-red-600 relative overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.5)] group/module p-8 md:p-12">
+
+                        <!-- SCANLINE OVERLAY -->
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMCwgMCwgMC4xKSIvPgo8L3N2Zz4=')] opacity-50 pointer-events-none z-10">
+                        </div>
+
+                        <!-- WINDOW HEADER -->
+                        <div
+                            class="absolute top-0 left-0 right-0 bg-red-600 text-black px-4 py-2 flex justify-between items-center font-mono font-bold z-30">
+                            <div class="flex items-center gap-2">
+                                <span class="animate-pulse">⚠</span>
+                                <span>CRITICAL SYSTEM ALERT</span>
+                            </div>
+                            <div class="text-xs">ERR_CODE: LEGACY_OVERLOAD</div>
+                        </div>
+
+                        <div class="relative z-20 mt-12">
+
+                            <!-- STATUS MONITOR GRID -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 font-mono">
+
+                                <!-- CURRENT SYSTEM STATUS -->
+                                <div class="border border-gray-800 bg-gray-900/50 p-6 relative group">
+                                    <div
+                                        class="absolute top-0 left-0 bg-gray-800 text-gray-500 text-[0.6rem] px-2 py-1">
+                                        CURRENT VER.</div>
+                                    <h4
+                                        class="text-gray-500 text-xl font-bold mt-4 line-through decoration-red-600 decoration-4">
+                                        TRADITIONAL POLITICS</h4>
+                                    <div class="mt-4 text-xs space-y-2 text-gray-600">
+                                        <p class="flex justify-between"><span>> PERFORMANCE:</span> <span>CRITICAL
+                                                LOW</span></p>
+                                        <p class="flex justify-between"><span>> TRUST LEVEL:</span>
+                                            <span>ERROR_404</span>
+                                        </p>
+                                        <p class="flex justify-between"><span>> FUTURE COMPAT:</span> <span>NONE</span>
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="mt-6 bg-red-900/30 border border-red-900 text-red-500 text-center py-2 text-xs font-bold animate-pulse">
+                                        [ LIMIT REACHED ]
+                                    </div>
+                                </div>
+
+                                <!-- TARGET SYSTEM STATUS -->
+                                <div class="border-2 border-neon bg-neon/5 p-6 relative">
+                                    <div
+                                        class="absolute top-0 left-0 bg-neon text-black text-[0.6rem] px-2 py-1 font-bold">
+                                        TARGET VER.</div>
+                                    <h4 class="text-white text-xl font-bold mt-4">NEXT GEN OS <span
+                                            class="text-neon text-xs ml-2">v2026.0</span></h4>
+                                    <div class="mt-4 text-xs space-y-2 text-gray-300">
+                                        <p class="flex justify-between"><span class="text-neon">> PERFORMANCE:</span>
+                                            <span>UNLIMITED</span>
+                                        </p>
+                                        <p class="flex justify-between"><span class="text-neon">> SPEED:</span>
+                                            <span>INSTANT</span>
+                                        </p>
+                                        <p class="flex justify-between"><span class="text-neon">> ARCHITECTURE:</span>
+                                            <span>HUMAN x AI</span>
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="mt-6 bg-neon text-black text-center py-2 text-xs font-bold animate-pulse">
+                                        [ READY TO INSTALL ]
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- THE BUTTON (EMBEDDED) -->
+                            <div class="text-center relative inline-block w-full">
+                                <!-- Hover Box 1: Red -->
+                                <div
+                                    class="absolute inset-0 bg-red-600 transform translate-x-1 translate-y-1 group-hover/module:translate-x-2 group-hover/module:translate-y-2 transition-transform duration-100 opacity-0 group-hover/module:opacity-100 pointer-events-none">
+                                </div>
+                                <!-- Hover Box 2: Cyan -->
+                                <div
+                                    class="absolute inset-0 bg-cyan-600 transform -translate-x-1 -translate-y-1 group-hover/module:-translate-x-2 group-hover/module:-translate-y-2 transition-transform duration-100 opacity-0 group-hover/module:opacity-100 pointer-events-none">
+                                </div>
+
+                                <!-- HOVER HINT: LEFT ARROW -->
+                                <div
+                                    class="hidden md:flex absolute top-1/2 left-4 md:left-[10%] xl:left-[15%] transform -translate-y-1/2 -translate-x-8 group-hover/module:translate-x-0 opacity-0 group-hover/module:opacity-100 transition-all duration-300 items-center gap-2 font-mono font-bold text-neon text-sm tracking-widest pointer-events-none whitespace-nowrap z-50">
+                                    <span class="animate-pulse">PUSH</span>
+                                    <span>>>></span>
+                                </div>
+
+                                <!-- HOVER HINT: RIGHT ARROW -->
+                                <div
+                                    class="hidden md:flex absolute top-1/2 right-4 md:right-[10%] xl:right-[15%] transform -translate-y-1/2 translate-x-8 group-hover/module:translate-x-0 opacity-0 group-hover/module:opacity-100 transition-all duration-300 items-center gap-2 font-mono font-bold text-neon text-sm tracking-widest pointer-events-none whitespace-nowrap z-50">
+                                    <span>&lt;&lt;&lt;</span>
+                                    <span class="animate-pulse">PUSH</span>
+                                </div>
+
+                                <button onclick="activateUpdate()"
+                                    class="relative w-full md:w-auto md:min-w-[500px] cursor-pointer bg-black text-white border-4 border-white px-8 md:px-16 py-6 shadow-[10px_10px_0px_#CD7F32] group-hover/module:shadow-[15px_15px_0px_#FF0000] group-hover/module:translate-x-[-2px] group-hover/module:translate-y-[-2px] transition-all duration-200 overflow-hidden animate-pulse hover:animate-none z-40 mx-auto block">
+                                    <div
+                                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LDI1NSwgMC4xKSIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none">
+                                    </div>
+                                    <div class="relative z-10 text-center">
+                                        <p
+                                            class="font-sans text-neon text-xs tracking-[0.4em] mb-1 group-hover:text-white transition-colors">
+                                            &lt; EXECUTE PATCH &gt;</p>
+                                        <h2
+                                            class="font-jp font-black text-2xl md:text-4xl tracking-widest leading-none mt-2">
+                                            政治家OSを<br>
+                                            <span
+                                                class="text-transparent stroke-white bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:text-neon transition-colors"
+                                                style="-webkit-text-stroke: 1px transparent;">更新すると<br>こうなる！</span><span
+                                                class="text-neon blink">_</span>
+                                        </h2>
+                                        <p
+                                            class="text-[0.6rem] md:text-xs text-red-500 font-bold tracking-[0.3em] mt-3 animate-pulse">
+                                            /// PUSH TO INSTALL ///
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="absolute bottom-0 left-0 h-1 bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out">
+                                    </div>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center max-w-lg mx-auto bg-black/50 backdrop-blur border-l-4 border-red-600 p-4">
+                    <p class="text-red-500 font-bold text-sm md:text-base animate-pulse">※ 警告：実行すると、古い常識はすべて「削除」されます。
+                    </p>
+                </div>
             </div>
-        </div>
     </div>
 
 
