@@ -897,12 +897,12 @@
 
                     <h2
                         class="font-sans font-black text-6xl md:text-[8rem] text-black leading-[0.8] uppercase tracking-tighter relative z-10 mix-blend-darken">
-                        3 TACTICAL<br>GEARS
+                        3 TACTICAL<br class="hidden md:block"> GEARS
                     </h2>
 
                     <p
                         class="font-jp font-bold text-sm md:text-xl text-white mt-4 bg-black inline-block px-6 py-2 transform rotate-1 border-2 border-[#EAFF00]">
-                        あなたの「一人会派」に実装される、3つの非対称兵器。
+                        <span class="inline-block">あなたの「一人会派」に実装される、</span><span class="inline-block">3つの非対称兵器。</span>
                     </p>
                 </div>
 
@@ -934,11 +934,12 @@
                         <div class="h-1 w-full bg-black group-hover:bg-[#CD7F32] mb-4"></div>
 
                         <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#CD7F32]">
-                            ポスター1枚で、<br>街の景色を変えてしまう。
+                            <span class="inline-block">ポスター1枚で、</span><span class="inline-block">街の景色を変えてしまう。</span>
                         </p>
                         <p
                             class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
-                            デザインとは、単なる装飾ではない「機能」だ。圧倒的な視覚効果で、他候補を過去のものにする。
+                            デザインとは、単なる装飾ではない「機能」だ。<span class="inline-block">圧倒的な視覚効果で、</span><span
+                                class="inline-block">他候補を過去のものにする。</span>
                         </p>
 
                         <div
@@ -973,11 +974,12 @@
                         <div class="h-1 w-full bg-black group-hover:bg-[#EAFF00] mb-4"></div>
 
                         <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#EAFF00]">
-                            あなたの能力を拡張する、<br>デジタルの分身。
+                            <span class="inline-block">あなたの能力を拡張する、</span><span class="inline-block">デジタルの分身。</span>
                         </p>
                         <p
                             class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
-                            「人手が足りない」という言い訳はもう不要。あなたの思考をコピーしたAIが、24時間休まず有権者と対話し続ける。
+                            「人手が足りない」という言い訳はもう不要。<span class="inline-block">あなたの思考をコピーしたAIが、</span><span
+                                class="inline-block">24時間休まず有権者と対話し続ける。</span>
                         </p>
 
                         <div
@@ -1012,11 +1014,12 @@
                         <div class="h-1 w-full bg-black group-hover:bg-[#FF00FF] mb-4"></div>
 
                         <p class="font-jp font-black text-xl md:text-2xl mb-4 leading-tight group-hover:text-[#FF00FF]">
-                            感情論を捨てよ。<br>必要なのは「正確な攻略法」だ。
+                            <span class="inline-block">感情論を捨てよ。</span><span class="inline-block">必要なのは「正確な攻略法」だ。</span>
                         </p>
                         <p
                             class="font-jp text-sm text-gray-700 group-hover:text-gray-300 leading-relaxed mb-6 font-bold">
-                            勝利に必要な票数は計算できる。LINEとデータを結合し、最短ルートで当選ラインを超えるシステムを実装する。
+                            勝利に必要な票数は計算できる。<span class="inline-block">LINEとデータを結合し、</span><span
+                                class="inline-block">最短ルートで当選ラインを超える</span><span class="inline-block">システムを実装する。</span>
                         </p>
 
                         <div
@@ -1496,9 +1499,17 @@
                 .to(overlay, { backgroundColor: "#000", duration: 0.1 })
                 .call(() => {
                     // Actual DOM Switch
-                    window.scrollTo(0, 0);
                     legacySystem.style.display = 'none';
-                    newServices.classList.remove('hidden');
+                    if (newServices) {
+                        newServices.classList.remove('hidden');
+
+                        // Force scroll to top immediately after DOM change to prevent jumping
+                        requestAnimationFrame(() => {
+                            window.scrollTo(0, 0);
+                            document.documentElement.scrollTop = 0;
+                            document.body.scrollTop = 0;
+                        });
+                    }
                 })
 
             // 5. Reveal New World (CRT Turn On Effect)
