@@ -220,7 +220,7 @@
             background: #EAFF00;
         }
 
-        /* GENESIS MOIRÉ EFFECT - IMPROVED VISIBILITY */
+        /* GENESIS MOIRÉ EFFECT - ROBUST VISIBILITY FIX */
         @keyframes moire-float {
             0% {
                 transform: translate(0, 0) rotate(0deg) scale(1);
@@ -241,19 +241,19 @@
 
         .bg-genesis {
             background-image:
-                radial-gradient(circle at center, #000000 0.8px, transparent 0.8px),
-                linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+                radial-gradient(circle at center, #000000 1.2px, transparent 1.2px),
+                linear-gradient(to right, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
             background-size: 30px 30px, 50px 50px, 50px 50px;
             position: absolute;
             inset: -50%;
             width: 200%;
             height: 200%;
-            opacity: 0.15;
-            /* Visibility Check: Should be distinct on white */
+            opacity: 0.4;
+            /* HIGH VISIBILITY */
             pointer-events: none;
             z-index: 0;
-            mix-blend-mode: multiply;
+            /* Removed mix-blend-mode for safety */
         }
 
         .bg-genesis-1 {
@@ -261,21 +261,35 @@
         }
 
         .bg-genesis-2 {
-            background-image: radial-gradient(circle at center, #000000 0.8px, transparent 0.8px);
+            background-image: radial-gradient(circle at center, #000000 1px, transparent 1px);
             background-size: 36px 36px;
             animation: moire-float 35s infinite ease-in-out;
-            opacity: 0.1;
+            opacity: 0.3;
         }
 
         /* WIGGLY TEXTURE */
         .bg-noise-animated {
             animation: grain 0.5s steps(3) infinite;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
-            opacity: 0.15;
-            mix-blend-mode: multiply;
+            opacity: 0.2;
             position: absolute;
             inset: 0;
             z-index: 1;
+        }
+
+        /* MANUAL BLOB GRADIENT (Fixing Tailwind missing class) */
+        .genesis-blob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(200, 200, 200, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 9999px;
+            filter: blur(80px);
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -923,9 +937,7 @@
                     <div class="absolute inset-0 bg-noise-animated"></div>
 
                     <!-- OPTIONAL: Organic Blob for 'Nyonyo' feel -->
-                    <div
-                        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gray-300 to-transparent opacity-60 rounded-full blur-[100px] animate-pulse">
-                    </div>
+                    <div class="genesis-blob"></div>
                 </div>
                 <div class="max-w-4xl px-6 text-center relative z-10">
                     <h2
