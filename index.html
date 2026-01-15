@@ -567,29 +567,44 @@
 
                 <div class="max-w-4xl px-6 relative z-10">
                     <div class="flex items-baseline gap-4 mb-8 border-l-8 border-orange-600 pl-6">
-                        <span class="font-ui text-6xl md:text-8xl font-bold text-orange-600 opacity-50">2000</span>
+                        <span
+                            class="parallax-target font-ui text-6xl md:text-8xl font-bold text-orange-600 opacity-50 inline-block">2000</span>
                         <h3 class="font-eva text-3xl md:text-5xl font-black">熱狂と体温の時代</h3>
                     </div>
 
-                    <div class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-orange-100/90 text-justify">
+                    <div
+                        class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-orange-100/90 text-justify relative">
+                        <!-- Decoration -->
+                        <div class="absolute -left-12 top-0 h-full w-[1px] bg-orange-900 hidden md:block"></div>
+                        <div
+                            class="absolute -left-12 top-10 text-[0.6rem] text-orange-700 font-ui hidden md:block rotate-90 origin-left">
+                            LEGACY_PROTOCOL_V1.0
+                        </div>
+
                         <p>
                             「熱量」で人を動かし、「足」で信頼を稼ぐ。<br>
-                            それが、<span class="text-orange-500 font-black">確かな正義</span>でした。
+                            それが、<span class="text-orange-500 font-black bg-orange-950/30 px-1">確かな正義</span>でした。
                         </p>
                         <div
                             class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base md:text-lg border-t border-orange-900 pt-8">
                             <div>
                                 <p class="mb-4">世界はまだ、オフラインで回っていました。<br>会いたければ行く。伝えたければ叫ぶ。</p>
                                 <p>ポケットの中の携帯電話は、まだ会話のためだけの道具でした。</p>
-                                <p class="mt-4 text-orange-400">>> センター問い合わせを繰り返した指先の感覚。</p>
-                                <p class="text-orange-400">>> 着メロ本を片手に打ち込んだ、電子音の響き。</p>
+                                <div class="mt-4 pl-4 border-l-2 border-orange-500/50">
+                                    <p class="text-orange-400 text-sm font-mono">>> LOG: センター問い合わせ...受信</p>
+                                    <p class="text-orange-400 text-sm font-mono">>> LOG: 着メロ本_Vol.23.txt</p>
+                                </div>
                             </div>
-                            <div class="bg-black/30 p-6 border border-orange-900">
-                                <p class="font-bold mb-4">「24時間戦えますか」</p>
+                            <div class="bg-black/30 p-6 border border-orange-900 relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 bg-orange-900 text-black text-[0.6rem] px-2 font-bold">
+                                    ENERGY: MAX</div>
+                                <p class="font-bold mb-4 text-xl">「24時間戦えますか」</p>
                                 <p>という問いに、誇りを持ってYESと答えた夜。<br>私たちは確かに、信じていました。</p>
-                                <p class="mt-4 font-black border-b border-orange-500 inline-block">流した汗の量は裏切らないと。
+                                <p class="mt-4 font-black border-b border-orange-500 inline-block text-orange-300">
+                                    流した汗の量は裏切らないと。
                                 </p>
-                                <p class="mt-2">この「根性」と「情熱」さえあれば、未来永劫、勝ち続けられるはずだと。</p>
+                                <p class="mt-2 text-sm opacity-80">この「根性」と「情熱」さえあれば、未来永劫、勝ち続けられるはずだと。</p>
                             </div>
                         </div>
                     </div>
@@ -599,14 +614,24 @@
             <div class="scene min-h-screen flex items-center justify-center relative bg-[#000a14] border-b border-gray-800"
                 data-theme="blue">
                 <div class="absolute top-20 right-10 w-64 h-32 border border-cyan-900 bg-cyan-900/10 hidden md:block">
+                    <div class="absolute top-0 right-0 bg-cyan-900 text-black text-[0.6rem] px-2">SYSTEM_MONITOR</div>
+                    <div class="p-2 text-cyan-500 font-mono text-[0.6rem] leading-tight opacity-70">
+                        > CPU_LOAD: 99%<br>
+                        > MEMORY: LEAKING<br>
+                        > COMPLIANCE: ENFORCED<br>
+                        > PASSION: NOT_FOUND
+                    </div>
                 </div>
-                <div class="absolute bottom-20 left-10 w-40 h-40 border border-cyan-900 rounded-full hidden md:block">
+                <div
+                    class="absolute bottom-20 left-10 w-40 h-40 border border-cyan-900 rounded-full hidden md:block flex items-center justify-center">
+                    <div class="w-32 h-32 border border-dashed border-cyan-700 rounded-full animate-spin-slow"></div>
                 </div>
 
                 <div class="max-w-4xl px-6 relative z-10">
                     <div
                         class="flex flex-row-reverse items-baseline gap-4 mb-8 border-r-8 border-cyan-500 pr-6 text-right">
-                        <span class="font-ui text-6xl md:text-8xl font-bold text-cyan-500 opacity-50">2025</span>
+                        <span
+                            class="parallax-target font-ui text-6xl md:text-8xl font-bold text-cyan-500 opacity-50 inline-block">2025</span>
                         <h3 class="font-eva text-3xl md:text-5xl font-black">正解と焦燥の時代</h3>
                     </div>
 
@@ -725,20 +750,31 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div class="space-y-8 font-eva text-lg md:text-xl text-gray-300">
-                            <p class="text-2xl font-bold text-white">その席に、あなたはいない。</p>
+                        <div class="space-y-8 font-eva text-lg md:text-xl text-gray-300 relative">
+                            <!-- Decoration -->
+                            <div class="absolute -left-6 top-0 bottom-0 w-[1px] bg-green-900 hidden md:block"></div>
+
+                            <p class="text-2xl font-bold text-white relative">
+                                その席に、あなたはいない。
+                                <span
+                                    class="absolute -top-4 -right-10 text-[4rem] text-green-900 opacity-20 font-black pointer-events-none">404</span>
+                            </p>
                             <p>
                                 「政治家という聖域だけは守られる」<br>
                                 もしそうお考えなら、この現実（データ）を直視してください。
                             </p>
-                            <div class="font-ui text-sm text-green-400 space-y-2 pl-4 border-l-2 border-green-800">
-                                <p>> GOLDMAN SACHS: 300M JOBS AUTOMATED</p>
-                                <p>> IMF REPORT: 60% JOBS AT RISK IN ADVANCED ECONOMIES</p>
+                            <div
+                                class="font-ui text-xs md:text-sm text-green-400 space-y-2 pl-4 border-l-2 border-green-500 bg-green-900/10 p-4 font-mono">
+                                <p><span class="opacity-50">>> SOURCE_01:</span> GOLDMAN_SACHS [300M_JOBS_AUTO]</p>
+                                <p><span class="opacity-50">>> SOURCE_02:</span> IMF_REPORT [60%_RISK_ADV_ECON]</p>
+                                <p><span class="opacity-50">>> PREDICTION:</span> HUMAN_VALUE < <span
+                                        class="text-red-500 animate-pulse">ALGORITHM</span></p>
                             </div>
                             <p>
                                 弁護士も、会計士も、すでにAIに席を譲り始めています。<br>
                                 予算配分、法案作成、民意の調整。<br>
-                                <span class="text-green-500 font-bold">高度な判断業務こそが、AIの最も得意とする領域だからです。</span>
+                                <span
+                                    class="text-green-500 font-bold bg-green-950/50 px-1">高度な判断業務こそが、AIの最も得意とする領域だからです。</span>
                             </p>
                             <p>
                                 「先生、お願いします」と頭を下げる景色は、過去のものとなるでしょう。<br>
@@ -1370,29 +1406,13 @@
                 });
             });
 
-            // 2. Great Rewrite Section (History Logs)
-            gsap.utils.toArray('.space-y-40 > div').forEach((section) => {
-                // Main Content Fade Up
-                gsap.fromTo(section.querySelector('.relative.z-10'),
-                    { y: 50, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none reverse"
-                        }
-                    }
-                );
-
+            // 2. Great Rewrite Section (History Logs) Polished
+            gsap.utils.toArray('#chronicle-section .scene').forEach((section) => {
                 // Background Year Parallax
-                const bgYear = section.querySelector('.text-\\[8rem\\]') || section.querySelector('.text-\\[10rem\\]');
+                const bgYear = section.querySelector('.parallax-target');
                 if (bgYear) {
                     gsap.to(bgYear, {
-                        y: 150,
+                        y: 100,
                         ease: "none",
                         scrollTrigger: {
                             trigger: section,
