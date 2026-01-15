@@ -226,7 +226,56 @@
 
     <div class="noise"></div>
 
-    <!-- BOOT SEQUENCE OVERLAY -->
+    <!-- ADVANCED PLACEMENT HEADER (COCKPIT HUD) -->
+    <header
+        class="fixed top-0 left-0 w-full z-[9999] px-4 py-3 pointer-events-none mix-blend-difference text-[#EAFF00]">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-start font-mono text-xs md:text-sm">
+
+            <!-- LEFT: ID & COORDS -->
+            <div class="flex flex-col gap-1 pointer-events-auto">
+                <div class="font-black text-base tracking-tighter hover:text-white transition-colors cursor-pointer">
+                    AX-2026<span class="text-[0.6rem] align-top text-gray-400">®</span>
+                </div>
+                <div class="hidden md:block opacity-60 text-[0.6rem]">
+                    LAT: 35.6895<br>
+                    LNG: 139.6917
+                </div>
+            </div>
+
+            <!-- CENTER: SYSTEM STATUS (Desktop) -->
+            <div
+                class="hidden md:flex gap-8 items-center border-t border-[#EAFF00]/30 pt-2 pointer-events-auto bg-black/5 backdrop-blur-sm px-4 rounded-b-lg">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span>SYS: ONLINE</span>
+                </div>
+                <div class="flex gap-4 opacity-80">
+                    <a href="#about" class="hover:text-white transition-colors">[MISSION]</a>
+                    <a href="#tactical-gears" class="hover:text-white transition-colors">[ARSENAL]</a>
+                    <a href="#core-team" class="hover:text-white transition-colors">[WANTED]</a>
+                </div>
+            </div>
+
+            <!-- RIGHT: ACTION & MENU -->
+            <div class="flex flex-col items-end gap-2 pointer-events-auto">
+                <button onclick="activateUpdate()"
+                    class="group flex items-center gap-2 bg-[#EAFF00]/10 border border-[#EAFF00] px-3 py-1 hover:bg-[#EAFF00] hover:text-black transition-all">
+                    <span class="animate-pulse">●</span>
+                    <span class="font-bold tracking-widest">REBOOT</span>
+                </button>
+                <div class="text-[0.6rem] text-right opacity-50 hidden md:block">
+                    BUILD_VER: 2.0.4<br>
+                    AUTH: ADMIN
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DECORATIVE LINES -->
+        <div class="fixed top-12 left-0 w-full h-[1px] bg-[#EAFF00]/20 pointer-events-none hidden md:block"></div>
+        <div class="fixed top-0 left-12 w-[1px] h-screen bg-[#EAFF00]/10 pointer-events-none hidden md:block"></div>
+        <div class="fixed top-0 right-12 w-[1px] h-screen bg-[#EAFF00]/10 pointer-events-none hidden md:block"></div>
+    </header>
     <div id="boot-sequence"
         class="fixed inset-0 z-[99999] bg-black flex flex-col items-center justify-center font-mono text-neon overflow-hidden">
         <div class="absolute inset-0 opacity-10 pointer-events-none">
