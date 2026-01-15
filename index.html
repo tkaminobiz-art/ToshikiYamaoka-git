@@ -291,6 +291,35 @@
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             opacity: 0.6;
         }
+
+        /* 2025 MARQUEE ANIMATION */
+        @keyframes marquee-slow {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-reverse {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .animate-marquee-slow {
+            animation: marquee-slow 40s linear infinite;
+        }
+
+        .animate-marquee-reverse {
+            animation: marquee-reverse 30s linear infinite;
+        }
     </style>
 </head>
 
@@ -734,63 +763,96 @@
                 </div>
             </div>
 
-            <div class="scene min-h-screen flex items-center justify-center relative bg-[#000a14] border-b border-gray-800"
-                data-theme="blue">
-                <div
-                    class="absolute top-20 right-4 md:right-10 w-40 md:w-64 h-auto md:h-32 border border-cyan-900 bg-cyan-900/10 block">
-                    <div class="absolute top-0 right-0 bg-cyan-900 text-black text-[0.6rem] px-2">SYSTEM_MONITOR</div>
-                    <div class="p-2 text-cyan-500 font-mono text-[0.5rem] md:text-[0.6rem] leading-tight opacity-70">
-                        > CPU_LOAD: 99%<br>
-                        > MEMORY: LEAKING<br>
-                        > COMPLIANCE: ENFORCED<br>
-                        > PASSION: NOT_FOUND
-                    </div>
-                </div>
-                <div
-                    class="absolute bottom-20 left-10 w-40 h-40 border border-cyan-900 rounded-full hidden md:block flex items-center justify-center">
-                    <div class="w-32 h-32 border border-dashed border-cyan-700 rounded-full animate-spin-slow"></div>
+            <div class="scene min-h-screen flex items-center justify-center relative bg-[#0a0a0a] border-b border-gray-800 overflow-hidden"
+                data-theme="info-overload">
+
+                <div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-screen"
+                    style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InRyYW5zcGFyZW50Ii8+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmYiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+');">
                 </div>
 
-                <div class="max-w-4xl px-6 relative z-10">
+                <div class="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none">
                     <div
-                        class="flex flex-row-reverse items-baseline gap-4 mb-8 border-r-8 border-cyan-500 pr-6 text-right">
-                        <span
-                            class="parallax-target font-ui text-6xl md:text-8xl font-bold text-cyan-500 opacity-50 inline-block">2025</span>
-                        <h3 class="font-eva text-3xl md:text-5xl font-black">正解と焦燥の時代</h3>
+                        class="absolute top-10 -left-10 whitespace-nowrap text-[10rem] font-black text-white animate-marquee-slow">
+                        INFO_OVERLOAD FLAMING AI_EXTENSION OBSOLESCENCE CHANGE REALITY
+                    </div>
+                    <div
+                        class="absolute bottom-20 -right-10 whitespace-nowrap text-[8rem] font-black text-white animate-marquee-reverse">
+                        IGNORANCE IS NOT BLISS WAKE UP REBOOT YOUR OS
+                    </div>
+                </div>
+
+                <div class="max-w-5xl px-6 relative z-10 w-full">
+
+                    <div class="border-l-4 border-yellow-500 pl-6 mb-16">
+                        <p class="font-mono text-yellow-500 text-xs tracking-[0.3em] mb-2">CURRENT_YEAR: 2025</p>
+                        <h3 class="font-sans text-4xl md:text-5xl font-black text-white leading-tight">
+                            正解と、<br>
+                            <span class="text-gray-400">「思考停止」</span>の時代。
+                        </h3>
                     </div>
 
-                    <div class="space-y-8 font-eva text-lg md:text-2xl leading-relaxed text-cyan-100/90 text-justify">
-                        <p class="text-center md:text-right">
-                            「正しさ」という檻の中で、<br>息苦しさを感じていませんか。
-                        </p>
-                        <div class="bg-cyan-950/30 border border-cyan-500/30 p-8 relative overflow-hidden">
-                            <div class="absolute top-0 left-0 bg-cyan-500 text-black text-xs px-2 py-1 font-ui">
-                                SYSTEM_LOG_ERROR</div>
-                            <p class="mb-4">いつからでしょうか。<br>目の前の有権者ではなく、<span
-                                    class="text-cyan-400">サーバーのログ</span>を窺うようになったのは。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
 
-                            <ul class="space-y-2 text-base md:text-lg opacity-80 list-disc list-inside font-mono">
-                                <li>「不眠不休の努力」 >> <span class="bg-red-900 text-red-200 px-1">BLACK_LABOR</span></li>
-                                <li>「熱血指導」 >> <span class="bg-red-900 text-red-200 px-1">HARASSMENT_RECORD</span>
-                                </li>
-                            </ul>
-
-                            <p class="mt-6">
-                                街頭演説の声はノイズキャンセリングで消され、<br>
-                                握手の手は消毒液で拭われていく。
-                            </p>
+                        <div class="md:col-span-7 space-y-10">
+                            <div class="font-jp text-lg md:text-xl text-gray-300 leading-loose font-medium">
+                                <p>
+                                    SNSの炎上に怯え、秒速で流れる情報の濁流に疲れ果て、<br>
+                                    あなたは今日も<span class="text-white border-b border-yellow-500">「見ないふり」</span>をしていないか。
+                                </p>
+                                <p class="mt-8">
+                                    世界では今、ホワイトカラーの淘汰が始まり、<br>
+                                    AIによる「大脳の拡張」という、人類史レベルの分岐が起きている。<br>
+                                    あらゆる定義が書き換わるこの激動の最中に。
+                                </p>
+                                <p class="mt-8 text-white font-bold">
+                                    その意味すら理解しようとせず、<br>
+                                    ただ情報の洪水から逃げ回っている。
+                                </p>
+                                <p class="mt-4 text-gray-400 text-sm">
+                                    （そんな人には、舵取りは難しい時代が来る。）
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="text-center mt-12">
-                            <p class="font-bold text-white text-xl md:text-3xl">お気づきのはずです。</p>
-                            <p class="mt-4">あの頃の必勝法（OS）が、今の時代と適合していないことに。</p>
-                            <p class="text-sm md:text-base text-gray-400 mt-2">
-                                まるでアクセルとブレーキを同時に踏み続けているような、<br>この疲労感の正体に。</p>
+                        <div class="md:col-span-5 relative">
+                            <div
+                                class="bg-white/5 border border-gray-700 p-8 backdrop-blur-sm relative overflow-hidden group hover:border-yellow-500 transition-colors duration-500">
+                                <div
+                                    class="absolute -right-4 -top-4 text-yellow-500/10 text-9xl font-black group-hover:text-yellow-500/20 transition-colors">
+                                    !</div>
+
+                                <h4 class="text-white font-bold text-xl mb-6 relative z-10">
+                                    気づいてください。
+                                </h4>
+
+                                <p class="text-gray-300 text-sm leading-relaxed mb-8 relative z-10">
+                                    あなたが目を逸らすべきなのは<br>
+                                    「書類」ではありません。<br>
+                                    <br>
+                                    <strong
+                                        class="text-yellow-500 text-lg border-b border-yellow-500 inline-block pb-1">あなた自身の「賞味期限」です。</strong>
+                                </p>
+
+                                <div class="relative z-10 p-4 bg-black/50 border-l-2 border-yellow-500">
+                                    <p class="text-xs text-gray-400 font-mono mb-2">SYSTEM_DIAGNOSIS:</p>
+                                    <p class="text-white text-sm font-bold">
+                                        思考を止めたまま、<br>
+                                        この時代を生き残ることは不可能です。
+                                    </p>
+                                </div>
+
+                                <div class="absolute bottom-4 right-4 text-yellow-500 animate-bounce">
+                                    ↓
+                                </div>
+                            </div>
                         </div>
+
+                    </div>
+
+                    <div class="absolute -bottom-20 left-8 w-px h-32 bg-gradient-to-b from-yellow-500 to-transparent">
                     </div>
                 </div>
             </div>
-
             <div class="scene min-h-screen py-24 relative bg-[#1a0000] text-white border-b border-gray-800"
                 data-theme="red">
                 <div
@@ -855,231 +917,233 @@
                 </div>
             </div>
 
-<div class="scene min-h-screen flex items-center justify-center relative bg-[#050510] border-b border-gray-800 overflow-hidden"
-    data-theme="evolution">
+            <div class="scene min-h-screen flex items-center justify-center relative bg-[#050510] border-b border-gray-800 overflow-hidden"
+                data-theme="evolution">
 
-    <div class="absolute inset-0 z-0 opacity-30"
-        style="background-image: radial-gradient(circle at 50% 50%, rgba(100, 50, 255, 0.1) 0%, transparent 50%);">
-    </div>
-    <div class="absolute inset-0 z-0"
-        style="background-image: linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, .05) 25%, rgba(0, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, .05) 75%, rgba(0, 255, 255, .05) 76%, transparent 77%, transparent); background-size: 30px 30px;">
-    </div>
-
-    <div
-        class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse">
-    </div>
-    <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"
-        style="animation-delay: 1s;"></div>
-
-    <div class="max-w-7xl px-6 relative z-10 w-full">
-
-        <div class="text-center mb-16">
-            <div
-                class="inline-block border border-cyan-500/50 px-4 py-1 mb-4 rounded-full bg-cyan-900/10 backdrop-blur-sm">
-                <p class="font-mono text-cyan-400 text-xs tracking-[0.3em]">TIMELINE: 2050.01.01 // NEO_TOKYO</p>
-            </div>
-            <h3 class="font-sans text-4xl md:text-6xl font-black text-white leading-tight mb-4">
-                「人間」の限界は、<br>
-                もう突破（ブレイク）されている。
-            </h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-            <div class="relative bg-white/5 border-l-2 border-cyan-500 p-8 backdrop-blur-md">
-                <h4 class="text-cyan-400 font-bold text-xl mb-6 tracking-wider flex items-center gap-2">
-                    <span class="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
-                    SOCIETY 6.0
-                </h4>
-
-                <div class="space-y-6 text-gray-300 text-sm md:text-base leading-loose font-jp font-medium">
-                    <p>
-                        2050年。人類は「老い」と「時間」の制約から解放された。<br>
-                        ウェアラブルデバイスは体内へ。脳はクラウドと直結（BMI）し、<br>
-                        私たちは、かつての100倍の速度で思考し、対話している。
-                    </p>
-                    <p>
-                        政治もまた、その姿を変えた。<br>
-                        AIによる自動調整？ いや、最終決定権は今も「人間（日本政府）」にある。<br>
-                        だが、その議席に座っているのは、<br>
-                        <span class="text-white font-bold border-b border-cyan-500">「かつてのスペックのままの人間」ではない。</span>
-                    </p>
+                <div class="absolute inset-0 z-0 opacity-30"
+                    style="background-image: radial-gradient(circle at 50% 50%, rgba(100, 50, 255, 0.1) 0%, transparent 50%);">
                 </div>
-            </div>
+                <div class="absolute inset-0 z-0"
+                    style="background-image: linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, .05) 25%, rgba(0, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, .05) 75%, rgba(0, 255, 255, .05) 76%, transparent 77%, transparent); background-size: 30px 30px;">
+                </div>
 
-            <div class="relative">
                 <div
-                    class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg opacity-30 blur-lg">
+                    class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse">
                 </div>
-                <div class="relative bg-black border border-gray-700 p-8 md:p-10 rounded-lg shadow-2xl">
+                <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"
+                    style="animation-delay: 1s;"></div>
 
-                    <h4 class="text-white font-black text-2xl md:text-3xl mb-8 leading-tight">
-                        拡張された政治家<br>
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">"AUGMENTED
-                            POLITICIAN"</span>
-                    </h4>
+                <div class="max-w-7xl px-6 relative z-10 w-full">
 
-                    <div class="space-y-6 mb-8">
-                        <div class="flex gap-4 items-start">
-                            <div
-                                class="mt-1 w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 text-gray-500 text-xs">
-                                ✕</div>
-                            <p class="text-gray-500 text-sm">
-                                <strong class="block text-gray-400 mb-1">旧来の政治家 (Biological)</strong>
-                                自分の目と耳だけで情報を集め、限られた脳の容量で悩み、処理しきれずにパンクする。
-                            </p>
+                    <div class="text-center mb-16">
+                        <div
+                            class="inline-block border border-cyan-500/50 px-4 py-1 mb-4 rounded-full bg-cyan-900/10 backdrop-blur-sm">
+                            <p class="font-mono text-cyan-400 text-xs tracking-[0.3em]">TIMELINE: 2050.01.01 //
+                                NEO_TOKYO</p>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div
-                                class="mt-1 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-black font-bold text-xs">
-                                ✓</div>
-                            <p class="text-white text-sm">
-                                <strong class="block text-cyan-400 mb-1">拡張された政治家 (Augmented)</strong>
-                                AIを「第二の脳」として実装。数万件の民意を瞬時に解析し、人間にしかできない「倫理的決断」のみを高速で行う。
-                            </p>
-                        </div>
+                        <h3 class="font-sans text-4xl md:text-6xl font-black text-white leading-tight mb-4">
+                            「人間」の限界は、<br>
+                            もう突破（ブレイク）されている。
+                        </h3>
                     </div>
 
-                    <div class="pt-6 border-t border-gray-800 text-center">
-                        <p class="font-sans text-gray-300 text-base font-bold mb-4">
-                            議席がなくなるのではない。<br>
-                            <span class="text-purple-400">「ついていける人間」</span>が代わるだけだ。
-                        </p>
-                        <p class="text-xs text-gray-500 font-mono">
-                            ARE YOU READY TO UPGRADE?
-                        </p>
-                    </div>
-                </div>
-            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-        </div>
+                        <div class="relative bg-white/5 border-l-2 border-cyan-500 p-8 backdrop-blur-md">
+                            <h4 class="text-cyan-400 font-bold text-xl mb-6 tracking-wider flex items-center gap-2">
+                                <span class="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
+                                SOCIETY 6.0
+                            </h4>
 
-        <div
-            class="absolute bottom-0 left-1/2 w-px h-16 bg-gradient-to-b from-transparent to-cyan-500 transform -translate-x-1/2">
-        </div>
-    </div>
-</div>                                <span class="text-4xl block my-2 text-gray-500">「傍観者」</span>
-                                になるか。
-                            </p>
-                            <div class="w-full h-[1px] bg-green-500 my-4"></div>
-                            <p class="font-eva text-xl md:text-2xl font-bold text-white relative z-10">
-                                それとも、<br>
-                                システムを再構築する<br>
-                                <span class="text-5xl block my-2 text-green-500 text-glow">「設計者」</span>
-                                として生き残るか。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="scene min-h-screen flex items-center justify-center relative bg-white text-black border-b border-gray-800 pb-32"
-                data-theme="white">
-
-                <!-- BACKGROUND LAYERS -->
-                <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                    <div class="bg-genesis bg-genesis-1"></div>
-                    <div class="bg-genesis bg-genesis-2"></div>
-                    <div class="absolute inset-0 bg-noise-animated"></div>
-
-                    <!-- OPTIONAL: Organic Blob for 'Nyonyo' feel -->
-                    <div class="genesis-blob"></div>
-                </div>
-                <div class="max-w-4xl px-6 text-center relative z-10">
-                    <h2
-                        class="font-sans font-black text-6xl md:text-[10rem] tracking-tighter opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
-                        REBOOT
-                    </h2>
-
-                    <div class="relative">
-                        <p class="font-ui text-black tracking-[0.5em] mb-6">SYSTEM_RECOVERY_MODE</p>
-                        <h3 class="font-eva font-black text-5xl md:text-7xl mb-12">覚醒の時</h3>
-
-                        <div class="font-eva text-lg md:text-2xl font-bold leading-loose space-y-6">
-                            <p>過去を懐かしむ必要も、未来に怯える必要もありません。</p>
-                            <p>
-                                歴史を振り返れば、変化に適応できなかった者は消え、<br>
-                                <span class="bg-black text-white px-2">適応した者だけが新しい時代を作ってきました。</span>
-                            </p>
-                            <p class="text-base text-gray-600">
-                                刀を置いた士族の一部が、ペンを持ち替え、<br>明治政府のリーダーとなったように。
-                            </p>
-
-                            <div class="py-8">
-                                <p class="text-3xl md:text-4xl font-black">
-                                    今、必要なのは<br>
-                                    小手先の「アップデート」ではないのです。
+                            <div class="space-y-6 text-gray-300 text-sm md:text-base leading-loose font-jp font-medium">
+                                <p>
+                                    2050年。人類は「老い」と「時間」の制約から解放された。<br>
+                                    ウェアラブルデバイスは体内へ。脳はクラウドと直結（BMI）し、<br>
+                                    私たちは、かつての100倍の速度で思考し、対話している。
+                                </p>
+                                <p>
+                                    政治もまた、その姿を変えた。<br>
+                                    AIによる自動調整？ いや、最終決定権は今も「人間（日本政府）」にある。<br>
+                                    だが、その議席に座っているのは、<br>
+                                    <span
+                                        class="text-white font-bold border-b border-cyan-500">「かつてのスペックのままの人間」ではない。</span>
                                 </p>
                             </div>
-
-                            <p>
-                                自らのOSを初期化し、<br>
-                                再起動（リブート）する勇気を持つことです。
-                            </p>
-                            <p>古い思考（OS）を手放す時が来ました。</p>
                         </div>
 
-                        <div class="mt-16">
-                            <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
+                        <div class="relative">
+                            <div
+                                class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg opacity-30 blur-lg">
+                            </div>
+                            <div class="relative bg-black border border-gray-700 p-8 md:p-10 rounded-lg shadow-2xl">
 
-                            <button onclick="activateUpdate()" id="reboot-btn"
-                                class="no-anim inline-block opacity-100 !visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden"
-                                style="opacity: 1 !important; transform: none !important;">
-                                <div
-                                    class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <h4 class="text-white font-black text-2xl md:text-3xl mb-8 leading-tight">
+                                    拡張された政治家<br>
+                                    <span
+                                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">"AUGMENTED
+                                        POLITICIAN"</span>
+                                </h4>
+
+                                <div class="space-y-6 mb-8">
+                                    <div class="flex gap-4 items-start">
+                                        <div
+                                            class="mt-1 w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 text-gray-500 text-xs">
+                                            ✕</div>
+                                        <p class="text-gray-500 text-sm">
+                                            <strong class="block text-gray-400 mb-1">旧来の政治家 (Biological)</strong>
+                                            自分の目と耳だけで情報を集め、限られた脳の容量で悩み、処理しきれずにパンクする。
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-4 items-start">
+                                        <div
+                                            class="mt-1 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-black font-bold text-xs">
+                                            ✓</div>
+                                        <p class="text-white text-sm">
+                                            <strong class="block text-cyan-400 mb-1">拡張された政治家 (Augmented)</strong>
+                                            AIを「第二の脳」として実装。数万件の民意を瞬時に解析し、人間にしかできない「倫理的決断」のみを高速で行う。
+                                        </p>
+                                    </div>
                                 </div>
-                                <span
-                                    class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00] relative z-10">SYSTEM_REBOOT
-                                    >></span>
-                                <span class="relative z-10">ボタンを押してRebootしてください。</span>
-                            </button>
+
+                                <div class="pt-6 border-t border-gray-800 text-center">
+                                    <p class="font-sans text-gray-300 text-base font-bold mb-4">
+                                        議席がなくなるのではない。<br>
+                                        <span class="text-purple-400">「ついていける人間」</span>が代わるだけだ。
+                                    </p>
+                                    <p class="text-xs text-gray-500 font-mono">
+                                        ARE YOU READY TO UPGRADE?
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+
+                    </div>
+
+                    <div
+                        class="absolute bottom-0 left-1/2 w-px h-16 bg-gradient-to-b from-transparent to-cyan-500 transform -translate-x-1/2">
                     </div>
                 </div>
+            </div> <span class="text-4xl block my-2 text-gray-500">「傍観者」</span>
+            になるか。
+            </p>
+            <div class="w-full h-[1px] bg-green-500 my-4"></div>
+            <p class="font-eva text-xl md:text-2xl font-bold text-white relative z-10">
+                それとも、<br>
+                システムを再構築する<br>
+                <span class="text-5xl block my-2 text-green-500 text-glow">「設計者」</span>
+                として生き残るか。
+            </p>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="scene min-h-screen flex items-center justify-center relative bg-white text-black border-b border-gray-800 pb-32"
+        data-theme="white">
+
+        <!-- BACKGROUND LAYERS -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="bg-genesis bg-genesis-1"></div>
+            <div class="bg-genesis bg-genesis-2"></div>
+            <div class="absolute inset-0 bg-noise-animated"></div>
+
+            <!-- OPTIONAL: Organic Blob for 'Nyonyo' feel -->
+            <div class="genesis-blob"></div>
+        </div>
+        <div class="max-w-4xl px-6 text-center relative z-10">
+            <h2
+                class="font-sans font-black text-6xl md:text-[10rem] tracking-tighter opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                REBOOT
+            </h2>
+
+            <div class="relative">
+                <p class="font-ui text-black tracking-[0.5em] mb-6">SYSTEM_RECOVERY_MODE</p>
+                <h3 class="font-eva font-black text-5xl md:text-7xl mb-12">覚醒の時</h3>
+
+                <div class="font-eva text-lg md:text-2xl font-bold leading-loose space-y-6">
+                    <p>過去を懐かしむ必要も、未来に怯える必要もありません。</p>
+                    <p>
+                        歴史を振り返れば、変化に適応できなかった者は消え、<br>
+                        <span class="bg-black text-white px-2">適応した者だけが新しい時代を作ってきました。</span>
+                    </p>
+                    <p class="text-base text-gray-600">
+                        刀を置いた士族の一部が、ペンを持ち替え、<br>明治政府のリーダーとなったように。
+                    </p>
+
+                    <div class="py-8">
+                        <p class="text-3xl md:text-4xl font-black">
+                            今、必要なのは<br>
+                            小手先の「アップデート」ではないのです。
+                        </p>
+                    </div>
+
+                    <p>
+                        自らのOSを初期化し、<br>
+                        再起動（リブート）する勇気を持つことです。
+                    </p>
+                    <p>古い思考（OS）を手放す時が来ました。</p>
+                </div>
+
+                <div class="mt-16">
+                    <p class="text-xl md:text-2xl font-bold mb-8">政治家としての本能を、今こそ再インストールしてください。</p>
+
+                    <button onclick="activateUpdate()" id="reboot-btn"
+                        class="no-anim inline-block opacity-100 !visible border-4 border-black px-12 py-6 text-xl md:text-3xl font-black hover:bg-black hover:text-white transition-all duration-300 shadow-[8px_8px_0px_#EAFF00] hover:shadow-none hover:translate-x-1 hover:translate-y-1 group relative overflow-hidden"
+                        style="opacity: 1 !important; transform: none !important;">
+                        <div
+                            class="absolute inset-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        </div>
+                        <span
+                            class="font-ui text-sm block tracking-widest mb-1 group-hover:text-[#EAFF00] relative z-10">SYSTEM_REBOOT
+                            >></span>
+                        <span class="relative z-10">ボタンを押してRebootしてください。</span>
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
 
-        </section>
+    </section>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", (event) => {
-                gsap.registerPlugin(ScrollTrigger);
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
 
-                // Scene Transition Effects
-                const scenes = document.querySelectorAll('.scene');
+            // Scene Transition Effects
+            const scenes = document.querySelectorAll('.scene');
 
-                scenes.forEach((scene, index) => {
-                    // Text Stagger Animation
-                    gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper:not(.no-anim)'), {
-                        y: 50,
-                        opacity: 0,
-                        duration: 1,
-                        stagger: 0.1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: scene,
-                            start: "top 70%",
-                            toggleActions: "play none none reverse"
-                        }
-                    });
+            scenes.forEach((scene, index) => {
+                // Text Stagger Animation
+                gsap.from(scene.querySelectorAll('h2:not(.opacity-10), h3, p, .anim-wrapper:not(.no-anim)'), {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: scene,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    }
                 });
-
-                // 2050 Monolith Pulse
-                gsap.to(".text-glow", {
-                    textShadow: "0 0 20px rgba(0,255,0,1)",
-                    repeat: -1,
-                    yoyo: true,
-                    duration: 1.5
-                });
-
-                // Timer Update
-                setInterval(() => {
-                    const now = new Date();
-                    const timeString = now.toISOString().split('T')[1].slice(0, -1);
-                    document.getElementById('chronicle-timer').innerText = timeString;
-                }, 100);
             });
-        </script>
+
+            // 2050 Monolith Pulse
+            gsap.to(".text-glow", {
+                textShadow: "0 0 20px rgba(0,255,0,1)",
+                repeat: -1,
+                yoyo: true,
+                duration: 1.5
+            });
+
+            // Timer Update
+            setInterval(() => {
+                const now = new Date();
+                const timeString = now.toISOString().split('T')[1].slice(0, -1);
+                document.getElementById('chronicle-timer').innerText = timeString;
+            }, 100);
+        });
+    </script>
 
 
     </div><!-- End legacy-system -->
