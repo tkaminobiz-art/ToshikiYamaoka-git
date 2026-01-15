@@ -857,130 +857,131 @@
 
             <div class="scene min-h-screen flex items-center justify-center relative bg-white text-black border-b border-gray-800 pb-32"
                 data-theme="white">
-<style>
-    /* GENESIS MOIRÉ EFFECT */
-    @keyframes moire-float {
-        0% {
-            transform: translate(0, 0) rotate(0deg) scale(1);
-        }
+                <style>
+                    /* GENESIS MOIRÉ EFFECT */
+                    @keyframes moire-float {
+                        0% {
+                            transform: translate(0, 0) rotate(0deg) scale(1);
+                        }
 
-        33% {
-            transform: translate(10px, -10px) rotate(0.5deg) scale(1.02);
-        }
+                        33% {
+                            transform: translate(10px, -10px) rotate(0.5deg) scale(1.02);
+                        }
 
-        66% {
-            transform: translate(-5px, 10px) rotate(-0.5deg) scale(0.98);
-        }
+                        66% {
+                            transform: translate(-5px, 10px) rotate(-0.5deg) scale(0.98);
+                        }
 
-        100% {
-            transform: translate(0, 0) rotate(0deg) scale(1);
-        }
-    }
+                        100% {
+                            transform: translate(0, 0) rotate(0deg) scale(1);
+                        }
+                    }
 
-    @keyframes moire-pulse {
+                    @keyframes moire-pulse {
 
-        0%,
-        100% {
-            opacity: 0.3;
-        }
+                        0%,
+                        100% {
+                            opacity: 0.3;
+                        }
 
-        50% {
-            opacity: 0.6;
-        }
-    }
+                        50% {
+                            opacity: 0.6;
+                        }
+                    }
 
-    .bg-genesis {
-        background-image:
-            radial-gradient(circle at center, #000 0.5px, transparent 0.5px),
-            linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-        background-size: 20px 20px, 40px 40px, 40px 40px;
-        position: absolute;
-        inset: -50%;
-        width: 200%;
-        height: 200%;
-        opacity: 0.08;
-        /* Ultra subtle */
-        pointer-events: none;
-        z-index: 0;
-    }
+                    .bg-genesis {
+                        background-image:
+                            radial-gradient(circle at center, #000 0.5px, transparent 0.5px),
+                            linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+                        background-size: 20px 20px, 40px 40px, 40px 40px;
+                        position: absolute;
+                        inset: -50%;
+                        width: 200%;
+                        height: 200%;
+                        opacity: 0.2;
+                        /* Ultra subtle */
+                        pointer-events: none;
+                        z-index: 0;
+                    }
 
-    .bg-genesis-1 {
-        animation: moire-float 20s infinite ease-in-out reverse;
-    }
+                    .bg-genesis-1 {
+                        animation: moire-float 20s infinite ease-in-out reverse;
+                    }
 
-    .bg-genesis-2 {
-        background-image: radial-gradient(circle at center, #000 0.5px, transparent 0.5px);
-        background-size: 24px 24px;
-        /* Different size for interference */
-        animation: moire-float 30s infinite ease-in-out;
-        opacity: 0.05;
-    }
+                    .bg-genesis-2 {
+                        background-image: radial-gradient(circle at center, #000 0.5px, transparent 0.5px);
+                        background-size: 24px 24px;
+                        /* Different size for interference */
+                        animation: moire-float 30s infinite ease-in-out;
+                        opacity: 0.05;
+                    }
 
-    /* WIGGLY TEXTURE (GRAIN) */
-    .bg-noise-animated {
-        animation: grain 1s steps(4) infinite;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
-        opacity: 0.15;
-        mix-blend-mode: multiply;
-    }
+                    /* WIGGLY TEXTURE (GRAIN) */
+                    .bg-noise-animated {
+                        animation: grain 1s steps(4) infinite;
+                        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+                        opacity: 0.15;
+                        mix-blend-mode: multiply;
+                    }
 
-    @keyframes grain {
+                    @keyframes grain {
 
-        0%,
-        100% {
-            transform: translate(0, 0)
-        }
+                        0%,
+                        100% {
+                            transform: translate(0, 0)
+                        }
 
-        10% {
-            transform: translate(-1%, -1%)
-        }
+                        10% {
+                            transform: translate(-1%, -1%)
+                        }
 
-        20% {
-            transform: translate(1%, 1%)
-        }
+                        20% {
+                            transform: translate(1%, 1%)
+                        }
 
-        30% {
-            transform: translate(-2%, 2%)
-        }
+                        30% {
+                            transform: translate(-2%, 2%)
+                        }
 
-        40% {
-            transform: translate(3%, -3%)
-        }
+                        40% {
+                            transform: translate(3%, -3%)
+                        }
 
-        50% {
-            transform: translate(-3%, 3%)
-        }
+                        50% {
+                            transform: translate(-3%, 3%)
+                        }
 
-        60% {
-            transform: translate(3%, 3%)
-        }
+                        60% {
+                            transform: translate(3%, 3%)
+                        }
 
-        70% {
-            transform: translate(-3%, -3%)
-        }
+                        70% {
+                            transform: translate(-3%, -3%)
+                        }
 
-        80% {
-            transform: translate(2%, -2%)
-        }
+                        80% {
+                            transform: translate(2%, -2%)
+                        }
 
-        90% {
-            transform: translate(-2%, 2%)
-        }
-    }
-</style>
+                        90% {
+                            transform: translate(-2%, 2%)
+                        }
+                    }
+                </style>
 
-<!-- BACKGROUND LAYERS -->
-<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-    <div class="bg-genesis bg-genesis-1"></div>
-    <div class="bg-genesis bg-genesis-2"></div>
-    <div class="absolute inset-0 bg-noise-animated"></div>
+                <!-- BACKGROUND LAYERS -->
+                <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div class="bg-genesis bg-genesis-1"></div>
+                    <div class="bg-genesis bg-genesis-2"></div>
+                    <div class="absolute inset-0 bg-noise-animated"></div>
 
-    <!-- OPTIONAL: Organic Blob for 'Nyonyo' feel -->
-    <div
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gray-100 to-transparent opacity-60 rounded-full blur-[100px] animate-pulse">
-    </div>
-</div>                <div class="max-w-4xl px-6 text-center relative z-10">
+                    <!-- OPTIONAL: Organic Blob for 'Nyonyo' feel -->
+                    <div
+                        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gray-300 to-transparent opacity-60 rounded-full blur-[100px] animate-pulse">
+                    </div>
+                </div>
+                <div class="max-w-4xl px-6 text-center relative z-10">
                     <h2
                         class="font-sans font-black text-6xl md:text-[10rem] tracking-tighter opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
                         REBOOT
