@@ -2,9 +2,15 @@
 // Powered by Three.js & GLSL
 // Concept: Organic, dark, neural-network-like liquid that reacts to mouse interaction.
 
-document.addEventListener('DOMContentLoaded', () => {
+const initFluidBackground = () => {
     const container = document.getElementById('liquid-canvas');
-    if (!container) return;
+    if (!container) {
+        console.warn("Liquid Canvas container not found via ID 'liquid-canvas'.");
+        return;
+    }
+
+    // Use existing canvas if present to prevent dupes
+    if (container.querySelector('canvas')) return;
 
     // --- 1. Scene Setup ---
     const scene = new THREE.Scene();
@@ -141,4 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Direct update for responsiveness (can add lerp in loop for smoothness)
         fluidShader.uniforms.uMouse.value.set(targetMouseX, targetMouseY);
     });
-});
+};
+
+// Robust Initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFluidBackground);
+} else {
+    initFluidBackground();
+}
