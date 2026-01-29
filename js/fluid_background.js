@@ -18,7 +18,7 @@ const initFluidBackground = () => {
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false }); // Antialias false for performance/grit
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.0)); // Cap at 1.0 for performance
     container.appendChild(renderer.domElement);
 
     // --- 2. Geometry & Material ---
