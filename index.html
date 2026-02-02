@@ -353,7 +353,16 @@
                         class="hover:text-white transition-colors">[WANTED]</a></div>
             </div>
             <!-- RIGHT: ACTION & MENU -->
-            <div class="flex flex-col items-end gap-2 pointer-events-auto"><button onclick="activateUpdate()"
+            <div class="flex flex-col items-end gap-2 pointer-events-auto">
+                <a href="https://seimukatudou2026.vercel.app/" target="_blank"
+                    class="group flex items-center gap-2 bg-white/10 border border-white/30 px-3 py-1 hover:bg-white hover:text-black transition-all text-white mb-1">
+                    <span class="font-bold text-[0.6rem] tracking-widest">通常サイト</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </a>
+                <button onclick="activateUpdate()"
                     class="group flex items-center gap-2 bg-[#EAFF00]/10 border border-[#EAFF00] px-3 py-1 hover:bg-[#EAFF00] hover:text-black transition-all"><span
                         class="animate-pulse">●</span><span class="font-bold tracking-widest">REBOOT</span></button>
                 <div class="text-[0.6rem] text-right opacity-50 hidden md:block">BUILD_VER: 2.0.4<br>AUTH:
@@ -2494,6 +2503,30 @@
                 }
             </script>
             <script src="js/fluid_background.js"></script>
+
+            <!-- SHOWCASE NOTICE FOOTER -->
+            <footer class="relative z-50 py-8 bg-black/90 border-t-2 border-[#EAFF00]/30 text-center">
+                <div class="max-w-4xl mx-auto px-6">
+                    <p class="font-mono text-xs md:text-sm text-[#EAFF00]/80 leading-relaxed mb-3">
+                        <span class="font-bold text-white">[ SHOWCASE MODE ]</span><br>
+                        このサイトは、BLOOM ROADのデザイン哲学・技術力・思考力を体験いただくためのショーケースです。
+                    </p>
+                    <p class="font-jp text-xs text-gray-400 mb-4">
+                        実際のサービス内容については、通常サイトをご覧ください。
+                    </p>
+                    <a href="https://seimukatudou2026.vercel.app/" target="_blank"
+                        class="inline-flex items-center gap-2 bg-white/10 border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all text-white font-bold text-sm">
+                        <span>通常サイトへ</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                    <p class="font-mono text-[0.6rem] text-gray-600 mt-6">
+                        © 2026 BLOOM ROAD Inc. All Rights Reserved.
+                    </p>
+                </div>
+            </footer>
 </body>
 
 </html>
